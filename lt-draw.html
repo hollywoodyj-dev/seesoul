@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>生命课题解读 · 抽牌 · SEESOUL 熙愈心空间</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="lt-draw">
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+
+    <div class="lt-shell">
+      <div class="lt-top">
+        <div class="lt-top__inner">
+          <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+          <span class="lt-step" id="lt-step">镜子 1 / 3</span>
+        </div>
+      </div>
+
+      <main id="main-content" tabindex="-1">
+        <section class="lt-stage">
+          <div class="lt-stage__inner">
+            <div class="mirror-stage">
+              <div class="mirror-head">
+                <p class="n" id="m-n">MIRROR 1</p>
+                <h2 id="m-zh">此刻正在发生什么？</h2>
+                <p class="en" id="m-en">WHAT IS PRESENT</p>
+              </div>
+
+              <div class="mirror-cards">
+                <div class="card-slot" id="slot-0" style="grid-column:span 1">
+                  <div class="card-back"><span class="eye">✳</span><span class="hint">第一张</span><span class="hint" style="font-size:0.66rem">此刻正在发生什么？</span></div>
+                  <div class="card-face" style="display:none"></div>
+                </div>
+                <div class="card-slot" id="slot-1">
+                  <div class="card-back"><div class="hint" style="min-height:2.6em;display:flex;align-items:center">第二张</div><span class="hint" style="font-size:0.66rem">什么似乎正在重复？</span></div>
+                  <div class="card-face" style="display:none"></div>
+                </div>
+                <div class="card-slot" id="slot-2">
+                  <div class="card-back"><div class="hint" style="min-height:2.6em;display:flex;align-items:center">第三张</div><span class="hint" style="font-size:0.66rem">当我看见以后，有什么新的可能？</span></div>
+                  <div class="card-face" style="display:none"></div>
+                </div>
+              </div>
+
+              <div class="reveal-panel" id="reveal" style="display:none">
+                <p class="m-en" id="r-en"></p>
+                <h3 id="r-name"></h3>
+                <p id="r-q"></p>
+                <div style="display:grid;gap:0.5rem">
+                  <span style="font-size:0.92rem;font-weight:600;color:var(--color-navy)">第一反应 · 你注意到了什么？</span>
+                  <textarea id="r-refl" rows="2" placeholder="一句话、一个画面、一个身体的感觉都可以。也可以留白。"></textarea>
+                </div>
+                <div class="fc-note" id="r-possible" style="display:none"><span id="r-possiblename"></span></div>
+                <div class="reveal-actions" style="margin-top:0.6rem">
+                  <a class="btn btn--ghost-ivory" id="btn-possible" href="#r-possible">看看可能的方向</a>
+                  <button class="btn btn--navy" id="btn-next" type="button"></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="lt-note" style="margin-top:1.6rem">
+              <strong>记住：</strong>这三张牌来自随机的象征相遇，不是「算出来的答案」。它们只是一面镜子，帮你把自己心里已经在的东西，多看见一点。
+            </div>
+          </div>
+          <div class="lt-foot">
+            <a href="lt-profile.html">← 返回上一步</a>
+            <a href="lt-resonate.html">进入共鸣 →</a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./lt-data.js"></script>
+    <script src="./lt-engine.js"></script>
+    <script>
+      var draw = LT_drawThree();
+      LT_store("draw", draw.map(function (c) { return c.id; }));
+      var mirrors = window.LT_MIRRORS;
+      var cur = 0, shownPossible = false;
+      // W05 · 唯一结构来源 1320_CONTEXT；未接入/缺席 → s1id = null（不 hardcode 默认 S1）
+      var s1id = window.LT_1320S1();
+      var match = (s1id != null) ? LT_match(s1id, draw, LT_load("topic", "")) : null;
+      // 每张卡的角色：仅当存在 1320 时才有 static/contextual；否则全部空白镜子
+      var cardRole = {};
+      if (match) {
+        (match.drawHits || []).forEach(function (h) { cardRole[h.card.id] = "static:" + h.layer; });
+        (match.contextual || []).forEach(function (c) { if (!cardRole[c.id]) cardRole[c.id] = "contextual"; });
+      }
+
+      function possibleNote(card) {
+        var role = cardRole[card.id];
+        if (role === "static:origin")      return "在你的 1320 结构里，这与你一贯比较自然的力量「" + card.zh + "」在同一条线上——是一个值得看看的方向，不是对你的结论。";
+        if (role === "static:tension")     return "在你的 1320 结构里，当那股力量失衡或紧绷时，可能正以「" + card.zh + "」这样的张力出现——值得看看，但不需要预设答案。";
+        if (role === "static:integration") return "在你的 1320 结构里，更成熟、更缓和一些的表达，可能正朝「" + card.zh + "」这个方向走。";
+        if (role === "static:secondary")   return "这与你 1320 结构里「" + card.zh + "」这个相关（但未必核心）的方向有所呼应。";
+        if (role === "contextual")         return "在今天带来的经验里，这个方向「" + card.zh + "」似乎被轻轻提了一下。";
+        // 无 1320（NOT_USED）→ 一律空白镜子，不假装有结构
+        return "这一张牌此刻更像一面空白镜子——更深的意义，留给你与容熙的线下对话一起慢慢探索（1320 观察角度本次未参与）。";
+      }
+
+      function fmt(card) {
+        return '<div class="card-face" style="display:flex">' +
+          '<span class="domain">' + card.domain + ' · CARD ' + String(card.id).padStart(2, "0") + '</span>' +
+          '<span class="zh">' + card.zh + '</span>' +
+          '<span class="en">' + card.en + '</span>' +
+          '<span class="mirror">' + mirrors[cur].zh + '</span></div>';
+      }
+
+      function renderSlot(i) {
+        var slot = document.getElementById("slot-" + i);
+        if (i < cur) { slot.classList.add("is-hide"); slot.querySelector(".card-face").innerHTML = ""; slot.querySelector(".card-face").style.display = "flex"; }
+        else if (i === cur) {
+          slot.classList.remove("is-hide");
+          var face = slot.querySelector(".card-face");
+          face.innerHTML = fmt(draw[cur]); face.style.display = "flex";
+          slot.querySelector(".card-back").style.display = "none";
+        }
+      }
+
+      function showReveal() {
+        var c = draw[cur], m = mirrors[cur];
+        document.getElementById("m-n").textContent = "MIRROR " + m.order;
+        document.getElementById("m-zh").textContent = m.zh;
+        document.getElementById("m-en").textContent = m.en;
+        document.getElementById("lt-step").textContent = "镜子 " + Math.min(cur + 1, 3) + " / 3";
+        var r = document.getElementById("reveal");
+        r.style.display = "grid";
+        r.scrollIntoView({ behavior: "smooth", block: "center" });
+        // 只先显示：牌名 + 镜子提问；不立刻显示长篇解释
+        document.getElementById("r-en").textContent = m.en;
+        document.getElementById("r-name").textContent = c.zh + " · " + c.en;
+        document.getElementById("r-q").textContent = m.zh + " 如果以眼前这一张牌为起点，它像在轻轻指给你看什么？";
+        document.getElementById("r-refl").value = "";
+        document.getElementById("r-possible").style.display = "none";
+        shownPossible = false;
+        document.getElementById("r-possiblename").textContent = possibleNote(c);
+        document.getElementById("btn-possible").style.display = "inline-flex";
+        var next = document.getElementById("btn-next");
+        if (cur < 2) { next.textContent = "翻开下一张 →"; next.setAttribute("href", "#"); next.onclick = advance; }
+        else { next.textContent = "进入共鸣 →"; next.setAttribute("href", "lt-resonate.html"); next.onclick = null; }
+      }
+
+      function advance(e) {
+        if (e) e.preventDefault();
+        LT_store("refl" + cur, document.getElementById("r-refl").value);
+        cur++;
+        renderSlot(cur - 1); renderSlot(cur);
+        showReveal();
+      }
+
+      document.getElementById("btn-possible").addEventListener("click", function (e) {
+        e.preventDefault();
+        document.getElementById("r-possible").style.display = "block";
+        this.style.display = "none";
+        shownPossible = true;
+      });
+
+      renderSlot(0);
+      showReveal();
+    </script>
+  </body>
+</html>

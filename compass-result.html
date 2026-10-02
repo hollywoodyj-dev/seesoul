@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>此刻的你 · SeeSoul Compass™ · SEESOUL 熙愈心空间</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="compass-result">
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+        <a class="btn btn--gold" href="counselling.html#booking" style="margin-left:auto">预约咨询</a>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <div class="result-head">
+        <div class="result-head__inner">
+          <span class="eyebrow" style="color:var(--color-gold-soft)">SeeSoul Compass™</span>
+          <h1>此刻的你</h1>
+          <p>这不是「测试结果」，也不是关于「你是什么样的人」的结论。<br />只是把你刚才说过的东西放在一起，陪你多看一眼。</p>
+        </div>
+      </div>
+
+      <div class="result-body" id="resultBody">
+        <!-- 动态内容由脚本按你的选择生成 -->
+        <section class="result-section"><p style="color:var(--color-muted);padding:2rem 0;text-align:center">正在整理你的回答……</p></section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div>
+          <div class="brand brand--logo"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></div>
+          <p class="footer-tagline"><small>Seeing Before Being™</small></p>
+        </div>
+        <div style="display:grid;gap:0.5rem">
+          <a href="index.html">返回首页</a>
+          <a href="counselling.html">预约咨询</a>
+          <a href="explore.html">自我探索</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        // 1. 读取用户选择（7题 -> code）
+        var a = {};
+        try { a = JSON.parse(localStorage.getItem("seesoul_compass_answers") || "{}") || {}; } catch (e) {}
+        var q1 = a["1"], q2 = a["2"], q3 = a["3"], q4 = a["4"], q5 = a["5"], q6 = a["6"], q7 = a["7"];
+
+        // 2. 内容映射：由关键选择决定各部分的文案
+        // —— 核心主题（由第1题主导）——
+        var themes = {
+          event:   { face: "一件最近发生、让你一直惦记的事",  lens: "它在心里反复出现，往往不是因为事情本身有多大，而是因为它碰触了某个还没有被好好看见的地方。", q: "如果这件事暂时无法改变，你现在真正需要的是什么？" },
+          relation:{ face: "一段关系里的距离变化", lens: "当关系出现靠近或疏远的变化时，你也会开始想到自己的价值。也许，这两件事值得先分开看看。", q: "如果有一天，我不再需要从对方的反应里确认自己的价值，我会怎样进入这段关系？" },
+          body:    { face: "身体或状态上持续的不舒服", lens: "身体常常先于语言开口。那个持续的紧绷或不舒服，可能正在替你说出一些还没找到词的话。", q: "如果我的身体能告诉我一个还没说出口的答案，它会说什么？" },
+          unclear: { face: "很难说清发生了什么的状态", lens: "说不清，并不等于没有发生。有些重量只是还没找到名字——它依然是真实存在的。", q: "如果先不着急给它一个名字，我可以怎样去陪伴这份说不清？" }
+        };
+        var t = themes[q1] || themes.event;
+
+        // —— 感受/身体（第2、3题）——
+        var feel_map = {
+          anxiety: "焦虑、紧张", tired: "疲惫、麻木", lonely: "孤单、被忽略", unsafe: "害怕、没有安全感", heavy: "说不清的沉重"
+        };
+        var body_map = { chest: "胸口发紧", stomach: "胃不舒服、没胃口", shoulder: "肩颈紧绷、疲惫", unclear: "说不上来，但身体记得" };
+        var feel = feel_map[q2] || "";
+        var bodyS = body_map[q3] || "";
+
+        // —— 脑海的声音 / 想做什么（第4、5题）——
+        var thought_map = { "not-good-enough": "「是不是我不够好？」", "why-always": "「为什么总是这样？」", "not-care": "「他/她是不是不在乎我？」", "what-to-do": "「我到底该怎么办？」" };
+        var impulse_map = { avoid: "躲开、不去想它", prove: "拼命解释或证明自己", ruminate: "一遍遍回想，找不到出口", "seek-talk": "想找人说说，又怕麻烦" };
+        var thought = thought_map[q4] || "";
+        var impulse = impulse_map[q5] || "";
+
+        // —— 最担心的（第6题）——
+        var worry_map = { "lose-relation": "失去一段重要的关系", "stuck-emotion": "一直被情绪拖住、做不了想做的事", "lose-self": "越来越没有自己", "break-down": "担心自己会撑不住" };
+        var worry = worry_map[q6] || "";
+
+        // —— 此刻最需要被照顾的（第7题）——
+        var care_map = { "relation-loop": "一直纠缠的一段关系", "own-emotion": "自己的情绪和状态", "body-rest": "身体：好好休息、被对待", "undecided": "一个迟迟没有决定的念头", "slow-down": "需要一个慢下来的空间" };
+        var care = care_map[q7] || "";
+
+        // 3. 组装呈现（缺任一关键选择时给出兜底提示）
+        var hasAny = q1 || q2 || q3 || q4 || q5 || q6 || q7;
+        var bodyEl = document.getElementById("resultBody");
+        if (!hasAny) {
+          bodyEl.innerHTML = '<section class="result-section"><span class="k">还没有留下回答</span><h3>好像还没有完成问卷</h3><p style="margin-top:0.6rem">你可以先回去做完 SeeSoul Compass，再回来看这份「此刻的你」。</p><div class="next-options" style="margin-top:1.4rem"><a class="next-option" href="compass-start.html"><div><strong>去做 SeeSoul Compass →</strong></div><span class="g">→</span></a></div></section>';
+          return;
+        }
+
+        function esc(s){ var d=document.createElement("div"); d.textContent=s||""; return d.innerHTML; }
+
+        var html = "";
+        // 01 你正在面对
+        html += '<section class="result-section" data-anchor-id="compass-result.result-see-now">' +
+          '<span class="k">01 · 你正在面对</span>' +
+          '<h3>' + esc(t.face) + (feel ? '，<span style="color:var(--color-text)">伴随' + esc(feel) + '</span>' : '') + '。</h3>' +
+          '<p>' + esc(t.lens) + '</p>' +
+          (bodyS ? '<p style="margin-top:0.4rem">身体上的印记是：<strong style="color:var(--color-text)">' + esc(bodyS) + '</strong>。</p>' : '') +
+          '</section>';
+
+        // 02 也许值得再看看
+        html += '<section class="result-section">' +
+          '<span class="k">02 · 也许值得再看看</span>' +
+          '<h3>你的心里有个声音在说：</h3>' +
+          (thought ? '<blockquote class="result-question" style="font-size:1.1rem;margin:0.8rem 0">' + esc(thought) + '</blockquote>' : '') +
+          '<p>这个声音想保护你，这一点值得被看见。它可以被尊重，但不一定要被当成唯一的事实。</p>' +
+          (impulse ? '<p style="margin-top:0.4rem">此刻你最想的是：<strong style="color:var(--color-text)">' + esc(impulse) + '</strong>。这份冲动本身，也是一份信号。</p>' : '') +
+          '</section>';
+
+        // 03 留给自己的一个问题
+        html += '<section class="result-section">' +
+          '<span class="k">03 · 留给自己的一个问题</span>' +
+          '<div class="result-question">' + esc(t.q) + '</div>' +
+          '</section>';
+
+        // 04 今天可以试试
+        html += '<section class="result-section action-card">' +
+          '<span class="k">04 · 今天可以试试</span>' +
+          '<h3>一个小行动，只需要记录</h3>' +
+          '<p>下一次这个感觉出现时，不急着解释它。先写下三句话——不需要解决，只需要看见。</p>' +
+          '<div class="steps-mini">' +
+          '<div class="mini">① 发生了什么？</div>' +
+          '<div class="mini">② 我现在感觉什么？</div>' +
+          '<div class="mini">③ 我最害怕什么？（' + esc(worry || "此刻的担心") + '）</div>' +
+          '</div>' +
+          (care ? '<p style="margin-top:0.8rem;color:var(--color-muted)">你说，此刻最需要被照顾的是：<strong style="color:var(--color-text)">' + esc(care) + '</strong>。</p>' : '') +
+          '</section>';
+
+        // Next step
+        html += '<section class="result-section" style="border-bottom:0">' +
+          '<span class="k">现在可以怎样开始</span>' +
+          '<h3 style="margin-bottom:1.2rem">不用马上做决定，选一个此刻感觉对的方向就好。</h3>' +
+          '<div class="next-options">' +
+          '<a class="next-option" href="explore.html"><div><strong>我想先自己看看</strong><div style="color:var(--color-muted);font-size:0.9rem;margin-top:0.2rem">一个与你刚才觉察有关的小练习</div></div><span class="g">→</span></a>' +
+          '<a class="next-option" href="counselling.html#booking"><div><strong>我想找个人一起谈谈</strong><div style="color:var(--color-muted);font-size:0.9rem;margin-top:0.2rem">如果这件事情已经困扰你一段时间，可以从一次咨询开始</div></div><span class="g">→</span></a>' +
+          '</div>' +
+          '</section>';
+
+        bodyEl.innerHTML = html;
+      })();
+    </script>
+  </body>
+</html>

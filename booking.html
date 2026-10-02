@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>预约 · SEESOUL 熙愈心空间</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="booking">
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+        <button class="nav-toggle" id="navToggle" aria-controls="siteNav" aria-expanded="false">☰</button>
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html">首页</a>
+          <a href="counselling.html">心理咨询</a>
+          <a href="life-theme.html">生命课题</a>
+          <a href="compass-start.html">SeeSoul Compass</a>
+          <a href="explore.html">自我探索</a>
+          <a href="founder.html">认识容熙</a>
+          <a class="btn btn--gold" href="booking.html" aria-current="page">预约</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="page-hero">
+        <div class="page-hero__inner">
+          <span class="eyebrow" style="color:var(--color-gold-soft)">Booking</span>
+          <h1>想从哪里开始？</h1>
+          <p>没有标准答案，也不需要是对的答案。这里有三种不同的进入方式——选一个此刻最靠近你的。</p>
+        </div>
+      </section>
+
+      <!-- 服务入口 -->
+      <section class="section section--ivory">
+        <div class="container">
+          <div class="service-grid" style="grid-template-columns:repeat(2,1fr)">
+            <div class="service-card" style="background:var(--color-ivory-card);border-color:var(--color-border-soft)">
+              <h3 style="color:var(--color-navy)">心理咨询</h3>
+              <p class="lead" style="color:var(--color-gold)">现在，有一件正在发生的事情</p>
+              <p style="color:var(--color-text);opacity:1">想找个人一起理清，理解正在发生什么，以及你可以怎样回应。</p>
+              <p style="color:var(--color-muted);font-size:0.95rem;margin-bottom:1.4rem">60 分钟 · AUD $150</p>
+              <a class="btn btn--gold" href="counselling.html#booking">选择心理咨询 →</a>
+            </div>
+            <div class="service-card" style="background:var(--color-ivory-card);border-color:var(--color-border-soft)">
+              <h3 style="color:var(--color-navy)">生命课题解读</h3>
+              <p class="lead" style="color:var(--color-gold)">有些事情，似乎重复很久了</p>
+              <p style="color:var(--color-text);opacity:1">想把这些线索放在一起，看看其中有没有值得进一步理解的主题。</p>
+              <p style="color:var(--color-muted);font-size:0.95rem;margin-bottom:1.4rem">50 分钟 · AUD $100</p>
+              <a class="btn btn--navy" href="life-theme.html#booking">选择生命课题解读 →</a>
+              <p style="color:var(--color-muted);font-size:0.9rem;margin-top:0.8rem"><a href="lt-intake.html" style="text-decoration:underline">预约后，可先做 Three Mirrors™ 会前体验 →</a></p>
+            </div>
+          </div>
+
+          <div class="compass-band section--ivory" style="margin-top:2.6rem">
+            <div class="compass-band__inner compass" style="max-width:52rem;margin:0 auto;text-align:center">
+              <div>
+                <h2 style="font-size:clamp(1.5rem,3vw,2.2rem)">如果你连自己怎么了，都还说不清楚</h2>
+                <p style="color:var(--color-muted);margin-top:0.8rem">那也不错。可以先用自己的节奏，做一次 SeeSoul Compass™。</p>
+              </div>
+              <div>
+                <a class="btn btn--gold" href="compass-start.html">先做 SeeSoul Compass →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div><div class="brand" style="color:var(--color-gold-soft)">SEESOUL<small>熙愈心空间</small></div><p class="footer-tagline"><small>Seeing Before Being™</small></p></div>
+        <div style="display:grid;gap:0.5rem"><a href="index.html">首页</a><a href="counselling.html">心理咨询</a><a href="life-theme.html">生命课题解读</a></div>
+        <div style="display:grid;gap:0.5rem"><a href="founder.html">认识容熙</a><a href="consent.html">知情同意书与保密协议</a><a href="index.html#trust">隐私 · 专业边界 · 免责声明</a></div>
+      </div>
+    </footer>
+
+    <script>
+      var t = document.getElementById("navToggle");
+      if (t) t.addEventListener("click", function () { var n = document.getElementById("siteNav"); var o = n.classList.toggle("site-nav--open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
+    </script>
+  </body>
+</html>

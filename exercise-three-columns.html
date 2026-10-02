@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>三栏区分 · 一个练习 · 自我探索 · SEESOUL 熙愈心空间</title>
+    <meta name="description" content="一个区分练习：把「事实、害怕、过去留下的模式」分到三栏，看清哪些是真的发生，哪些是情绪，哪些是旧的回声。" />
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="explore">
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+        <button class="nav-toggle" id="navToggle" aria-controls="siteNav" aria-expanded="false">☰</button>
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html">首页</a>
+          <a href="counselling.html">心理咨询</a>
+          <a href="life-theme.html">生命课题</a>
+          <a href="compass-start.html">SeeSoul Compass</a>
+          <a href="explore.html" aria-current="page">自我探索</a>
+          <a href="founder.html">认识容熙</a>
+          <a class="btn btn--gold" href="booking.html">预约咨询</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <div class="container">
+        <div class="article-head">
+          <span class="eyebrow">自我探索 · 练习</span>
+          <h1>三栏区分：事实、害怕、过去留下的模式</h1>
+          <div class="article-byline">当一件事让你反应很大时，常常是三种东西混在了一起。把它们分开，你会更清楚自己真正在回应什么。</div>
+        </div>
+
+        <article class="prose">
+          <p class="prose-lead">我们很容易把「一件事真的怎样」与「我此刻的感觉」与「很早以前就学来的反应」混成同一件事。这个练习，是轻轻地把它们分开——三栏而已。</p>
+
+          <div class="prose-practice">
+            <h3>三栏结构</h3>
+            <table style="width:100%;border-collapse:collapse;font-size:0.95rem">
+              <tr style="border-bottom:1px solid var(--color-gold-soft, #d8c49a)">
+                <th style="text-align:left;padding:.5rem">① 事实</th>
+                <th style="text-align:left;padding:.5rem">② 害怕</th>
+                <th style="text-align:left;padding:.5rem">③ 过去留下的模式</th>
+              </tr>
+              <tr>
+                <td style="padding:.5rem;vertical-align:top">真的发生了什么（可被旁证、不带判断的事实）</td>
+                <td style="padding:.5rem;vertical-align:top">这个当下，我最害怕失去什么（被否定、被冷落、失控……）</td>
+                <td style="padding:.5rem;vertical-align:top">这个反应，我很早以前就学会了吗（像旧的回声，不只是此刻）</td>
+              </tr>
+            </table>
+          </div>
+
+          <h2>一个例子</h2>
+          <p>朋友没有立刻回我消息。<br>
+            ① 事实：他还没回复。<br>
+            ② 害怕：怕他不重视我，怕被冷落。<br>
+            ③ 模式：小时候被忽视时，我会立刻以为「我不重要」——这个反应很像我。</p>
+
+          <h2>为什么这样做有帮助</h2>
+          <ul>
+            <li>把「事实」和「害怕」分开，你就不会把担心的当成已经发生的。</li>
+            <li>看到「模式」那一栏，你会明白：这份难过不一定全是此刻的你，有一部分是很久以前的你和现在的你一起参与的。</li>
+            <li>你不需要推翻任何一栏。你只需要看见：这三栏，不是同一件事。</li>
+          </ul>
+          <p>看见的那一瞬间，你通常就已经比「被它拉着跑」多了一点选择的空间。</p>
+
+          <a class="prose-back" href="explore.html">← 回到自我探索</a>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div><div class="brand" style="color:var(--color-gold-soft)">SEESOUL<small>熙愈心空间</small></div><p class="footer-tagline"><small>Seeing Before Being™</small></p></div>
+        <div style="display:grid;gap:0.5rem"><a href="index.html">首页</a><a href="counselling.html">心理咨询</a><a href="life-theme.html">生命课题解读</a></div>
+        <div style="display:grid;gap:0.5rem"><a href="compass-start.html">SeeSoul Compass</a><a href="booking.html">预约咨询</a><a href="index.html#trust">隐私 · 专业边界 · 免责声明</a></div>
+      </div>
+    </footer>
+
+    <script>
+      var t = document.getElementById("navToggle");
+      if (t) t.addEventListener("click", function () { var n = document.getElementById("siteNav"); var o = n.classList.toggle("site-nav--open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
+    </script>
+  </body>
+</html>

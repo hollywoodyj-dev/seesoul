@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>生命课题解读 · 共鸣 · SEESOUL 熙愈心空间</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="lt-resonate">
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+
+    <div class="lt-shell">
+      <div class="lt-top">
+        <div class="lt-top__inner">
+          <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+          <span class="lt-step">共鸣</span>
+        </div>
+      </div>
+
+      <main id="main-content" tabindex="-1">
+        <section class="lt-stage">
+          <div class="lt-stage__inner">
+            <p class="lt-kicker">第二步 · 你最有解释权</p>
+            <h2 class="lt-title">这些可能的方向，哪一部分与你贴近？</h2>
+            <p class="lt-sub">下面只是三张牌带来的「可能」，不是关于你是谁或你命运结论。由你来选择它是否贴近你的经验。</p>
+
+            <div class="theme-cards" id="theme-cards"></div>
+
+            <div class="lt-note" style="margin-top:1.6rem">
+              <strong>你的话，永远优先于算法：</strong>如果某张牌「不太像我」，我们就先把那个方向放下。<strong>不同意不是错误，它同样是重要的信息。</strong>
+            </div>
+
+            <fieldset class="field-group" style="margin-top:2rem;border:0;padding:0">
+              <legend class="field-label">如果现在，暂时没有明显需要连在一起的主题——</legend>
+              <label class="consent-check" style="margin-top:0.8rem">
+                <input type="checkbox" id="lt-nomatch" />
+                <span class="box">✓</span>
+                <p>「有时候，并不是所有线索都需要马上形成一个解释。你也可以先把今天抽到的三张牌留在这里，看看哪一张会在之后的生活里重新引起你的注意。」</p>
+              </label>
+            </fieldset>
+
+            <div class="compass-nav" style="border-top:1px solid var(--color-border-navy);margin-top:2rem;padding-top:1.2rem">
+              <a class="btn btn--gold" id="lt-to-map" href="lt-map.html" style="width:100%">放下这三位镜子，带走一张地图 →</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./lt-data.js"></script>
+    <script src="./lt-engine.js"></script>
+    <script>
+      var ids = LT_load("draw", [1, 2, 3]);
+      var cards = ids.map(window.LT_cardById);
+      var mirrors = window.LT_MIRRORS;
+      var RESO = ["很有共鸣", "有一点", "我还不知道", "暂时没有感觉", "不太像我"];
+      var reso = {};
+      // W05 · 唯一结构来源 1320_CONTEXT；未接入/缺席 → s1id = null（不 hardcode 默认 S1）
+      var s1id = window.LT_1320S1();
+      var match = (s1id != null) ? LT_match(s1id, ids.map(function (id) { return window.LT_cardById(id); }), LT_load("topic", "")) : null;
+      var cardRole = {};
+      if (match) {
+        (match.drawHits || []).forEach(function (h) { cardRole[h.card.id] = "static:" + h.layer; });
+        (match.contextual || []).forEach(function (c) { if (!cardRole[c.id]) cardRole[c.id] = "contextual"; });
+      }
+      window.LT_store("s1role", cardRole);
+
+      function suggest(c) {
+        var role = cardRole[c.id];
+        if (role === "static:origin")      return "从你的 1320 结构看，「" + c.zh + "」是你一贯比较自然的力量方向。当它出现在这面镜子里，也许值得看看：它目前是在支撑你，还是在悄悄提醒你什么。";
+        if (role === "static:tension")     return "在你的 1320 结构里，「" + c.zh + "」常常是当力量失衡或紧绷时出现的一面。它可能指向一个更需要被照顾的地方——先感受它是否贴近你。";
+        if (role === "static:integration") return "你的 1320 结构里，更成熟、更缓和一些的表达可能正朝「" + c.zh + "」这个方向走。把它放在一起看看，会是什么感觉？";
+        if (role === "static:secondary")   return "「" + c.zh + "」与你的 1320 结构有关联，但未必是最核心的一个。你可以先感受它是否贴近。";
+        if (role === "contextual")         return "在今天带来的经验里，「" + c.zh + "」似乎被轻轻提了一下——它不一定属于你的 1320 结构，但可能正被当下唤起。";
+        return "它以一种「" + c.zh + "」的方式提醒着你——这是一个可以看看的方向，不是关于你的结论。";
+      }
+
+      var box = document.getElementById("theme-cards");
+      cards.forEach(function (c, i) {
+        var m = mirrors[i];
+        var row = document.createElement("div");
+        row.className = "theme-card";
+        var html =
+          '<div class="t-head"><span class="mirror-label">' + m.en + '</span><span class="t-name">' + c.zh + ' · ' + c.en + '</span></div>' +
+          '<p class="t-suggest">' + suggest(c) + '</p>' +
+          '<div class="reso-group">' +
+          RESO.map(function (r) {
+            return '<label class="reso-opt"><input type="radio" name="reso-' + i + '" value="' + r + '"><span>' + r + '</span></label>';
+          }).join("") +
+          '</div>' +
+          '<p class="lt-note" id="rej-' + i + '" style="display:none;margin-top:0.9rem"><strong>我们先把它放下：</strong>这个方向目前似乎并不贴近你的经验，我们可以先把它放到一边。</p>';
+        row.innerHTML = html;
+        box.appendChild(row);
+        // 治理规则：选「不太像我」→ 显示友善回应，不反驳（USER_RESONANCE > S1_AFFINITY）
+        row.querySelectorAll('input[name="reso-' + i + '"]').forEach(function (inp) {
+          inp.addEventListener("change", function () {
+            reso[c.id] = inp.value;
+            var rj = document.getElementById("rej-" + i);
+            rj.style.display = inp.value === "不太像我" ? "block" : "none";
+            LT_store("reso", reso);
+          });
+        });
+      });
+
+      document.getElementById("lt-nomatch").addEventListener("change", function () {
+        LT_store("nomatch", this.checked);
+      });
+      document.getElementById("lt-to-map").addEventListener("click", function () {
+        LT_store("reso", reso);
+        LT_store("nomatch", document.getElementById("lt-nomatch").checked);
+      });
+    </script>
+  </body>
+</html>

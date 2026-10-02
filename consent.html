@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>知情同意书与保密协议 · SEESOUL 熙愈心空间</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="consent">
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+        <button class="nav-toggle" id="navToggle" aria-controls="siteNav" aria-expanded="false">☰</button>
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html">首页</a>
+          <a href="counselling.html">心理咨询</a>
+          <a href="life-theme.html">生命课题</a>
+          <a href="compass-start.html">SeeSoul Compass</a>
+          <a href="explore.html">自我探索</a>
+          <a href="founder.html">认识容熙</a>
+          <a class="btn btn--gold" href="booking.html">预约</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="page-hero">
+        <div class="page-hero__inner">
+          <span class="eyebrow" style="color:var(--color-gold-soft)">Informed Consent &amp; Confidentiality</span>
+          <h1>知情同意书与保密协议</h1>
+          <p>在开始预约或第一次见面之前，请你先花一点时间，读完这份说明。你可以随时提问，也可以选择不签署。</p>
+        </div>
+      </section>
+
+      <section class="section section--ivory">
+        <div class="container">
+          <div class="consent-panel">
+
+            <div class="consent-note">本说明为高保真原型示意。正式上线前，措辞与条款将以确定的法律版本为准，请以最终版本文档为有效依据。</div>
+
+            <div class="consent-section">
+              <h3>一、与本服务有关</h3>
+              <p>SeeSoul 熙愈心空间提供一对一心理咨询与生命课题解读。服务由受过专业训练的从业者提供，帮助你理解自己正在经历的事情，并重新找到属于自己的选择。本服务不能替代紧急医疗救助或精神科急诊。</p>
+            </div>
+
+            <div class="consent-section">
+              <h3>二、保密原则</h3>
+              <p>你在咨询与生命课题解读中谈到的内容，会被视为隐私并严格保密。除非出现下述适用的例外情形，否则不会向任何第三方披露。</p>
+            </div>
+
+            <div class="consent-section">
+              <h3>三、保密的例外情形</h3>
+              <ol>
+                <li>依现行法律有强制披露义务的情形（如法律程序要求）。</li>
+                <li>存在对你自己或他人造成现实而明确伤害风险、需要请求适当帮助以保护安全的情形。</li>
+                <li>涉及依法需要遵循的儿童与易受伤害人群保护义务。</li>
+                <li>在少数情况下，基于专业与法律要求需要启动其他适用的程序。</li>
+              </ol>
+              <p>在可以的情况下，我们会尽量在披露前先与你说明。你随时可以就保密的范围与例外向我们提问。</p>
+            </div>
+
+            <div class="consent-section">
+              <h3>四、隐私与数据</h3>
+              <p>你的预约资料与咨询记录仅用于提供服务、过程与安全所必需的范围，并妥善保管。涉及敏感的自由文本默认不做不必要或过长的留存；具体数据存储与处理规则将在确定方案后列明或另行告知。</p>
+            </div>
+
+            <div class="consent-section">
+              <h3>五、自愿与随时退出</h3>
+              <p>参与是自愿的。你理解本服务的性质与过程，有权在任何时候提出暂停或结束服务，不会被要求解释原因。</p>
+            </div>
+
+            <div class="consent-section">
+              <h3>六、紧急与危机情况</h3>
+              <p>如果你正处于可能伤害自己或他人的危机中，请不要等待预约时间——请立即联系当地紧急服务（紧急求助电话）或前往最近的医院。</p>
+            </div>
+
+            <div class="consent-section">
+              <h3>七、理解与同意</h3>
+              <label class="consent-check">
+                <input type="checkbox" id="agreeBox">
+                <span class="box">✓</span>
+                <p>我已阅读并理解以上内容，同意SeeSoul在此说明的范围内提供服务，并愿意遵守相关的保密与安全约定。</p>
+              </label>
+            </div>
+
+            <div class="sign-grid">
+              <label class="field"><span>签署人姓名</span><input type="text" id="signName" placeholder="你的姓名"></label>
+              <label class="field"><span>签署日期</span><input type="date" id="signDate"></label>
+            </div>
+
+            <div id="consentFlow">
+              <button class="btn btn--gold btn--full btn--disabled" id="signBtn" type="button" disabled>我已阅读并同意签署</button>
+              <p class="book-fine" style="margin-top:0.8rem">电子签署为原型示意 · 正式签署将在开发阶段接入。</p>
+            </div>
+            <div class="book-confirmed" id="consentDone" hidden>
+              <div class="ok-icon">✓</div>
+              <h3>已确认并签署。</h3>
+              <p>感谢你抽出时间阅读。我们按照这份约定，一起把接下来的一步走稳。<br /><a class="text-link" href="booking.html" style="display:inline-block;margin-top:1rem">返回预约页 →</a></p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div><div class="brand" style="color:var(--color-gold-soft)">SEESOUL<small>熙愈心空间</small></div><p class="footer-tagline"><small>Seeing Before Being™</small></p></div>
+        <div style="display:grid;gap:0.5rem"><a href="index.html">首页</a><a href="counselling.html">心理咨询</a><a href="life-theme.html">生命课题解读</a></div>
+        <div style="display:grid;gap:0.5rem"><a href="consent.html">知情同意书与保密协议</a><a href="index.html#trust">隐私 · 专业边界 · 免责声明</a></div>
+      </div>
+    </footer>
+
+    <script>
+      var t = document.getElementById("navToggle");
+      if (t) t.addEventListener("click", function () { var n = document.getElementById("siteNav"); var o = n.classList.toggle("site-nav--open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
+
+      (function () {
+        var box = document.getElementById("agreeBox"), btn = document.getElementById("signBtn"),
+            flow = document.getElementById("consentFlow"), done = document.getElementById("consentDone"),
+            name = document.getElementById("signName"), date = document.getElementById("signDate");
+        function refresh() {
+          var ok = box.checked && name.value.trim() !== "" && date.value !== "";
+          btn.disabled = !ok; btn.classList.toggle("btn--disabled", !ok);
+        }
+        box.addEventListener("change", refresh);
+        name.addEventListener("input", refresh);
+        date.addEventListener("change", refresh);
+        btn.addEventListener("click", function () { flow.hidden = true; done.hidden = false; });
+      })();
+    </script>
+  </body>
+</html>

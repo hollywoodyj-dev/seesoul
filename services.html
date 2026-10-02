@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>看看适合我的服务 · SEESOUL 熙愈心空间</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="services">
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+        <button class="nav-toggle" id="navToggle" aria-controls="siteNav" aria-expanded="false">☰</button>
+        <nav class="site-nav" id="siteNav">
+          <a href="index.html">首页</a>
+          <a href="counselling.html">心理咨询</a>
+          <a href="life-theme.html">生命课题</a>
+          <a href="compass-start.html">SeeSoul Compass</a>
+          <a href="explore.html">自我探索</a>
+          <a href="founder.html">认识容熙</a>
+          <a class="btn btn--gold" href="booking.html">预约咨询</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="page-hero">
+        <div class="page-hero__inner">
+          <span class="eyebrow" style="color:var(--color-gold-soft)">我已经知道自己想处理什么</span>
+          <h1>看看适合我的服务</h1>
+          <p>你需要的是哪一种继续？两者平级，由你决定，SeeSoul 不替你预选。</p>
+        </div>
+      </section>
+
+      <section class="section section--ivory" style="padding-top:var(--space-8)">
+        <div class="container">
+          <div class="problem-grid" style="grid-template-columns:1fr 1fr">
+            <!-- Service 1 · Counselling -->
+            <a class="problem-card" href="counselling.html">
+              <span class="problem-card__num" style="color:var(--color-gold)">Ⅰ</span>
+              <h3>心理咨询</h3>
+              <p>我有一个现实中的情绪、关系、家庭或个人议题，希望和一个人认真谈谈。</p>
+              <span class="problem-card__cta">了解熙愈心理咨询 →</span>
+            </a>
+
+            <!-- Service 2 · Life Theme -->
+            <a class="problem-card" href="life-theme.html">
+              <span class="problem-card__num" style="color:var(--color-gold)">Ⅱ</span>
+              <h3>生命课题探索</h3>
+              <p>我想从当下经验、卡牌与结构性参考中，看看是否有值得继续理解的重复主题。</p>
+              <span class="problem-card__cta">了解 Life Theme Exploration →</span>
+            </a>
+          </div>
+
+          <p style="margin-top:2.2rem;color:var(--color-muted-navy);text-align:center">
+            还不确定？也可以<a href="compass-start.html" style="text-decoration:underline">先从 SeeSoul Compass™ 看看此刻</a>。
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div><div class="brand" style="color:var(--color-gold-soft)">SEESOUL<small>熙愈心空间</small></div><p class="footer-tagline"><small>Seeing Before Being™</small></p></div>
+        <div style="display:grid;gap:0.5rem"><a href="index.html">首页</a><a href="counselling.html">心理咨询</a><a href="life-theme.html">生命课题解读</a></div>
+        <div style="display:grid;gap:0.5rem"><a href="compass-start.html">SeeSoul Compass</a><a href="booking.html">预约咨询</a><a href="index.html#trust">隐私 · 专业边界 · 免责声明</a></div>
+      </div>
+    </footer>
+
+    <script>
+      var t = document.getElementById("navToggle");
+      if (t) t.addEventListener("click", function () { var n = document.getElementById("siteNav"); var o = n.classList.toggle("site-nav--open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
+    </script>
+  </body>
+</html>

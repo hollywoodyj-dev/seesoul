@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>我的生命课题地图 · SEESOUL 熙愈心空间</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="lt-map">
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+
+    <div class="map-shell">
+      <header class="map-head">
+        <div class="map-head__inner">
+          <p style="color:var(--color-gold-soft);font-size:0.9rem;letter-spacing:0.2em;margin-bottom:0.6rem">MY LIFE THEME MAP</p>
+          <h1>我的生命课题地图</h1>
+          <p>一份留给你自己的整理——不是关于你是谁的定义，而是此刻你愿意为自己多看见的一点。</p>
+        </div>
+      </header>
+
+      <main id="main-content" tabindex="-1">
+        <div class="map-body">
+
+          <section class="map-section">
+            <p class="k">01</p>
+            <h3>我今天带来的</h3>
+            <span class="src">来自你的分享</span>
+            <p id="map-topic"></p>
+            <p class="map-text" id="map-topic-text" style="margin-top:0.4rem"></p>
+          </section>
+
+          <section class="map-section">
+            <p class="k">02</p>
+            <h3>我的 Three Mirrors</h3>
+            <span class="src">来自随机抽牌</span>
+            <div id="map-cards" style="display:grid;gap:0.8rem;margin-top:0.5rem"></div>
+          </section>
+
+          <section class="map-section">
+            <p class="k">03</p>
+            <h3>1320 提供的观察角度</h3>
+            <span class="src">来自 1320 结构化反思 · 一面反射的镜子，不是结论</span>
+            <div id="map-lens" style="margin-top:0.6rem"></div>
+            <div class="fc-note" style="background:var(--color-ivory);border-left:3px solid var(--color-gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.9rem 1.1rem;color:var(--color-muted);font-size:0.86rem;line-height:1.85;margin-top:0.8rem">
+              以上只是「原初力量 → 张力 → 成熟表达」三个发展面向里值得看看的地方，不是「你命中注定要经历什么」。它与你的 1320 结构有关，但最终是否贴近你，仍由你决定。
+            </div>
+          </section>
+
+          <section class="map-section">
+            <p class="k">04</p>
+            <h3>我自己最有共鸣的</h3>
+            <span class="src">你的选择 · 你最有解释权</span>
+            <p class="map-text" id="map-reso"></p>
+          </section>
+
+          <section class="map-section">
+            <p class="k">05</p>
+            <h3>我想继续看看</h3>
+            <span class="src">反思</span>
+            <div class="map-field">
+              <textarea id="map-refl" rows="3" placeholder="如果之后还想再回来看看，记在这里。"></textarea>
+            </div>
+          </section>
+
+          <section class="map-section">
+            <p class="k">06</p>
+            <h3>我想带回生活的一步</h3>
+            <span class="src">一个很小的行动</span>
+            <div class="map-field">
+              <textarea id="map-step" rows="2" placeholder="不一定要大，一个让自己在今天稍微不一样的小动作就好。"></textarea>
+            </div>
+          </section>
+
+          <div class="compass-nav" style="border-top:1px solid var(--color-border-soft)">
+            <div class="compass-nav__inner" style="max-width:46rem;justify-content:center;gap:1rem">
+              <a class="btn btn--navy" href="life-theme.html">返回生命课题解读</a>
+              <a class="btn btn--ghost-ivory" href="booking.html">与容熙预约对话 →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-foot">
+          <hr class="rule" />
+          <p>这不是关于你是谁的结论。<br />它只是记录了此刻，你愿意为自己多看见的一点。</p>
+        </div>
+      </main>
+    </div>
+
+    <script src="./lt-data.js"></script>
+    <script src="./lt-engine.js"></script>
+    <script>
+      var topic = LT_load("topic", "——");
+      var topicText = LT_load("topicText", "");
+      var ids = LT_load("draw", [1, 2, 3]);
+      var cards = ids.map(window.LT_cardById);
+      var mirrors = window.LT_MIRRORS;
+      var reso = LT_load("reso", {});
+      var nomatch = LT_load("nomatch", false);
+      // W05 · 唯一结构来源 1320_CONTEXT；未接入/缺席 → 1320 区显示「未参与」
+      var ctx = window.LT_1320Context();
+      var s1id = (ctx && ctx.status === "CALCULATED") ? ctx.s1 : null;
+      var s1name = (ctx && ctx.status === "CALCULATED") ? (ctx.display_name || "") : "";
+      var match = (s1id != null) ? LT_match(s1id, cards, LT_load("topic", "")) : null;
+
+      document.getElementById("map-topic").textContent = topic;
+      document.getElementById("map-topic-text").textContent = topicText ? "「" + topicText + "」" : "(你暂时没有写下更多，留白也没关系。)";
+
+      // —— 03 · 1320 观察角度（SeeSoul 语言，不暴露 affinity 数值；无 1320 则占位）——
+      (function () {
+        var lens = document.getElementById("map-lens");
+        if (s1id == null) {
+          lens.innerHTML = '<div class="fc-note" style="background:var(--color-ivory);border-left:3px solid var(--color-gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.9rem 1.1rem;color:var(--color-muted);font-size:0.86rem;line-height:1.85">' + (window.LT_1320_PLACEHOLDER || "这一层观察角度（1320）这次不参与。它不影响你抽到哪三张，也不影响你的共鸣与反思。") + '</div>';
+          return;
+        }
+        if (!match) { lens.innerHTML = '<div class="fc-note">' + window.LT_LENS_OPEN + '</div>'; return; }
+        var open = document.createElement("p");
+        open.style.cssText = "color:var(--color-muted);font-size:0.92rem;line-height:1.8;margin-bottom:0.9rem";
+        open.textContent = window.LT_LENS_OPEN;
+        lens.appendChild(open);
+        var roleNames = { origin: "原初力量", tension: "发展张力", integration: "成熟表达", secondary: "相关方向", contextual: "今天被提起的" };
+        match.structure.forEach(function (item) {
+          var d = document.createElement("div");
+          d.style.cssText = "background:var(--color-ivory-card);border:1px solid var(--color-border-soft);border-left:3px solid var(--color-gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.85rem 1rem;margin-bottom:0.6rem;line-height:1.75";
+          d.innerHTML = '<span style="font-size:0.8rem;letter-spacing:0.08em;color:var(--color-gold)">' + (roleNames[item.role] || item.role) + '</span><div style="font-weight:600;color:var(--color-navy)">' + item.card.zh + ' · ' + item.card.en + '</div>' +
+            '<span style="color:var(--color-muted);font-size:0.9rem">' + (window.LT_ROLE_LANG[item.role] || "") + '</span>';
+          lens.appendChild(d);
+        });
+        match.contextual.forEach(function (c) {
+          var d = document.createElement("div");
+          d.style.cssText = "background:var(--color-ivory-card);border:1px dashed var(--color-gold);border-left:3px solid var(--color-gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.8rem 1rem;margin-bottom:0.6rem;line-height:1.75";
+          d.innerHTML = '<span style="font-size:0.8rem;letter-spacing:0.08em;color:var(--color-gold)">今天被提起的</span><div style="font-weight:600;color:var(--color-navy)">' + c.zh + ' · ' + c.en + '</div>' +
+            '<span style="color:var(--color-muted);font-size:0.9rem">' + (window.LT_ROLE_LANG.contextual || "") + '</span>';
+          lens.appendChild(d);
+        });
+        var trace = document.createElement("p");
+        trace.style.cssText = "color:var(--color-muted);font-size:0.78rem;line-height:1.7;margin-top:0.8rem";
+        trace.textContent = "线索来源：你的 1320 结构（S1-" + String(Number(s1id)).padStart(2, "0") + (s1name ? " · " + s1name : "") + "）与今天带来的经验，加上这三面镜子。它没有把你的经历合并成一个自动结论。";
+        lens.appendChild(trace);
+      })();
+
+      var mc = document.getElementById("map-cards");
+      cards.forEach(function (c, i) {
+        var m = mirrors[i];
+        var d = document.createElement("div");
+        d.className = "fc-note";
+        d.style.background = "var(--color-ivory-card)";
+        d.style.border = "1px solid var(--color-border-soft)";
+        d.style.borderLeft = "3px solid var(--color-gold)";
+        var r = reso[c.id] || "——";
+        d.innerHTML = '<strong style="color:var(--color-navy)">' + m.en + '</strong> · ' + c.zh + ' ' + c.en +
+          '<br><span style="color:var(--color-muted);font-size:0.9rem">我对这个方向：' + r + '</span>';
+        mc.appendChild(d);
+      });
+
+      var mr = [];
+      if (nomatch) mr.push("此刻我暂时选择不把这些线索连成主题——我先把三张牌留在这里，之后再看哪一张会再引起我的注意。");
+      var any = false;
+      cards.forEach(function (c) {
+        var r = reso[c.id];
+        if (r && r === "很有共鸣") { any = true; mr.push("「" + c.zh + "」——我感到贴近。"); }
+        else if (r && (r === "有一点" || r === "我还不知道")) { any = true; mr.push("「" + c.zh + "」——有一点 / 我还不是太确定。"); }
+      });
+      if (!any && !nomatch) mr.push("(你还没有选择，这里会记下你认为最贴近的一两个。)");
+      document.getElementById("map-reso").innerHTML = mr.join("<br>");
+    </script>
+  </body>
+</html>

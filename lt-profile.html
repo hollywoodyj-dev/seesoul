@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>生命课题解读 · 1320 观察角度 · SEESOUL 熙愈心空间</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="lt-profile">
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+
+    <div class="lt-shell">
+      <div class="lt-top">
+        <div class="lt-top__inner">
+          <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+          <span class="lt-step">1320 Profile</span>
+        </div>
+      </div>
+
+      <main id="main-content" tabindex="-1">
+        <section class="lt-stage">
+          <div class="lt-stage__inner">
+            <span class="lt-badge">SeeSoul Life Theme Reading™ · 50分钟 · AUD $100</span>
+            <p class="lt-kicker">第二步 · 一面可选的镜子</p>
+            <h2 class="lt-title">今天，先不急着给自己贴上任何结构</h2>
+            <p class="lt-sub">1320 只是 SeeSoul 在完成 Life Theme 时可能会请你看的一面反射镜——它不是「你是谁的标签」，也不替你做决定。这一层是可选、不参与也完全不影响你抽牌与反思的。</p>
+
+            <div class="lt-note" style="margin-top:1.2rem">
+              <strong>这一层镜子这次暂不参与（PENDING）：</strong>1320 观察角度需接入计算后才会出现。你不需要选任何原型、也不需要记住任何编号——直接继续，抽牌依旧独立随机。
+              <span id="s1-preview" style="display:block;margin-top:0.2rem"></span>
+            </div>
+
+            <div class="compass-nav" style="border-top:1px solid var(--color-border-navy);margin-top:2rem;padding-top:1.2rem">
+              <a class="btn btn--gold" id="lt-go-draw" href="lt-draw.html" style="width:100%">直接开始抽牌 →</a>
+              <p style="margin:0.9rem 0 1.2rem;text-align:center;color:var(--color-muted-navy);font-size:0.9rem">抽牌依旧独立随机——没有 1320 也能完整继续。</p>
+              <p style="margin:0;text-align:center;font-size:0.85rem"><a href="lt-intake.html" style="color:var(--color-muted-navy)">← 更改今天带来的主题</a></p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./lt-data.js"></script>
+    <script>
+      // W05 · 迁移期：1320 calculator 未接入 → 明确 NOT_USED，绝不 hardcode 默认 S1
+      window.LT_store("1320", { status: "NOT_USED", note: "PENDING_IMPLEMENTATION" });
+      document.getElementById("s1-preview").textContent =
+        "记录：1320_CONTEXT = NOT_USED / PENDING_IMPLEMENTATION（本次体验不使用 1320 结构）。";
+    </script>
+  </body>
+</html>

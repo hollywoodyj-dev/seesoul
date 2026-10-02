@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>生命课题解读 · 开始 · SEESOUL 熙愈心空间</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="lt-intake">
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+
+    <div class="lt-shell">
+      <div class="lt-top">
+        <div class="lt-top__inner">
+          <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+          <a class="compass-back" href="life-theme.html">← 返回</a>
+        </div>
+      </div>
+
+      <main id="main-content" tabindex="-1">
+        <section class="lt-stage">
+          <div class="lt-stage__inner">
+            <span class="lt-badge">SeeSoul Life Theme Reading™ · 50分钟 · AUD $100</span>
+            <p class="lt-kicker">第一步 · 先为自己留一点空间</p>
+            <h2 class="lt-title">最近，你最想看看生命里的哪一部分？</h2>
+            <p class="lt-sub">不需要想得太复杂，也不用想清楚为什么。挑一个此刻最靠近你的就好了。</p>
+
+            <div class="option-list" role="list">
+              <button class="option" type="button" data-topic="情绪"><span>情绪</span><span class="hint">最近很累、焦虑、内耗，或情绪停不下来</span></button>
+              <button class="option" type="button" data-topic="关系"><span>关系</span><span class="hint">和人相处中反复出现的模式</span></button>
+              <button class="option" type="button" data-topic="家庭"><span>家庭</span><span class="hint">和父母、家人之间的牵绊</span></button>
+              <button class="option" type="button" data-topic="自己"><span>自己</span><span class="hint">和自己的关系，或怎样看待自己</span></button>
+              <button class="option" type="button" data-topic="工作 · 方向"><span>工作 / 方向</span><span class="hint">在做什么、往哪里走</span></button>
+              <button class="option" type="button" data-topic="价值感"><span>价值感</span><span class="hint">觉得自己是否值得、够不够</span></button>
+              <button class="option" type="button" data-topic="意义"><span>意义</span><span class="hint">说不清，但总觉得缺了点什么</span></button>
+              <button class="option" type="button" data-topic="说不清楚"><span>说不清楚</span><span class="hint">没有具体的事，但知道自己不太对劲</span></button>
+            </div>
+
+            <fieldset class="field-group" style="margin-top:2rem">
+              <legend class="field-label">最近有没有一件事情，让你觉得「怎么又是这样」？</legend>
+              <div class="field">
+                <textarea id="lt-topic-text" rows="3" placeholder="不需要分析原因，一两句话就可以。也可以暂时留空。"></textarea>
+              </div>
+            </fieldset>
+
+            <div class="lt-note" style="margin-top:1.2rem">
+              <strong>请放心：</strong>这里没有对错，也没有诊断。你写下什么，我们就以你写下的为准，不替你补充「你没说的」。
+            </div>
+
+            <div class="compass-nav" style="border-top:1px solid var(--color-border-navy);margin-top:2rem;padding-top:1.2rem">
+              <a class="btn btn--gold" id="lt-go-draw" href="lt-profile.html" style="width:100%">继续：看我的 1320 结构 →</a>
+              <p style="margin:0.9rem 0 1.2rem;text-align:center;color:var(--color-muted-navy);font-size:0.9rem">牌是镜子，不是答案。</p>
+              <p style="margin:0;text-align:center;font-size:0.85rem"><a href="lt-safety.html" style="text-decoration:underline;color:var(--color-muted-navy)">此刻若你正处于很大的痛苦中，先看看这里 →</a></p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./lt-data.js"></script>
+    <script>
+      var chosen = null;
+      document.querySelectorAll(".option").forEach(function (o) {
+        o.addEventListener("click", function () {
+          document.querySelectorAll(".option").forEach(function (x) { x.removeAttribute("aria-pressed"); x.classList.remove("is-checked"); });
+          o.setAttribute("aria-pressed", "true"); o.classList.add("is-checked");
+          chosen = o.getAttribute("data-topic");
+        });
+      });
+
+      // 安全层：出现明确危机关键词时，暂停解释流程，进入紧急支持路径
+      var CRISIS = ["自杀", "不想活", "活不下去", "结束生命", "伤害自己", "想死", "死掉算了", "自残", "真的撑不住了", "没有希望"];
+      document.getElementById("lt-go-draw").addEventListener("click", function (e) {
+        var text = document.getElementById("lt-topic-text").value || "";
+        if (chosen) LT_store("topic", chosen);
+        LT_store("topicText", text);
+        for (var i = 0; i < CRISIS.length; i++) {
+          if (text.indexOf(CRISIS[i]) !== -1) { e.preventDefault(); window.location.href = "lt-safety.html"; return; }
+        }
+      });
+    </script>
+  </body>
+</html>

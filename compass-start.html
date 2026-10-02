@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SeeSoul Compass™ · 开始 · SEESOUL 熙愈心空间</title>
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body data-page-id="compass-start">
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
+
+    <div class="compass-shell">
+      <div class="compass-top">
+        <div class="compass-top__inner">
+          <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+          <a class="compass-back" href="index.html">← 返回首页</a>
+        </div>
+      </div>
+
+      <main id="main-content" tabindex="-1">
+        <section class="compass-question" style="padding-block:var(--space-16)">
+          <div class="compass-question__inner" style="max-width:44rem">
+            <span class="compass-badge">SeeSoul Compass™</span>
+            <p class="compass-q-kicker">一段简短的自我整理 · 约 3–5 分钟</p>
+            <h2 class="compass-q-title" style="font-size:clamp(1.6rem,3vw,2.3rem)">在开始之前，请放心：<br />这里没有对错，没有诊断，没有标签。</h2>
+            <p style="color:var(--color-muted-navy);max-width:34em;margin-bottom:2rem">
+              Compass 会通过几个简单的问题，陪你看看此刻什么最需要被看见。你可以随时停下来，也可以随时返回。
+            </p>
+
+            <p class="compass-q-kicker" style="margin-top:1.5rem">第一步 · 定位</p>
+            <h3 style="font-size:1.5rem;margin-bottom:1.4rem">最近，什么最占据你的心？</h3>
+            <div class="option-list" role="list">
+              <button class="option" type="button" data-anchor-id="compass-start.orientation-emo"><span>情绪</span><span class="hint">最近很累、焦虑、内耗，或情绪停不下来</span></button>
+              <button class="option" type="button" data-anchor-id="compass-start.orientation-relation"><span>一段关系</span><span class="hint">反复牵动你，不知该如何相处</span></button>
+              <button class="option" type="button" data-anchor-id="compass-start.orientation-family"><span>家庭</span><span class="hint">和父母、伴侣或孩子的关系让你觉得累</span></button>
+              <button class="option" type="button" data-anchor-id="compass-start.orientation-self"><span>自己</span><span class="hint">总觉得自己不够好，在意别人怎么看你</span></button>
+              <button class="option" type="button" data-anchor-id="compass-start.orientation-life-direction"><span>人生方向</span><span class="hint">面对选择，不知道下一步怎么走</span></button>
+              <button class="option" type="button" data-anchor-id="compass-start.orientation-meaning"><span>意义 / 存在困惑</span><span class="hint">说不清，但总觉得缺了点什么</span></button>
+              <button class="option" type="button" data-anchor-id="compass-start.orientation-unclear"><span>说不清楚</span><span class="hint">没有特别明确的事，但知道自己不太对劲</span></button>
+            </div>
+
+            <div class="compass-nav" style="border-top:1px solid var(--color-border-navy);margin-top:2.4rem;padding-top:1.2rem">
+              <a class="btn btn--gold" href="compass-question.html" style="width:100%">继续 →</a>
+              <p style="margin:1rem 0 0;text-align:center"><a class="text-link" href="compass-result.html">先看看结果页长什么样 →</a></p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <div class="compass-nav">
+        <div class="compass-nav__inner">
+          <span style="color:var(--color-muted-navy);font-size:0.9rem">SeeSoul Compass · 无诊断 · 无标签 · 可随时停下</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.querySelectorAll(".option").forEach(function (o) {
+        o.addEventListener("click", function () {
+          document.querySelectorAll(".option").forEach(function (x) { x.removeAttribute("aria-pressed"); });
+          o.setAttribute("aria-pressed", "true");
+        });
+      });
+    </script>
+  </body>
+</html>
