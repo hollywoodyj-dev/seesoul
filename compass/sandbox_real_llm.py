@@ -276,6 +276,8 @@ def call_llm(cfg: ProviderConfig, prompt_text: str, timeout: float = 60.0,
             request["max_tokens"] = max_tokens
         resp = client.chat.completions.create(**request)
         content = resp.choices[0].message.content
+        finish = getattr(resp.choices[0], "finish_reason", "")
+        logger.info("llm finish=%s content=%s", finish, _set_log(content))
         obj = parse_structured_response(content)   # 抛 EMPTY / INVALID_JSON
         validate_output_schema(obj)                # 抛 OUTPUT_SCHEMA_INVALID
         return LLMResult(ok=True, payload=obj, status="OK", provider=cfg.provider)

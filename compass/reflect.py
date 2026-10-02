@@ -151,11 +151,16 @@ def reflect(answers: dict | None, free_text: str = "") -> dict:
         if cfg.configured:
             result = call_llm(cfg, _prompt(eo, suff))
             mapped = _from_model(result.payload, suff) if result.ok and result.payload else None
-            if mapped is not None:
-                audit = audit_output(mapped, eo, suff)
-                if audit["overall"] == "PASS":
+            if mapped is None:
+                logger_status = result.status if not result.ok else "MAP_REJECTED"
+            else:
+                model_audit = audit_output(mapped, eo, suff)
+                failed = [k for k, v in model_audit["checks"].items() if v == "FAIL"]
+                logger_status = "OK" if model_audit["overall"] == "PASS" else ("AUDIT_FAIL:" + ",".join(failed))
+                if model_audit["overall"] == "PASS":
                     composed = mapped
                     source = "llm"
+            print("LLM_STATUS " + logger_status, flush=True)
 
     audit = audit_output(composed, eo, suff)
     if audit["overall"] != "PASS":
