@@ -262,12 +262,19 @@ def call_llm(cfg: ProviderConfig, prompt_text: str, timeout: float = 60.0,
             if cfg.base_url:
                 kwargs["base_url"] = cfg.base_url
             client = openai.OpenAI(**kwargs)
-        resp = client.chat.completions.create(
-            model=cfg.model,               # DECLARED MODEL = EXECUTED MODEL；绝不使用默认模型
-            messages=build_request(prompt_text, cfg.model)["messages"],
-            temperature=temperature,
-            max_tokens=max_tokens,
-        )
+        request = {
+            "model": cfg.model,            # DECLARED MODEL = EXECUTED MODEL；绝不使用默认模型
+            "messages": build_request(prompt_text, cfg.model)["messages"],
+        }
+        model_name = (cfg.model or "").lower()
+        # gpt-5.x rejects max_tokens and a non-default temperature.
+        if model_name.startswith("gpt-5") or model_name.startswith(("o1", "o3", "o4")):
+            request["max_completion_tokens"] = max_tokens
+            request["reasoning_effort"] = "none"
+        else:
+            request["temperature"] = temperature
+            request["max_tokens"] = max_tokens
+        resp = client.chat.completions.create(**request)
         content = resp.choices[0].message.content
         obj = parse_structured_response(content)   # 抛 EMPTY / INVALID_JSON
         validate_output_schema(obj)                # 抛 OUTPUT_SCHEMA_INVALID
