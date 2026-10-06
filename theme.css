@@ -411,6 +411,15 @@ button.chip { font: inherit; cursor: pointer; }
 }
 .option[aria-pressed="true"] .hint { color: var(--color-gold-soft); }
 .option .hint { display: block; font-size: 0.86rem; color: var(--color-muted-navy); margin-top: 0.15rem; }
+.q-note { display: grid; gap: 0.45rem; margin-top: 1.15rem; }
+.q-note span { color: var(--color-muted-navy); font-size: 0.92rem; }
+.q-note textarea {
+  width: 100%; min-height: 5.6rem; resize: vertical;
+  border: 1px solid var(--color-border-navy); border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.04); color: var(--color-text-navy);
+  padding: 0.9rem 1rem; font-size: 1rem;
+}
+.q-note textarea:focus { outline: 3px solid var(--color-focus); outline-offset: 1px; border-color: var(--color-gold); }
 .compass-nav { border-top: 1px solid var(--color-border-navy); padding-block: 1rem; }
 .compass-nav__inner { max-width: 44rem; margin: 0 auto; padding-inline: 1.5rem; display: flex; align-items: center; gap: 1rem; }
 .compass-nav__inner .btn--navy { background: var(--color-gold); color: var(--color-navy-deep); border: 0; }

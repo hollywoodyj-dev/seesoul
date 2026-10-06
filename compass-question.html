@@ -25,7 +25,7 @@
           <div class="compass-question__inner">
 
             <!-- 1 Reality -->
-            <section class="q-screen" data-q="1"
+            <section class="q-screen" data-q="1">
               <p class="compass-q-kicker">Seven Layers of Seeing™ · Reality</p>
               <h2 class="compass-q-title">最近发生了什么？</h2>
               <div class="option-list">
@@ -34,11 +34,11 @@
                 <button class="option" type="button" data-code="body"><span>身体或状态上持续的不舒服</span></button>
                 <button class="option" type="button" data-code="unclear"><span>很难说清到底发生了什么</span></button>
               </div>
-            
+              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="1" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
             </section>
 
             <!-- 2 Feeling -->
-            <section class="q-screen" data-q="2"
+            <section class="q-screen" data-q="2">
               <p class="compass-q-kicker">Seven Layers of Seeing™ · Feeling</p>
               <h2 class="compass-q-title">这件事最容易带起什么感受？</h2>
               <div class="option-list">
@@ -48,11 +48,11 @@
                 <button class="option" type="button" data-code="unsafe"><span>害怕、没有安全感</span></button>
                 <button class="option" type="button" data-code="heavy"><span>说不清的沉重</span></button>
               </div>
-            
+              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="2" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
             </section>
 
             <!-- 3 Body -->
-            <section class="q-screen" data-q="3"
+            <section class="q-screen" data-q="3">
               <p class="compass-q-kicker">Seven Layers of Seeing™ · Body</p>
               <h2 class="compass-q-title">想到它时，身体最明显的感觉在哪里？</h2>
               <div class="option-list">
@@ -61,11 +61,11 @@
                 <button class="option" type="button" data-code="shoulder"><span>肩膀/脖子紧绷、疲惫</span></button>
                 <button class="option" type="button" data-code="unclear"><span>说不上来，但身体记得</span></button>
               </div>
-            
+              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="3" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
             </section>
 
             <!-- 4 Thought -->
-            <section class="q-screen" data-q="4"
+            <section class="q-screen" data-q="4">
               <p class="compass-q-kicker">Seven Layers of Seeing™ · Thought</p>
               <h2 class="compass-q-title">脑海里最常出现哪一句话？</h2>
               <div class="option-list">
@@ -74,11 +74,11 @@
                 <button class="option" type="button" data-code="not-care"><span>「他/她是不是不在乎我？」</span></button>
                 <button class="option" type="button" data-code="what-to-do"><span>「我到底该怎么办？」</span></button>
               </div>
-            
+              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="4" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
             </section>
 
             <!-- 5 Impulse -->
-            <section class="q-screen" data-q="5"
+            <section class="q-screen" data-q="5">
               <p class="compass-q-kicker">Seven Layers of Seeing™ · Impulse</p>
               <h2 class="compass-q-title">你通常最想做什么？</h2>
               <div class="option-list">
@@ -87,11 +87,11 @@
                 <button class="option" type="button" data-code="ruminate"><span>一遍遍回想，找不到出口</span></button>
                 <button class="option" type="button" data-code="seek-talk"><span>想找人说说，又怕麻烦</span></button>
               </div>
-            
+              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="5" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
             </section>
 
             <!-- 6 Protection -->
-            <section class="q-screen" data-q="6"
+            <section class="q-screen" data-q="6">
               <p class="compass-q-kicker">Seven Layers of Seeing™ · Protection</p>
               <h2 class="compass-q-title">如果继续这样下去，你最担心什么？</h2>
               <div class="option-list">
@@ -100,11 +100,11 @@
                 <button class="option" type="button" data-code="lose-self"><span>越来越没有自己</span></button>
                 <button class="option" type="button" data-code="break-down"><span>担心自己会撑不住</span></button>
               </div>
-            
+              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="6" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
             </section>
 
             <!-- 7 Awareness -->
-            <section class="q-screen" data-q="7"
+            <section class="q-screen" data-q="7">
               <p class="compass-q-kicker">Seven Layers of Seeing™ · Awareness</p>
               <h2 class="compass-q-title">此刻回头看，你觉得什么最需要被照顾？</h2>
               <div class="option-list">
@@ -114,10 +114,7 @@
                 <button class="option" type="button" data-code="undecided"><span>一个迟迟没有决定的念头</span></button>
                 <button class="option" type="button" data-code="slow-down"><span>说不上来，但我知道需要慢一点</span></button>
               </div>
-              <div style="margin-top:1rem">
-                <textarea id="freeText" rows="3" style="width:100%;border:1px solid var(--color-border-navy);border-radius:var(--radius-md);background:rgba(255,255,255,0.04);color:var(--color-text-navy);padding:1rem;font-size:1rem" placeholder="也可以再多说一点——可以只是一句话，甚至一个模糊的感觉。"></textarea>
-              </div>
-            
+              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="7" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
             </section>
 
           </div>
@@ -177,15 +174,28 @@
           });
         });
 
-        var free = document.getElementById("freeText");
-        if (free && typeof answers.free_text === "string") free.value = answers.free_text;
-        if (free) free.addEventListener("input", function () {
-          answers.free_text = free.value;
-          saveAnswers();
+        if (!answers.notes || typeof answers.notes !== "object") answers.notes = {};
+        if (!answers.notes["7"] && typeof answers.free_text === "string") answers.notes["7"] = answers.free_text;
+        document.querySelectorAll("textarea[data-note]").forEach(function (box) {
+          var key = box.getAttribute("data-note");
+          if (typeof answers.notes[key] === "string") box.value = answers.notes[key];
+          box.addEventListener("input", function () {
+            answers.notes[key] = box.value;
+            saveAnswers();
+          });
         });
 
+        function writtenText() {
+          return ["1", "2", "3", "4", "5", "6", "7"].map(function (k) {
+            return (answers.notes[k] || "").trim();
+          }).filter(Boolean).join("\n");
+        }
+
         function saveAnswers() {
-          if (free) answers.free_text = free.value;
+          document.querySelectorAll("textarea[data-note]").forEach(function (box) {
+            answers.notes[box.getAttribute("data-note")] = box.value;
+          });
+          answers.free_text = writtenText();
           try { localStorage.setItem("seesoul_compass_answers", JSON.stringify(answers)); } catch (e) {}
         }
 
