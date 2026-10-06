@@ -47,7 +47,7 @@ LABELS = {
     "not-good-enough":"「是不是我不够好？」","why-always":"「为什么总是这样？」","not-care":"「他/她是不是不在乎我？」","what-to-do":"「我到底该怎么办？」",
     "avoid":"躲开、不去想它","prove":"拼命解释或证明自己","ruminate":"一遍遍回想，找不到出口","seek-talk":"想找人说说，又怕麻烦",
     "lose-relation":"失去一段重要的关系","stuck-emotion":"一直被情绪拖住，做不了想做的事","lose-self":"越来越没有自己","break-down":"担心自己会撑不住",
-    "relation-loop":"一直在纠缠的一段关系","own-emotion":"我自己的情绪和状态","body-rest":"身体：好好休息、被对待","undecided":"一个迟迟没有决定的念头","slow-down":"说不上来，但我知道需要慢一点",
+    "relation-loop":"一直在纠缠的一段关系","own-emotion":"我自己的情绪和状态","body-rest":"身体这一侧，包括累和需要休息","undecided":"一个迟迟没有决定的念头","slow-down":"说不上来，但我知道需要慢一点",
 }
 
 # UI step -> canonical base evidence field
@@ -122,19 +122,44 @@ class SufficiencyResult:
 
 _REPEAT = ["总是","一直","从小到大","又这样","每次","反复","总是这样","不停"]
 
+# Selected answers that are distress, not proof of imminent danger.
+# Q6 break-down stays an anticipated concern. It can open CLARIFY, never CRITICAL.
+CLARIFY_SELECTIONS = {("protection", "break-down")}
+
+R0_MIRROR = (
+    "你刚才写下的内容，让我们需要先认真确认你的安全。SeeSoul 会在这里停下来，不再继续整理或解释。\n\n"
+    "如果你现在可能伤害自己或他人，或觉得自己无法保证自己的安全，请不要等待预约或继续这个探索。请立即联系你所在地的紧急服务，或前往最近的医院。\n\n"
+    "如果你在澳大利亚：生命处于危险中，请拨 000；Lifeline 13 11 14 提供 24 小时危机支持。\n\n"
+    "如果你在其他地区，请使用你所在地当前有效的紧急服务。"
+)
+
+
+def assess_safety(eo: EvidenceObject) -> str:
+    """Deterministic safety gate. The model never sets this.
+
+    NONE / CLARIFY / CRITICAL. CLARIFY is not R0.
+    Critical terms are checked before shorter concern words.
+    """
+    raw = eo.free_text.raw or ""
+    for term in CRITICAL_TERMS:
+        if term in raw:
+            return "CRITICAL"
+    for step in eo.steps:
+        if (step.step, step.raw_code) in CLARIFY_SELECTIONS:
+            return "CLARIFY"
+    for term in CONCERN_TERMS:
+        if term in raw:
+            return "CLARIFY"
+    return "NONE"
+
+
 def sufficiency(eo: EvidenceObject, multi_interpretation: bool = False) -> SufficiencyResult:
     """确定性 mode 判定（非 LLM）。"""
     raw = eo.free_text.raw
     text = raw
     for s in eo.steps:
         text += " " + s.raw_label
-    # safety
-    safety = "NONE"
-    for t in CRITICAL_TERMS:
-        if t in (raw or ""): safety = "CRITICAL"; break
-    if safety == "NONE":
-        for t in CONCERN_TERMS:
-            if t in (raw or ""): safety = "CONCERN"; break
+    safety = assess_safety(eo)
     # lived density
     raw_present = bool(raw and len(raw) >= 12)
     density = "LOW"
@@ -165,12 +190,12 @@ def compose_llm(eo: EvidenceObject, suff: SufficiencyResult, mode_hint: str) -> 
     """
     if suff.safety_signals == "CRITICAL":
         return {
-            "mirror": "你现在听起来很辛苦，而且那份辛苦似乎已经超出了你自己能扛的范围。这不代表你软弱——它只说明你真的很需要被稳稳接住一次。",
+            "mirror": R0_MIRROR,
             "bounded_reflection": None,
             "discovery_question": None,
             "small_movement": None,
-            "sentence_provenance": [{"sentence":"你现在听起来很辛苦","provenance":"system_offered"}],
-            "system_offered_claims": ["你现在听起来很辛苦"],
+            "sentence_provenance": [{"sentence":"你刚才写下的内容，让我们需要先认真确认你的安全","provenance":"system_offered"}],
+            "system_offered_claims": ["你刚才写下的内容，让我们需要先认真确认你的安全"],
             "safety_override": True,
         }
     raise RuntimeError("compose_llm must be injected for R1/R2/R3")
@@ -206,19 +231,22 @@ def audit_output(composed: dict, eo: EvidenceObject, suff: SufficiencyResult) ->
         checks["not_under_reflected"] = "FAIL"
     checks["user_language_fidelity"] = "FAIL" if any(t in all_text for t in _TERM) else "PASS"
     checks["raw_vs_hypothesis_separated"] = "PASS" if composed.get("bounded_reflection") is None or composed.get("system_offered_claims") else "FAIL"
-    checks["no_commercial_leak"] = "FAIL" if any(t in all_text for t in _NOCL) else "PASS"
+    # "不要等待预约" is a refusal inside the locked R0 sentence, not a booking offer.
+    commercial_text = all_text.replace("不要等待预约", "")
+    checks["no_commercial_leak"] = "FAIL" if any(t in commercial_text for t in _NOCL) else "PASS"
     checks["question_hygiene"] = _audit_question(composed.get("discovery_question") or "")
     checks["small_movement_present"] = "PASS" if (suff.mode in ("R2","R1") and composed.get("small_movement")) else "N/A"
     overall = "PASS" if not any(v in ("FAIL",) for k,v in checks.items() if isinstance(v,str) and k!="small_movement_present") else "FAIL"
     # NOTE: small_movement_present=N/A 不计失败；question_hygiene 用 FAIL
     return {"checks": checks, "overall": overall}
 
-_HYPO_Q = ["还是","是……还是","你是不是","你其实","因为你","你怕"]
+# A discovery question may open attention. It may not supply the answer inside the question.
+# Phrase list only. This gate does not add a semantic classifier.
+_HYPO_Q = ["还是", "是……还是", "你是不是", "你其实", "因为你", "你怕", "是不是因为", "其实是因为", "你怕的是"]
 
 def _audit_question(q: str) -> str:
     if not q:
         return "PASS"
-    # HYPOTHESIS-LOADED 检测：出现"还是 A 还是 B"二选一或"你是不是…因为…"含未支撑前提
     if "还是" in q and q.count("还是") >= 2:
         return "FAIL"
     for t in _HYPO_Q:

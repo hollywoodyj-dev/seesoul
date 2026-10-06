@@ -29,7 +29,7 @@
         <div class="page-hero__inner">
           <span class="eyebrow" style="color:var(--color-gold-soft)">Informed Consent &amp; Confidentiality</span>
           <h1>知情同意书与保密协议</h1>
-          <p>在开始预约或第一次见面之前，请你先花一点时间，读完这份说明。你可以随时提问，也可以选择不签署。</p>
+          <p>在开始预约或第一次见面之前，请你先花一点时间，读完这份说明。你可以随时提问。正式签署尚未开通。</p>
         </div>
       </section>
 
@@ -37,7 +37,7 @@
         <div class="container">
           <div class="consent-panel">
 
-            <div class="consent-note">本说明为高保真原型示意。正式上线前，措辞与条款将以确定的法律版本为准，请以最终版本文档为有效依据。</div>
+            <div class="consent-note">这一页只是说明，不是已经完成的签署。正式签署尚未开通。在有外部法律与专业复核之前，这些句子不能当作最终法律文本。</div>
 
             <div class="consent-section">
               <h3>一、与本服务有关</h3>
@@ -76,27 +76,8 @@
             </div>
 
             <div class="consent-section">
-              <h3>七、理解与同意</h3>
-              <label class="consent-check">
-                <input type="checkbox" id="agreeBox">
-                <span class="box">✓</span>
-                <p>我已阅读并理解以上内容，同意SeeSoul在此说明的范围内提供服务，并愿意遵守相关的保密与安全约定。</p>
-              </label>
-            </div>
-
-            <div class="sign-grid">
-              <label class="field"><span>签署人姓名</span><input type="text" id="signName" placeholder="你的姓名"></label>
-              <label class="field"><span>签署日期</span><input type="date" id="signDate"></label>
-            </div>
-
-            <div id="consentFlow">
-              <button class="btn btn--gold btn--full btn--disabled" id="signBtn" type="button" disabled>我已阅读并同意签署</button>
-              <p class="book-fine" style="margin-top:0.8rem">电子签署为原型示意 · 正式签署将在开发阶段接入。</p>
-            </div>
-            <div class="book-confirmed" id="consentDone" hidden>
-              <div class="ok-icon">✓</div>
-              <h3>已确认并签署。</h3>
-              <p>感谢你抽出时间阅读。我们按照这份约定，一起把接下来的一步走稳。<br /><a class="text-link" href="booking.html" style="display:inline-block;margin-top:1rem">返回预约页 →</a></p>
+              <h3>七、Compass 的数据</h3>
+              <p>Compass 的七个选择和你写下的话保存在这台浏览器里。查看结果时，它们会被发送到 /api/compass 用来生成这一次反思。这个网站没有把它们写入预约库。安全状态由固定规则判断，不由模型判断。</p>
             </div>
 
           </div>
@@ -116,19 +97,6 @@
       var t = document.getElementById("navToggle");
       if (t) t.addEventListener("click", function () { var n = document.getElementById("siteNav"); var o = n.classList.toggle("site-nav--open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
 
-      (function () {
-        var box = document.getElementById("agreeBox"), btn = document.getElementById("signBtn"),
-            flow = document.getElementById("consentFlow"), done = document.getElementById("consentDone"),
-            name = document.getElementById("signName"), date = document.getElementById("signDate");
-        function refresh() {
-          var ok = box.checked && name.value.trim() !== "" && date.value !== "";
-          btn.disabled = !ok; btn.classList.toggle("btn--disabled", !ok);
-        }
-        box.addEventListener("change", refresh);
-        name.addEventListener("input", refresh);
-        date.addEventListener("change", refresh);
-        btn.addEventListener("click", function () { flow.hidden = true; done.hidden = false; });
-      })();
     </script>
   </body>
 </html>

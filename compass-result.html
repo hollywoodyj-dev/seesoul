@@ -62,7 +62,7 @@
 
         function nextStep(payload) {
           if (payload.safety === "CRITICAL") {
-            return '<a class="next-option" href="lt-safety.html"><div><strong>如果现在很难受</strong><div style="color:var(--color-muted);font-size:0.9rem;margin-top:0.2rem">先去一个安全的页面。不必继续往下看。</div></div><span class="g">→</span></a>';
+            return '<a class="next-option" href="lt-safety.html"><div><strong>查看其他地区支持 →</strong></div></a>';
           }
           if (payload.router === "COUNSELLING_INFORMATION") {
             return '<a class="next-option" href="counselling.html"><div><strong>想找个人一起谈谈</strong><div style="color:var(--color-muted);font-size:0.9rem;margin-top:0.2rem">可以从一次咨询了解怎么开始。</div></div><span class="g">→</span></a>';
@@ -96,16 +96,32 @@
 
         var answers = {};
         ["1", "2", "3", "4", "5", "6", "7"].forEach(function (k) { if (a[k]) answers[k] = a[k]; });
-        fetch("/api/compass", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ answers: answers, free_text: a.free_text || "" })
-        }).then(function (res) { return res.json(); }).then(function (payload) {
-          if (!payload || !payload.ok) { emptyState(); return; }
-          render(payload);
-        }).catch(function () {
+
+        function failState() {
           bodyEl.innerHTML = '<section class="result-section"><span class="k">还没能整理出来</span><h3>这一次没有生成反思</h3><p style="margin-top:0.6rem">你可以回到问卷再走一次。你的选择还留在这台设备上。</p><div class="next-options" style="margin-top:1.4rem"><a class="next-option" href="compass-question.html"><div><strong>返回问卷 →</strong></div><span class="g">→</span></a></div></section>';
-        });
+        }
+
+        function showClarify() {
+          bodyEl.innerHTML = '<section class="result-section"><span class="k">先确认安全</span><h3>我想先确认一下你的安全。</h3><p style="margin-top:0.8rem">此刻，你有没有正在考虑伤害自己，或者觉得自己可能无法保证自己的安全？</p><div class="next-options" style="margin-top:1.4rem"><button class="next-option" type="button" id="safetyYes"><div><strong>是，我现在需要立即的帮助</strong></div></button><button class="next-option" type="button" id="safetyNo"><div><strong>没有，我现在是安全的</strong></div></button></div></section>';
+          document.getElementById("safetyYes").addEventListener("click", function () { ask("needs_help"); });
+          document.getElementById("safetyNo").addEventListener("click", function () { ask("safe_now"); });
+        }
+
+        function ask(safetyConfirmation) {
+          var body = { answers: answers, free_text: a.free_text || "" };
+          if (safetyConfirmation) body.safety_confirmation = safetyConfirmation;
+          fetch("/api/compass", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+          }).then(function (res) { return res.json(); }).then(function (payload) {
+            if (!payload || !payload.ok) { emptyState(); return; }
+            if (payload.safety === "CLARIFY") { showClarify(); return; }
+            render(payload);
+          }).catch(failState);
+        }
+
+        ask(null);
       })();
     </script>
   </body>

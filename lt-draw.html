@@ -89,10 +89,11 @@
 
       function possibleNote(card) {
         var role = cardRole[card.id];
-        if (role === "static:origin")      return "在你的 1320 结构里，这与你一贯比较自然的力量「" + card.zh + "」在同一条线上——是一个值得看看的方向，不是对你的结论。";
-        if (role === "static:tension")     return "在你的 1320 结构里，当那股力量失衡或紧绷时，可能正以「" + card.zh + "」这样的张力出现——值得看看，但不需要预设答案。";
-        if (role === "static:integration") return "在你的 1320 结构里，更成熟、更缓和一些的表达，可能正朝「" + card.zh + "」这个方向走。";
-        if (role === "static:secondary")   return "这与你 1320 结构里「" + card.zh + "」这个相关（但未必核心）的方向有所呼应。";
+        var notFinal = "这一版结构对照还不是最终计算规则，不能当作定论。";
+        if (role === "static:origin")      return "在你的 1320 结构里，这与你一贯比较自然的力量「" + card.zh + "」在同一条线上——是一个值得看看的方向，不是对你的结论。" + notFinal;
+        if (role === "static:tension")     return "在你的 1320 结构里，当那股力量失衡或紧绷时，可能正以「" + card.zh + "」这样的张力出现——值得看看，但不需要预设答案。" + notFinal;
+        if (role === "static:integration") return "在你的 1320 结构里，更成熟、更缓和一些的表达，可能正朝「" + card.zh + "」这个方向走。" + notFinal;
+        if (role === "static:secondary")   return "这与你 1320 结构里「" + card.zh + "」这个相关（但未必核心）的方向有所呼应。" + notFinal;
         if (role === "contextual")         return "在今天带来的经验里，这个方向「" + card.zh + "」似乎被轻轻提了一下。";
         // 无 1320（NOT_USED）→ 一律空白镜子，不假装有结构
         return "这一张牌此刻更像一面空白镜子——更深的意义，留给你与容熙的线下对话一起慢慢探索（1320 观察角度本次未参与）。";

@@ -153,24 +153,16 @@
             <div class="book-form">
               <div class="two-col">
                 <label class="field"><span>姓名</span><input type="text" name="bname" placeholder="怎么称呼你"></label>
-                <label class="field"><span>Email</span><input type="email" name="bemail" placeholder="你方便收到确认的邮箱"></label>
+                <label class="field"><span>Email</span><input type="email" name="bemail" placeholder="邮箱。这个页面不会发送。"></label>
               </div>
               <label class="field"><span>联系方式</span><input type="text" name="bcontact" placeholder="电话或其他便于联系你的方式（选填）"></label>
               <label class="field"><span>有什么是你希望我在见面前知道的吗？（选填）</span><textarea name="bnote" placeholder="不需要写得很完整，一两句话就可以。也可以留空，见面以后再谈。"></textarea></label>
             </div>
 
-            <p class="book-loc" id="locNote" hidden>线下地点不会公开展示——预约确认后，我们会把具体地点单独发给你。</p>
+            <p class="book-loc" id="locNote" hidden>线下地点不会显示在这个页面上。这个页面也不能为你确认地点。</p>
 
-            <div id="bookingFlow">
-              <button class="btn btn--gold btn--full" id="confirmBtn" type="button">确认并完成预约</button>
-              <p class="book-note" style="margin-top:1.2rem">还不知道自己想谈什么？没有关系。你可以直接预约，也可以先做一次 SeeSoul Compass™。<a class="text-link" href="compass-start.html">先做 SeeSoul Compass →</a></p>
-            </div>
-            <div class="book-confirmed" id="bookDone" hidden>
-              <div class="ok-icon">✓</div>
-              <h3>预约已确认。</h3>
-              <p>我们会通过你留下的联系方式与你确认细节。在那之前，你不需要准备任何东西——让自己好好保留这个小时就好。<br /><a class="text-link" href="compass-start.html" style="display:inline-block;margin-top:1rem">先做 SeeSoul Compass →</a></p>
-            </div>
-            <p class="book-fine">此为预约流程示意 · 正式在线预约系统将在开发阶段接入上线。</p>
+            <p class="book-note">这个页面还不能提交预约。你填写的内容不会被发送、保存，也不会进入日历。这里还不是一次已经完成的预约。</p>
+            <p class="book-note" style="margin-top:1.2rem">还不知道自己想谈什么？可以先做一次 SeeSoul Compass™。<a class="text-link" href="compass-start.html">先做 SeeSoul Compass →</a></p>
           </div>
         </div>
       </section>
@@ -188,7 +180,7 @@
             <p>· 你可随时询问咨询的相关事项、方式与过程，也有权在任何时候暂停或结束咨询。</p>
           </div>
           <div class="btn-row" style="margin-top:1.8rem">
-            <a class="btn btn--navy" href="consent.html">阅读并签署知情同意书与保密协议 →</a>
+            <a class="btn btn--navy" href="consent.html">阅读知情同意与保密说明 →</a>
           </div>
         </div>
       </section>
@@ -248,10 +240,6 @@
         /* 线上/线下 → 线下选址提示 */
         var locNote = document.getElementById("locNote");
         document.querySelectorAll("input[name=bmode]").forEach(function (r) { r.addEventListener("change", function () { locNote.hidden = (this.value !== "offline"); }); });
-
-        /* 确认 → 确认态 */
-        var flow = document.getElementById("bookingFlow"), done = document.getElementById("bookDone");
-        document.getElementById("confirmBtn").addEventListener("click", function () { flow.hidden = true; done.hidden = false; });
       })();
     </script>
   </body>

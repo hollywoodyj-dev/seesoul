@@ -16,7 +16,7 @@ SeeSoul Compass v2 · LLM Customised Reflection 可插拔组件
 """
 
 from __future__ import annotations
-from compass_engine import EvidenceObject, SufficiencyResult, LABELS
+from compass_engine import EvidenceObject, SufficiencyResult, LABELS, R0_MIRROR
 
 # ---------------------------------------------------------------- #
 # 读取用户已选字段的小工具（只忠实转述，不补全）
@@ -55,10 +55,10 @@ def compose_llm(eo: EvidenceObject, suff: SufficiencyResult, mode_hint: str) -> 
     # ----- R0 / 安全（引擎兜底也覆盖，这里双保险）-----
     if suff.safety_signals == "CRITICAL":
         return {
-            "mirror": "你现在听起来很辛苦，而且那份辛苦似乎已经超出了你自己能扛的范围。这不代表你软弱——它只说明你真的很需要被稳稳接住一次。",
+            "mirror": R0_MIRROR,
             "bounded_reflection": None, "discovery_question": None, "small_movement": None,
-            "sentence_provenance": [{"sentence":"你现在听起来很辛苦","provenance":"system_offered"}],
-            "system_offered_claims": ["你现在听起来很辛苦"], "safety_override": True,
+            "sentence_provenance": [{"sentence":"你刚才写下的内容，让我们需要先认真确认你的安全","provenance":"system_offered"}],
+            "system_offered_claims": ["你刚才写下的内容，让我们需要先认真确认你的安全"], "safety_override": True,
         }
 
     common = {

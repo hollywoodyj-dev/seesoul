@@ -14,6 +14,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from compass_engine import (  # noqa: E402
+    assess_safety,
     audit_output,
     build_evidence,
     compose_llm as engine_r0,
@@ -77,9 +78,16 @@ def _public(composed: dict, mode: str, router: str, safety: str, source: str, au
     }
 
 
+def _prompt_step(step_name: str) -> str:
+    # Q6 stays an anticipated concern. Do not send the internal name "protection".
+    if step_name == "protection":
+        return "anticipated_concern"
+    return step_name
+
+
 def _prompt(eo, suff) -> str:
     steps = [
-        {"step": s.step, "words": s.raw_label}
+        {"step": _prompt_step(s.step), "words": s.raw_label}
         for s in eo.steps
     ]
     return (
@@ -131,18 +139,50 @@ def _bounded(eo, suff) -> dict:
     return bounded_compose(eo, suff, suff.mode)
 
 
-def reflect(answers: dict | None, free_text: str = "") -> dict:
+def _clarify_hold() -> dict:
+    return {
+        "ok": True,
+        "source": "safety_gate",
+        "reflection_mode": None,
+        "mirror": "",
+        "bounded_reflection": None,
+        "discovery_question": None,
+        "small_movement": None,
+        "router": "NO_COMMERCIAL_CTA",
+        "safety": "CLARIFY",
+        "audit": "HELD",
+    }
+
+
+def reflect(answers: dict | None, free_text: str = "", safety_confirmation: str | None = None) -> dict:
+    # CLARIFY RESPONSE IS SAFETY EVIDENCE ONLY. IT MUST NOT BECOME REFLECTION EVIDENCE.
+    if safety_confirmation not in ("needs_help", "safe_now"):
+        safety_confirmation = None
     step_codes = {}
     for key, value in (answers or {}).items():
         step = UI_STEP.get(str(key))
         if step and isinstance(value, str) and value.strip():
             step_codes[step] = value.strip()
     free_text = _clip(free_text if isinstance(free_text, str) else "")
-    if not step_codes and not free_text:
+    if not step_codes and not free_text and safety_confirmation is None:
         return {"ok": False, "status": "EMPTY_INPUT"}
 
     eo = build_evidence("web", step_codes, free_text)
+    signal = assess_safety(eo)
+    if signal != "CRITICAL" and safety_confirmation == "needs_help":
+        signal = "CRITICAL"
+    elif signal == "CLARIFY" and safety_confirmation == "safe_now":
+        signal = "NONE"
+    elif signal == "CLARIFY":
+        return _clarify_hold()
+
+    # R3 = SPECIFIED / NOT PRODUCTION-REACHABLE. Do not enable it here.
     suff = sufficiency(eo, multi_interpretation=False)
+    if signal == "CRITICAL":
+        suff.safety_signals = "CRITICAL"
+        suff.mode = "R0"
+    elif signal == "NONE":
+        suff.safety_signals = "NONE"
     source = "bounded"
     composed = _bounded(eo, suff)
 
@@ -163,10 +203,19 @@ def reflect(answers: dict | None, free_text: str = "") -> dict:
             print("LLM_STATUS " + logger_status, flush=True)
 
     audit = audit_output(composed, eo, suff)
+    failed = [k for k, v in audit["checks"].items() if v == "FAIL"]
+    if failed == ["question_hygiene"]:
+        composed["discovery_question"] = "如果此刻要给这股感觉一个名字，你会怎么叫它？"
+        audit = audit_output(composed, eo, suff)
     if audit["overall"] != "PASS":
-        composed = safe_fallback(suff.mode)
-        source = "fallback"
-        audit = {"overall": "FALLBACK"}
+        if suff.safety_signals == "CRITICAL":
+            composed = engine_r0(eo, suff, suff.mode)
+            source = "safety_gate"
+            audit = {"overall": "R0_HELD"}
+        else:
+            composed = safe_fallback(suff.mode)
+            source = "fallback"
+            audit = {"overall": "FALLBACK"}
 
     router_decision = "NO_COMMERCIAL_CTA" if suff.safety_signals == "CRITICAL" else route(suff, eo)
     return _public(composed, suff.mode, router_decision, suff.safety_signals, source, audit["overall"])
