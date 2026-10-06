@@ -203,36 +203,52 @@
       (function () {
         var calGrid = document.getElementById("calGrid");
         var slotGrid = document.getElementById("slotGrid");
-        var year = 2026, month = 8;
-        var SUNDAY_START = true;
-        var dowLabels = SUNDAY_START ? ["日","一","二","三","四","五","六"] : ["一","二","三","四","五","六","日"];
-        function firstPad(year, month, sundayStart) { var d = new Date(year, month, 1).getDay(); return sundayStart ? d : ((d + 6) % 7); }
-        function dim(year, month) { return new Date(year, month + 1, 0).getDate(); }
+        var title = document.querySelector(".cal-title");
+        var prev = document.querySelector(".cal-nav[aria-label='上个月']");
+        var next = document.querySelector(".cal-nav[aria-label='下个月']");
+        var now = new Date();
+        var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        var year = today.getFullYear();
+        var month = today.getMonth();
+        var selected = null;
+        var dowLabels = ["日","一","二","三","四","五","六"];
+        function sameMonth(y, m) { return y === today.getFullYear() && m === today.getMonth(); }
         function buildCal() {
+          title.textContent = year + " 年 " + (month + 1) + " 月";
+          prev.disabled = sameMonth(year, month);
           calGrid.innerHTML = "";
           dowLabels.forEach(function (l) { var dw = document.createElement("div"); dw.className = "cal-dow"; dw.textContent = l; calGrid.appendChild(dw); });
-          var pad = firstPad(year, month, SUNDAY_START);
-          for (var i = 0; i < pad; i++) { var b0 = document.createElement("button"); b0.type = "button"; b0.className = "cal-date is-off"; b0.tabIndex = -1; calGrid.appendChild(b0); }
-          for (var d = 1; d <= dim(year, month); d++) {
+          var pad = new Date(year, month, 1).getDay();
+          var total = new Date(year, month + 1, 0).getDate();
+          for (var i = 0; i < pad; i++) { var blank = document.createElement("button"); blank.type = "button"; blank.className = "cal-date is-off"; blank.tabIndex = -1; blank.disabled = true; calGrid.appendChild(blank); }
+          for (var d = 1; d <= total; d++) {
+            var date = new Date(year, month, d);
             var b = document.createElement("button");
-            b.type = "button"; b.className = "cal-date"; b.textContent = d; b.setAttribute("aria-label", "选择 " + d + " 日");
-            if (d === 24) { b.classList.add("is-selected"); }
-            b.addEventListener("click", function () { calGrid.querySelectorAll(".cal-date").forEach(function (x) { x.classList.remove("is-selected"); }); this.classList.add("is-selected"); });
+            b.type = "button"; b.className = "cal-date"; b.textContent = String(d); b.setAttribute("aria-label", "选择 " + d + " 日");
+            if (date < today) { b.classList.add("is-off"); b.disabled = true; b.setAttribute("aria-disabled", "true"); }
+            else {
+              if (selected && selected.getTime() === date.getTime()) { b.classList.add("is-selected"); b.setAttribute("aria-pressed", "true"); }
+              b.addEventListener("click", function () {
+                selected = new Date(year, month, Number(this.textContent));
+                calGrid.querySelectorAll(".cal-date").forEach(function (x) { x.classList.remove("is-selected"); x.setAttribute("aria-pressed", "false"); });
+                this.classList.add("is-selected"); this.setAttribute("aria-pressed", "true");
+              });
+            }
             calGrid.appendChild(b);
           }
         }
         var slots = ["09:00","10:30","13:00","14:30","16:00","19:30"];
-        var offIdx = [2, 5];
         function buildSlots() {
           slotGrid.innerHTML = "";
-          slots.forEach(function (s, i) {
+          slots.forEach(function (s) {
             var b = document.createElement("button");
-            b.type = "button"; b.className = "slot"; b.textContent = s; b.dataset.t = s;
-            if (offIdx.indexOf(i) !== -1) { b.classList.add("is-off"); b.disabled = true; b.setAttribute("aria-disabled", "true"); }
-            else { b.addEventListener("click", function () { slotGrid.querySelectorAll(".slot").forEach(function (x) { x.classList.remove("is-selected"); }); this.classList.add("is-selected"); }); }
+            b.type = "button"; b.className = "slot"; b.textContent = s;
+            b.addEventListener("click", function () { slotGrid.querySelectorAll(".slot").forEach(function (x) { x.classList.remove("is-selected"); x.setAttribute("aria-pressed", "false"); }); this.classList.add("is-selected"); this.setAttribute("aria-pressed", "true"); });
             slotGrid.appendChild(b);
           });
         }
+        prev.addEventListener("click", function () { if (sameMonth(year, month)) return; month -= 1; if (month < 0) { month = 11; year -= 1; } buildCal(); });
+        next.addEventListener("click", function () { month += 1; if (month > 11) { month = 0; year += 1; } buildCal(); });
         buildCal(); buildSlots();
         var locNote = document.getElementById("locNote");
         document.querySelectorAll("input[name=bmode]").forEach(function (r) { r.addEventListener("change", function () { locNote.hidden = (this.value !== "offline"); }); });

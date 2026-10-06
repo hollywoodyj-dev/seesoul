@@ -37,44 +37,33 @@
       <section class="section section--ivory" style="padding-top:var(--space-8)">
         <div class="container">
           <div class="chips" role="toolbar" aria-label="内容分类">
-            <a class="chip" href="#popular" aria-pressed="true">情绪</a>
-            <a class="chip" href="#popular">关系</a>
-            <a class="chip" href="#popular">家庭</a>
-            <a class="chip" href="#popular">自己</a>
-            <a class="chip" href="#popular">身体</a>
-            <a class="chip" href="#popular">人生</a>
-            <a class="chip" href="#popular">心理学</a>
-            <a class="chip" href="#popular">意识与生命</a>
+            <button class="chip" type="button" data-filter="all" aria-pressed="true">全部</button>
+            <button class="chip" type="button" data-filter="情绪">情绪</button>
+            <button class="chip" type="button" data-filter="关系">关系</button>
+            <button class="chip" type="button" data-filter="家庭">家庭</button>
+            <button class="chip" type="button" data-filter="自己">自己</button>
+            <button class="chip" type="button" data-filter="身体">身体</button>
+            <button class="chip" type="button" data-filter="人生">人生</button>
+            <button class="chip" type="button" data-filter="心理学">心理学</button>
+            <button class="chip" type="button" data-filter="意识与生命">意识与生命</button>
           </div>
           <a class="btn btn--gold" href="compass-start.html" style="margin-bottom:2.5rem">不知道从哪一篇开始？做 SeeSoul Compass →</a>
 
-          <!-- Popular -->
-          <h2 id="popular" style="font-size:1.5rem;margin-bottom:1.2rem">大家常问的问题</h2>
-          <div class="content-grid">
-            <a class="content-card" href="article-overthinking.html"><span class="tag">情绪</span><h3>为什么大脑总是反复想最坏的结果？</h3></a>
-            <a class="content-card" href="article-relationship-patterns.html"><span class="tag">关系 · 依恋</span><h3>为什么我们总在关系里重复相似的模式？</h3></a>
-            <a class="content-card" href="article-projection.html"><span class="tag">关系 · 投射</span><h3>什么是投射？</h3></a>
-            <a class="content-card" href="article-loneliness.html"><span class="tag">自我 · 孤独</span><h3>为什么人会时不时感到孤独？</h3></a>
-            <a class="content-card" href="article-meaninglessness.html"><span class="tag">意义感</span><h3>为什么明明很努力，却越来越觉得没意义？</h3></a>
-            <a class="content-card" href="article-knowing-vs-doing.html"><span class="tag">认知</span><h3>为什么明白很多道理，却还是做不到？</h3></a>
+          <h2 style="font-size:1.5rem;margin-bottom:1.2rem">大家常问的问题</h2>
+          <div class="content-grid" id="exploreGrid">
+            <a class="content-card" href="article-overthinking.html" data-cats="情绪"><span class="tag">情绪</span><h3>为什么大脑总是反复想最坏的结果？</h3></a>
+            <a class="content-card" href="article-relationship-patterns.html" data-cats="关系"><span class="tag">关系 · 依恋</span><h3>为什么我们总在关系里重复相似的模式？</h3></a>
+            <a class="content-card" href="article-projection.html" data-cats="关系"><span class="tag">关系 · 投射</span><h3>什么是投射？</h3></a>
+            <a class="content-card" href="article-loneliness.html" data-cats="自己"><span class="tag">自我 · 孤独</span><h3>为什么人会时不时感到孤独？</h3></a>
+            <a class="content-card" href="article-meaninglessness.html" data-cats="人生"><span class="tag">意义感</span><h3>为什么明明很努力，却越来越觉得没意义？</h3></a>
+            <a class="content-card" href="article-body-signal.html" data-cats="身体"><span class="tag">身体</span><h3>为什么身体已经很累，人还在说再撑一下？</h3></a>
+            <a class="content-card" href="article-knowing-vs-doing.html" data-cats="心理学"><span class="tag">认知</span><h3>为什么明白很多道理，却还是做不到？</h3></a>
+            <a class="content-card" href="article-spiritual-psychology.html" data-cats="意识与生命|心理学"><span class="tag">意识与生命</span><h3>当灵性经验与心理学相遇：如何诚实地讨论它</h3></a>
+            <a class="content-card" href="article-family-boundary.html" data-cats="家庭"><span class="tag">原生家庭 · 边界</span><h3>在家庭里学会说不：边界如何被重新长出来</h3></a>
+            <a class="content-card" href="exercise-three-sentences.html" data-cats="情绪"><span class="tag">练习 · 三句话记录</span><h3>当感觉出现时，写下：发生了什么 / 我感觉什么 / 我最害怕什么</h3></a>
+            <a class="content-card" href="exercise-three-columns.html" data-cats="自己"><span class="tag">练习 · 区分</span><h3>把「事实、害怕、过去留下的模式」分到三栏</h3></a>
           </div>
-
-          <!-- Wisdom -->
-          <h2 id="wisdom" style="font-size:1.5rem;margin:2.5rem 0 1.2rem">今日 SeeSoul Wisdom</h2>
-          <blockquote style="margin:0 0 2rem;padding:1.4rem 1.6rem;border-left:3px solid var(--color-gold);background:var(--color-ivory-card);border-radius:0 var(--radius-md) var(--radius-md) 0;font-family:var(--font-display);font-size:1.15rem;line-height:1.9">真正的深度，是让一个人终于能够看清原本纠缠在一起的东西。</blockquote>
-
-          <!-- Exercises & Deep -->
-          <h2 style="font-size:1.5rem;margin-bottom:1.2rem">Reflection Exercises</h2>
-          <div class="content-grid">
-            <a class="content-card" href="exercise-three-sentences.html"><span class="tag">练习 · 三句话记录</span><h3>当感觉出现时，写下：发生了什么 / 我感觉什么 / 我最害怕什么</h3></a>
-            <a class="content-card" href="exercise-three-columns.html"><span class="tag">练习 · 区分</span><h3>把「事实、害怕、过去留下的模式」分到三栏</h3></a>
-          </div>
-
-          <h2 style="font-size:1.5rem;margin:2.5rem 0 1.2rem">Deep Reads</h2>
-          <div class="content-grid">
-            <a class="content-card" href="article-spiritual-psychology.html"><span class="tag">意识与生命</span><h3>当灵性经验与心理学相遇：如何诚实地讨论它</h3></a>
-            <a class="content-card" href="article-family-boundary.html"><span class="tag">原生家庭 · 边界</span><h3>在家庭里学会说不：边界如何被重新长出来</h3></a>
-          </div>
+          <p id="exploreEmpty" hidden style="color:var(--color-muted);margin-top:0.4rem">这一类还没有文章。</p>
         </div>
       </section>
     </main>
@@ -90,6 +79,32 @@
     <script>
       var t = document.getElementById("navToggle");
       if (t) t.addEventListener("click", function () { var n = document.getElementById("siteNav"); var o = n.classList.toggle("site-nav--open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
+
+      (function () {
+        var chips = document.querySelectorAll("[data-filter]");
+        var cards = document.querySelectorAll("#exploreGrid [data-cats]");
+        var empty = document.getElementById("exploreEmpty");
+        function apply(name) {
+          var shown = 0;
+          cards.forEach(function (card) {
+            var cats = (card.getAttribute("data-cats") || "").split("|");
+            var on = name === "all" || cats.indexOf(name) !== -1;
+            card.hidden = !on;
+            if (on) shown += 1;
+          });
+          empty.hidden = shown !== 0;
+          chips.forEach(function (chip) {
+            chip.setAttribute("aria-pressed", chip.getAttribute("data-filter") === name ? "true" : "false");
+          });
+        }
+        chips.forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            var name = chip.getAttribute("data-filter");
+            if (chip.getAttribute("aria-pressed") === "true" && name !== "all") apply("all");
+            else apply(name);
+          });
+        });
+      })();
     </script>
   </body>
 </html>

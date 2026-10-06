@@ -380,6 +380,7 @@ img, svg { display: block; max-width: 100%; }
 /* — Chip —— */
 .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
 .chip { border: 1px solid var(--color-border-soft); background: var(--color-ivory-card); color: var(--color-text); border-radius: 999px; padding: 0.45rem 1rem; font-size: 0.92rem; text-decoration: none; }
+button.chip { font: inherit; cursor: pointer; }
 .chip[aria-pressed="true"], .chip:hover { border-color: var(--color-gold); color: var(--color-navy); font-weight: 600; }
 
 /* — Compass 流程页 —— */
@@ -486,6 +487,8 @@ img, svg { display: block; max-width: 100%; }
 .cal-title { font-family: var(--font-display); font-weight: 600; color: var(--color-navy); }
 .cal-nav { background: none; border: 1px solid var(--color-border-soft); border-radius: var(--radius-sm); width: 2rem; height: 2rem; color: var(--color-navy); cursor: pointer; }
 .cal-nav:hover { border-color: var(--color-gold); }
+.cal-nav:disabled { opacity: 0.35; cursor: default; }
+.cal-nav:disabled:hover { border-color: var(--color-border-soft); }
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.3rem; }
 .cal-dow { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--color-muted); text-align: center; padding: 0.3rem 0; }
 .cal-date {
