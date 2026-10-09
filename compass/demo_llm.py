@@ -45,6 +45,41 @@ def _quote(label: str) -> str:
         return label
     return f"「{label}」"
 
+_LAYER = (
+    ("reality", "最近发生的事"),
+    ("feeling", "感受"),
+    ("body", "身体"),
+    ("thought", "脑海里的话"),
+    ("impulse", "你想做的"),
+    ("protection", "你在意的"),
+    ("awareness", "你想照顾的"),
+)
+
+def _own(eo: EvidenceObject, step: str) -> str:
+    for s in eo.steps:
+        if s.step == step:
+            return (s.own_words or "").strip()
+    return ""
+
+def _has_own(eo: EvidenceObject) -> bool:
+    return any(_own(eo, step) for step, _title in _LAYER)
+
+def _echo(eo: EvidenceObject) -> str:
+    """把每一步的选项和来访者自己写的原话并列出来，不另作解释。"""
+    lines = []
+    for step, title in _LAYER:
+        label = _label(eo, step)
+        words = _own(eo, step)
+        if not label and not words:
+            continue
+        if label and words:
+            lines.append(f"{title}：{label}。你写的是{_quote(words)}")
+        elif words:
+            lines.append(f"{title}：你写的是{_quote(words)}")
+        else:
+            lines.append(f"{title}：{label}")
+    return "你这次留下来的，是这些：\n" + "\n".join(lines)
+
 # ---------------------------------------------------------------- #
 # Compose（读取该用户真实字段 -> customised）
 # ---------------------------------------------------------------- #
@@ -68,6 +103,16 @@ def compose_llm(eo: EvidenceObject, suff: SufficiencyResult, mode_hint: str) -> 
 
     # ================= R1 · LIGHT =================
     if mode == "R1":
+        if _has_own(eo):
+            common["sentence_provenance"] = [{"sentence": "你这次留下来的，是这些", "provenance": "system_offered"}]
+            for step, _title in _LAYER:
+                if _own(eo, step):
+                    common["sentence_provenance"].append({"sentence": _own(eo, step), "provenance": "USER_WRITTEN"})
+            common["mirror"] = _echo(eo)
+            common["bounded_reflection"] = None
+            common["discovery_question"] = "如果这一刻要给自己一点照顾，你先想顾到的会是哪一小处？"
+            common["small_movement"] = "今天只做一件让自己回神的小事——不用想清楚为什么，也不需要向谁解释。"
+            return common
         # 保留用户的确切信号，只整理，不假设
         feel, body, thought, impulse = _feeling(eo), _body(eo), _thought(eo), _impulse(eo)
         mirror = "你现在还说不清具体发生了哪一件事，但身体的信号已经先到了"
@@ -90,6 +135,19 @@ def compose_llm(eo: EvidenceObject, suff: SufficiencyResult, mode_hint: str) -> 
 
     # ================= R2 · GROUNDED =================
     if mode == "R2":
+        if _has_own(eo):
+            common["mirror"] = _echo(eo)
+            common["bounded_reflection"] = "这些是你自己留下的选择和原话。这里不把它们解释成一个结论。"
+            common["system_offered_claims"] = ["这里不把它们解释成一个结论"]
+            common["sentence_provenance"] = [
+                {"sentence": "这些是你自己留下的选择和原话", "provenance": "system_offered"},
+            ]
+            for step, _title in _LAYER:
+                if _own(eo, step):
+                    common["sentence_provenance"].append({"sentence": _own(eo, step), "provenance": "USER_WRITTEN"})
+            common["discovery_question"] = "如果继续往下看，你希望先看清的是哪一处？"
+            common["small_movement"] = "今天可以给其中一个被你摆出来的事实做一点小小回应，不必推翻它，只需先看待它。"
+            return common
         # 用该用户真实自由文本做目标 base（必须出现原话片段 -> 可追溯）
         raw_frag = None
         if raw:

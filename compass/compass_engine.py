@@ -69,6 +69,7 @@ class StepEvidence:
     canonical: str
     provenance: str = "USER_SELECTED"
     source_step: int = 0
+    own_words: str = ""
 
 @dataclass
 class FreeTextEvidence:
@@ -89,19 +90,23 @@ class EvidenceObject:
 # ---------------------------------------------------------------- #
 # 2. Evidence Structuring (raw immutable + normalized + provenance)
 # ---------------------------------------------------------------- #
-def build_evidence(session_id, step_codes: dict, free_text: str = "") -> EvidenceObject:
+def build_evidence(session_id, step_codes: dict, free_text: str = "", own_words: dict | None = None) -> EvidenceObject:
     """step_codes: {step_name: code}。raw 原样保留，label 原样展露。"""
     eo = EvidenceObject(session_id=session_id)
+    written = own_words or {}
     for i, (step, q, valid) in enumerate(STEPS, start=1):
         code = step_codes.get(step)
         if code not in valid:
             code = None
+        note = (written.get(step) or "").strip()
         # 未作答 -> 该项留空（缺失输入，不补全）
-        if code is None:
+        if code is None and not note:
             continue
         eo.steps.append(StepEvidence(
-            step=step, raw_code=code, raw_label=LABELS.get(code, code),
-            canonical=STEP_TO_CANONICAL[step], provenance="USER_SELECTED", source_step=i))
+            step=step, raw_code=code or "", raw_label=LABELS.get(code, "") if code else "",
+            canonical=STEP_TO_CANONICAL[step],
+            provenance="USER_SELECTED" if code else "USER_WRITTEN",
+            source_step=i, own_words=note))
     ft = (free_text or "").strip()
     eo.free_text.raw = ft
     eo.free_text.normalized = ft   # 自由文本不做改写：NORMALIZATION MAY NOT ADD MEANING
@@ -219,7 +224,11 @@ def audit_output(composed: dict, eo: EvidenceObject, suff: SufficiencyResult) ->
     checks = {}
     # grounded：核心 lived 原话必须可追溯（raw 片段出现在输出中），此处做基本非空
     checks["grounded"] = "PASS"
-    checks["non_diagnostic"] = "FAIL" if any(t in all_text for t in _NODX) else "PASS"
+    system_text = all_text
+    for step in eo.steps:
+        if step.own_words:
+            system_text = system_text.replace(step.own_words, "")
+    checks["non_diagnostic"] = "FAIL" if any(t in system_text for t in _NODX) else "PASS"
     checks["restraint"] = "PASS"
     if suff.mode == "R1" and composed.get("bounded_reflection"):
         checks["restraint"] = "FAIL"   # R1 不许 hypothesis
@@ -229,10 +238,10 @@ def audit_output(composed: dict, eo: EvidenceObject, suff: SufficiencyResult) ->
     checks["not_under_reflected"] = "PASS"
     if suff.mode == "R2" and (not composed.get("bounded_reflection")):
         checks["not_under_reflected"] = "FAIL"
-    checks["user_language_fidelity"] = "FAIL" if any(t in all_text for t in _TERM) else "PASS"
+    checks["user_language_fidelity"] = "FAIL" if any(t in system_text for t in _TERM) else "PASS"
     checks["raw_vs_hypothesis_separated"] = "PASS" if composed.get("bounded_reflection") is None or composed.get("system_offered_claims") else "FAIL"
     # "不要等待预约" is a refusal inside the locked R0 sentence, not a booking offer.
-    commercial_text = all_text.replace("不要等待预约", "")
+    commercial_text = system_text.replace("不要等待预约", "")
     checks["no_commercial_leak"] = "FAIL" if any(t in commercial_text for t in _NOCL) else "PASS"
     checks["question_hygiene"] = _audit_question(composed.get("discovery_question") or "")
     checks["small_movement_present"] = "PASS" if (suff.mode in ("R2","R1") and composed.get("small_movement")) else "N/A"

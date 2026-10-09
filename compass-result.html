@@ -81,7 +81,7 @@
 
         function render(payload) {
           var html = "";
-          html += '<section class="result-section" data-anchor-id="compass-result.result-see-now"><span class="k">01 · 你正在面对</span><p>' + esc(payload.mirror) + "</p></section>";
+          html += '<section class="result-section" data-anchor-id="compass-result.result-see-now"><span class="k">01 · 你正在面对</span><p style="white-space:pre-line">' + esc(payload.mirror) + "</p></section>";
           if (payload.bounded_reflection) {
             html += '<section class="result-section"><span class="k">02 · 也许值得再看看</span><p>' + esc(payload.bounded_reflection) + "</p></section>";
           }
@@ -114,7 +114,7 @@
         }
 
         function ask(safetyConfirmation) {
-          var body = { answers: answers, free_text: notesText(a) };
+          var body = { answers: answers, free_text: notesText(a), notes: (a.notes && typeof a.notes === "object") ? a.notes : {} };
           if (safetyConfirmation) body.safety_confirmation = safetyConfirmation;
           fetch("/api/compass", {
             method: "POST",

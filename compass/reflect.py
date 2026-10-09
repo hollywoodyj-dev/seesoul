@@ -87,7 +87,7 @@ def _prompt_step(step_name: str) -> str:
 
 def _prompt(eo, suff) -> str:
     steps = [
-        {"step": _prompt_step(s.step), "words": s.raw_label}
+        {"step": _prompt_step(s.step), "selected": s.raw_label, "own_words": s.own_words}
         for s in eo.steps
     ]
     return (
@@ -104,7 +104,8 @@ def _prompt(eo, suff) -> str:
         "}\n"
         "R0 and R1 must set bounded_reflection to null. "
         "R2 may offer one bounded reflection that stays inside the evidence. "
-        "R3 must keep more than one reading open and must not choose for the person.\n"
+        "R3 must keep more than one reading open and must not choose for the person. "
+        "If own_words is present, the mirror must quote that text exactly. Do not replace it with a paraphrase.\n"
         f"reflection_mode={suff.mode}\n"
         f"selected={steps}\n"
         f"free_text={eo.free_text.raw}\n"
@@ -154,7 +155,30 @@ def _clarify_hold() -> dict:
     }
 
 
-def reflect(answers: dict | None, free_text: str = "", safety_confirmation: str | None = None) -> dict:
+def _own_words(notes) -> dict:
+    written = {}
+    if not isinstance(notes, dict):
+        return written
+    for key, value in notes.items():
+        step = UI_STEP.get(str(key))
+        if step and isinstance(value, str) and value.strip():
+            written[step] = _clip(value)
+    return written
+
+
+def _quotes_own_words(composed: dict, eo) -> bool:
+    blob = "\n".join([
+        composed.get("mirror") or "",
+        composed.get("bounded_reflection") or "",
+    ])
+    for step in eo.steps:
+        words = (step.own_words or "").strip()
+        if words and words not in blob:
+            return False
+    return True
+
+
+def reflect(answers: dict | None, free_text: str = "", safety_confirmation: str | None = None, notes: dict | None = None) -> dict:
     # CLARIFY RESPONSE IS SAFETY EVIDENCE ONLY. IT MUST NOT BECOME REFLECTION EVIDENCE.
     if safety_confirmation not in ("needs_help", "safe_now"):
         safety_confirmation = None
@@ -163,11 +187,15 @@ def reflect(answers: dict | None, free_text: str = "", safety_confirmation: str 
         step = UI_STEP.get(str(key))
         if step and isinstance(value, str) and value.strip():
             step_codes[step] = value.strip()
+    written = _own_words(notes)
+    note_text = "\n".join(written[step] for step in ("reality", "feeling", "body", "thought", "impulse", "protection", "awareness") if step in written)
     free_text = _clip(free_text if isinstance(free_text, str) else "")
-    if not step_codes and not free_text and safety_confirmation is None:
+    if note_text and note_text not in free_text:
+        free_text = _clip((note_text + "\n" + free_text).strip())
+    if not step_codes and not free_text and not written and safety_confirmation is None:
         return {"ok": False, "status": "EMPTY_INPUT"}
 
-    eo = build_evidence("web", step_codes, free_text)
+    eo = build_evidence("web", step_codes, free_text, written)
     signal = assess_safety(eo)
     if signal != "CRITICAL" and safety_confirmation == "needs_help":
         signal = "CRITICAL"
@@ -197,7 +225,7 @@ def reflect(answers: dict | None, free_text: str = "", safety_confirmation: str 
                 model_audit = audit_output(mapped, eo, suff)
                 failed = [k for k, v in model_audit["checks"].items() if v == "FAIL"]
                 logger_status = "OK" if model_audit["overall"] == "PASS" else ("AUDIT_FAIL:" + ",".join(failed))
-                if model_audit["overall"] == "PASS":
+                if model_audit["overall"] == "PASS" and _quotes_own_words(mapped, eo):
                     composed = mapped
                     source = "llm"
             print("LLM_STATUS " + logger_status, flush=True)

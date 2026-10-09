@@ -34,7 +34,8 @@ class handler(BaseHTTPRequestHandler):
         answers = body.get("answers") if isinstance(body.get("answers"), dict) else {}
         free_text = body.get("free_text") if isinstance(body.get("free_text"), str) else ""
         confirmation = body.get("safety_confirmation") if isinstance(body.get("safety_confirmation"), str) else None
-        self._send(200, reflect(answers, free_text, confirmation))
+        notes = body.get("notes") if isinstance(body.get("notes"), dict) else {}
+        self._send(200, reflect(answers, free_text, confirmation, notes))
 
     def do_GET(self):
         self._send(405, {"ok": False, "status": "POST_ONLY"})
