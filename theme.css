@@ -258,13 +258,131 @@ img, svg { display: block; max-width: 100%; }
   pointer-events: none;
 }
 .hero__inner { position: relative; max-width: var(--content-width); margin: 0 auto; padding: var(--space-24) 1.5rem var(--space-20); }
-.hero__kicker { color: var(--color-gold-soft); font-size: 0.92rem; letter-spacing: 0.2em; margin-bottom: 1rem; }
+.hero__kicker { color: var(--color-gold-soft); font-size: 0.95rem; letter-spacing: 0.02em; margin-bottom: 1rem; }
+.hero__next { margin-top: 1rem; font-size: 1rem; }
+.hero__next a { color: var(--color-gold-soft); text-underline-offset: 0.18em; }
 .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.28; max-width: 22em; }
 .hero h1 .hl { color: var(--color-gold-soft); }
 .hero__body { margin-top: 1.5rem; font-size: clamp(1.02rem, 1.6vw, 1.16rem); max-width: 34em; opacity: 0.9; }
 .hero__body strong { color: var(--color-gold-soft); font-weight: 600; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2.2rem; }
-.hero__foot { margin-top: 2.4rem; font-size: 0.86rem; color: var(--color-muted-navy); letter-spacing: 0.04em; }
+.hero__foot { margin-top: 1.4rem; font-size: 0.92rem; color: var(--color-muted-navy); letter-spacing: 0; }
+
+/* — 首页欢迎：一栏往下读 —— */
+.welcome { background: var(--color-ivory); color: var(--color-text); }
+.welcome__inner {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 3.2rem;
+}
+.welcome__brand {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--color-navy);
+}
+.welcome h1 {
+  font-size: clamp(1.32rem, 4.6vw, 2rem);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0;
+  color: var(--color-navy);
+}
+.welcome h1 strong,
+.welcome__arrive strong { font-weight: 700; }
+.welcome__prose { margin-top: 1.8rem; }
+.welcome__prose p {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+.welcome__prose p.welcome__turn { margin-top: 0; padding-top: 1.35rem; }
+.welcome__paths {
+  margin-top: 2.6rem;
+  display: grid;
+  gap: 2.2rem;
+}
+.welcome__paths h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0 0 0.45rem;
+  color: var(--color-navy);
+}
+.welcome__paths p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.85;
+}
+.welcome__go { margin-top: 0.75rem; }
+.welcome__go a {
+  color: var(--color-navy);
+  font-weight: 600;
+  text-underline-offset: 0.22em;
+}
+.welcome__meta {
+  margin-top: 0.35rem;
+  font-size: 0.92rem;
+  color: var(--color-muted);
+}
+
+/* — Our Philosophy：一栏阅读，不是使命卡片 —— */
+.phil { background: var(--color-ivory); color: var(--color-text); }
+.phil__inner { max-width: 40rem; margin: 0 auto; padding: 4.2rem 1.5rem 4.8rem; }
+.phil__kicker { margin: 0 0 0.75rem; font-size: 0.92rem; color: var(--color-gold); }
+.phil h1 {
+  font-size: clamp(1.7rem, 4vw, 2.45rem);
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--color-navy);
+}
+.phil__lead { margin-top: 1.7rem; }
+.phil p { font-size: 1.05rem; line-height: 1.9; margin: 0 0 0.85rem; }
+.phil__section {
+  margin-top: 2.8rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border-soft);
+}
+.phil__en { margin: 0 0 0.35rem; font-size: 0.92rem; color: var(--color-muted); }
+.phil__section h2 {
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--color-navy);
+  margin: 0 0 1.1rem;
+}
+.phil__pull {
+  margin: 1.25rem 0;
+  padding: 0.15rem 0 0.15rem 1rem;
+  border-left: 2px solid var(--color-gold);
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  line-height: 1.75;
+  color: var(--color-navy);
+}
+.phil__value { margin-top: 2.1rem; }
+.phil__num { margin: 0; font-size: 0.92rem; color: var(--color-gold); }
+.phil__value h3 {
+  font-size: 1.22rem;
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: var(--color-navy);
+  margin: 0.25rem 0 0.7rem;
+}
+.phil__ask {
+  margin: 0.1rem 0;
+  font-family: var(--font-display);
+  font-size: 1.16rem;
+  line-height: 1.7;
+  color: var(--color-navy);
+}
+.phil__sign {
+  margin-top: 1.6rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--color-navy);
+}
 
 /* — 问题卡 —— */
 .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
@@ -584,6 +702,8 @@ button.chip { font: inherit; cursor: pointer; }
   .problem-grid, .service-grid, .trust-grid, .content-grid, .method-grid, .reading-cols, .reading-cols--3 { grid-template-columns: 1fr !important; }
   .compass-band .compass-band__inner { grid-template-columns: 1fr; }
   .hero__inner { padding-block: var(--space-16); }
+  .welcome__inner { padding-block: 2.4rem 2.2rem; }
+  .phil__inner { padding-block: 2.4rem 2.8rem; }
   .section { padding-block: var(--space-12); }
   .site-footer__inner { grid-template-columns: 1fr; }
   .slots { grid-template-columns: repeat(3, 1fr); }
