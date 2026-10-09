@@ -119,7 +119,7 @@
             <p class="sub">如果有一件事情最近一直困扰着你，我们可以从那里开始。</p>
           </header>
 
-          <div class="booking-panel">
+          <div class="booking-panel" data-booking="counselling">
             <div class="booking-meta">
               <strong>一对一咨询</strong>
               <span class="price">60 分钟 · AUD $150</span>
@@ -153,15 +153,19 @@
             <div class="book-form">
               <div class="two-col">
                 <label class="field"><span>姓名</span><input type="text" name="bname" placeholder="怎么称呼你"></label>
-                <label class="field"><span>Email</span><input type="email" name="bemail" placeholder="邮箱。这个页面不会发送。"></label>
+                <label class="field"><span>Email</span><input type="email" name="bemail" placeholder="用来回复这次请求的邮箱" autocomplete="email"></label>
               </div>
               <label class="field"><span>联系方式</span><input type="text" name="bcontact" placeholder="电话或其他便于联系你的方式（选填）"></label>
               <label class="field"><span>有什么是你希望我在见面前知道的吗？（选填）</span><textarea name="bnote" placeholder="不需要写得很完整，一两句话就可以。也可以留空，见面以后再谈。"></textarea></label>
             </div>
 
-            <p class="book-loc" id="locNote" hidden>线下地点不会显示在这个页面上。这个页面也不能为你确认地点。</p>
+            <p class="book-loc" id="locNote" hidden>线下地点不会显示在这个页面上。地点会在回复里说明。</p>
 
-            <p class="book-note">这个页面还不能提交预约。你填写的内容不会被发送、保存，也不会进入日历。这里还不是一次已经完成的预约。</p>
+            <div class="book-actions">
+              <button class="btn btn--gold btn--full" type="button" id="bookSubmit">提交预约请求</button>
+              <p class="book-status" id="bookStatus" role="status"></p>
+            </div>
+            <p class="book-note">提交之后，这还不是一次已经确认的预约。时间没有被占住，也还没有付款。</p>
             <p class="book-note" style="margin-top:1.2rem">还不知道自己想谈什么？可以先做一次 SeeSoul Compass™。<a class="text-link" href="compass-start.html">先做 SeeSoul Compass →</a></p>
           </div>
         </div>
@@ -194,67 +198,12 @@
       </div>
     </footer>
 
+    <script src="booking.js"></script>
     <script>
       var t = document.getElementById("navToggle");
       if (t) t.addEventListener("click", function () { var n = document.getElementById("siteNav"); var o = n.classList.toggle("site-nav--open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
       document.querySelectorAll(".faq__q").forEach(function (b) { b.addEventListener("click", function () { var it = b.closest(".faq__item"); var o = it.getAttribute("data-open") === "true"; it.setAttribute("data-open", o ? "false" : "true"); b.setAttribute("aria-expanded", o ? "false" : "true"); }); });
 
-      /* 日期和时间可以在页面上选择。这个页面仍然不能提交预约。 */
-      (function () {
-        var calGrid = document.getElementById("calGrid");
-        var slotGrid = document.getElementById("slotGrid");
-        var title = document.querySelector(".cal-title");
-        var prev = document.querySelector(".cal-nav[aria-label='上个月']");
-        var next = document.querySelector(".cal-nav[aria-label='下个月']");
-        var now = new Date();
-        var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        var year = today.getFullYear();
-        var month = today.getMonth();
-        var selected = null;
-        var dowLabels = ["日","一","二","三","四","五","六"];
-        function sameMonth(y, m) { return y === today.getFullYear() && m === today.getMonth(); }
-        function buildCal() {
-          title.textContent = year + " 年 " + (month + 1) + " 月";
-          prev.disabled = sameMonth(year, month);
-          calGrid.innerHTML = "";
-          dowLabels.forEach(function (l) { var dw = document.createElement("div"); dw.className = "cal-dow"; dw.textContent = l; calGrid.appendChild(dw); });
-          var pad = new Date(year, month, 1).getDay();
-          var total = new Date(year, month + 1, 0).getDate();
-          for (var i = 0; i < pad; i++) { var blank = document.createElement("button"); blank.type = "button"; blank.className = "cal-date is-off"; blank.tabIndex = -1; blank.disabled = true; calGrid.appendChild(blank); }
-          for (var d = 1; d <= total; d++) {
-            var date = new Date(year, month, d);
-            var b = document.createElement("button");
-            b.type = "button"; b.className = "cal-date"; b.textContent = String(d); b.setAttribute("aria-label", "选择 " + d + " 日");
-            if (date < today) { b.classList.add("is-off"); b.disabled = true; b.setAttribute("aria-disabled", "true"); }
-            else {
-              if (selected && selected.getTime() === date.getTime()) { b.classList.add("is-selected"); b.setAttribute("aria-pressed", "true"); }
-              b.addEventListener("click", function () {
-                selected = new Date(year, month, Number(this.textContent));
-                calGrid.querySelectorAll(".cal-date").forEach(function (x) { x.classList.remove("is-selected"); x.setAttribute("aria-pressed", "false"); });
-                this.classList.add("is-selected"); this.setAttribute("aria-pressed", "true");
-              });
-            }
-            calGrid.appendChild(b);
-          }
-        }
-        var slots = ["09:00","10:30","13:00","14:30","16:00","19:30"];
-        function buildSlots() {
-          slotGrid.innerHTML = "";
-          slots.forEach(function (s) {
-            var b = document.createElement("button");
-            b.type = "button"; b.className = "slot"; b.textContent = s;
-            b.addEventListener("click", function () { slotGrid.querySelectorAll(".slot").forEach(function (x) { x.classList.remove("is-selected"); x.setAttribute("aria-pressed", "false"); }); this.classList.add("is-selected"); this.setAttribute("aria-pressed", "true"); });
-            slotGrid.appendChild(b);
-          });
-        }
-        prev.addEventListener("click", function () { if (sameMonth(year, month)) return; month -= 1; if (month < 0) { month = 11; year -= 1; } buildCal(); });
-        next.addEventListener("click", function () { month += 1; if (month > 11) { month = 0; year += 1; } buildCal(); });
-        buildCal(); buildSlots();
-
-        /* 线上/线下 → 线下选址提示 */
-        var locNote = document.getElementById("locNote");
-        document.querySelectorAll("input[name=bmode]").forEach(function (r) { r.addEventListener("change", function () { locNote.hidden = (this.value !== "offline"); }); });
-      })();
     </script>
   </body>
 </html>

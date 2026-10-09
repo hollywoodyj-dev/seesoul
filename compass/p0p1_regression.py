@@ -95,8 +95,8 @@ check("question-only-keeps-mirror", replaced.get("mirror") == "你停在这里�
 
 root = __import__("pathlib").Path(__file__).resolve().parents[1]
 pages = {
-    "counselling.html": ["这个页面还不能提交预约", "阅读知情同意与保密说明"],
-    "life-theme.html": ["这个页面还不能提交预约"],
+    "counselling.html": ["提交预约请求", "这还不是一次已经确认的预约", "阅读知情同意与保密说明"],
+    "life-theme.html": ["提交预约请求", "这还不是一次已经确认的预约"],
     "consent.html": ["这一页只是说明，不是已经完成的签署", "Compass 的七个选择和你写下的话保存在这台浏览器里"],
     "lt-safety.html": ["如果你在澳大利亚", "如果你在中国大陆", "如果你在其他地区", "13 11 14", "12356"],
     "lt-draw.html": ["这一版结构对照还不是最终计算规则，不能当作定论。"],
@@ -108,7 +108,7 @@ for name, needles in pages.items():
     missing = [n for n in needles if n not in text]
     check("page-" + name, not missing, ",".join(missing))
 banned = ["预约已确认", "已确认并签署", "我已阅读并同意签署", "400-161-9995"]
-for name in ("counselling.html", "life-theme.html", "consent.html", "lt-safety.html"):
+for name in ("counselling.html", "life-theme.html", "consent.html", "lt-safety.html", "booking.js"):
     text = (root / name).read_text(encoding="utf-8")
     hit = [n for n in banned if n in text]
     check("banned-" + name, not hit, ",".join(hit))
