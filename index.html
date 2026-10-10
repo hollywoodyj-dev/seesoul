@@ -9,6 +9,13 @@
   </head>
   <body data-page-id="home" data-entry="true">
     <a class="skip-link" href="#main-content">跳转到主要内容</a>
+    <button class="rite" id="rite" type="button" hidden aria-label="点一下，睁开眼睛">
+      <span class="rite__eye">
+        <span class="rite__iris"></span>
+      </span>
+      <span class="rite__hint">点一下</span>
+      <span class="rite__hello">Welcome to SeeSoul</span>
+    </button>
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
@@ -41,13 +48,13 @@
           </div>
           <div class="welcome__paths">
             <div>
-              <h2>还说不太清楚？</h2>
+              <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="m14.7 9.3-1.6 4.1-4.1 1.6 1.6-4.1z"/></svg></span>还说不太清楚？</h2>
               <p>不用急着给自己找一个答案。<br />先花 3–5 分钟，看看最近到底什么最牵动你。</p>
               <p class="welcome__go"><a href="compass-start.html">开始 SeeSoul Compass →</a></p>
               <p class="welcome__meta">免费 · 约 3–5 分钟</p>
             </div>
             <div>
-              <h2>心里已经有一件事了吗？</h2>
+              <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.2V7.6A1.6 1.6 0 0 1 7.6 6h9.2A1.6 1.6 0 0 1 18.4 7.6v6.2a1.6 1.6 0 0 1-1.6 1.6H9.2z"/><path d="M9 9.4h6.2M9 12.1h3.8"/></svg></span>心里已经有一件事了吗？</h2>
               <p>可能是一段关系、一种情绪、一个决定，<br />或者一个反复很久的问题。</p>
               <p class="welcome__go"><a href="services.html">看看我可以怎样开始 →</a></p>
             </div>
@@ -60,7 +67,7 @@
         <div class="container">
           <header class="section-header">
             <span class="eyebrow">How SeeSoul helps</span>
-            <h2>在 SeeSoul，我们通常这样开始。</h2>
+            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="18" cy="17" r="1.5"/><path d="m7.3 8.1 3.4 2.7M13.3 13.2l3.4 2.6"/></svg></span>在 SeeSoul，我们通常这样开始。</h2>
             <p class="sub">不用把它想得很正式。一次咨询或探索，往往就是这样进行的。</p>
           </header>
           <div class="steps">
@@ -81,6 +88,7 @@
           </header>
           <div class="service-grid">
             <div class="service-card">
+              <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 15.5V8A1.5 1.5 0 0 1 7 6.5h7A1.5 1.5 0 0 1 15.5 8v4.5A1.5 1.5 0 0 1 14 14H8z"/><path d="M13 10.2h5A1.5 1.5 0 0 1 19.5 11.7V16a1.5 1.5 0 0 1-1.5 1.5H16l-2.2 1.8v-1.8"/></svg></span>
               <h3>熙愈心理咨询</h3>
               <p class="lead">现在有一件事情正在困扰你</p>
               <p>情绪、关系、家庭、自我价值、人生选择……可以从具体的一件事情开始谈。</p>
@@ -90,12 +98,14 @@
               </div>
             </div>
             <div class="service-card">
+              <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 8.2A5 5 0 0 1 16 6.4"/><path d="M16 4.6V7.6h-3"/><path d="M16.8 15.8A5 5 0 0 1 8 17.6"/><path d="M8 19.4v-3h3"/></svg></span>
               <h3>生命课题解读</h3>
               <p class="lead">你发现某些事情已经重复很久</p>
               <p>相似的关系、相似的情绪、相似的选择，或一种一直说不清楚的人生主题。我们一起来整理：到底什么正在重复？</p>
               <a class="btn btn--gold" href="life-theme.html">了解生命课题解读</a>
             </div>
             <div class="service-card">
+              <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.2C10 5.8 7.8 5 5 5v11.2c2.8 0 5 .7 7 2.2 2-1.5 4.2-2.2 7-2.2V5c-2.8 0-5 .8-7 2.2z"/><path d="M12 7.2v11.2"/></svg></span>
               <h3>自我探索</h3>
               <p class="lead">你暂时不需要咨询，只想先理解自己</p>
               <p>使用 SeeSoul Compass™、心理学内容、反思练习与 SeeSoul Wisdom，自己先看看。不需要懂专业词汇，也不需要准备什么，从你好奇的地方开始就好。</p>
@@ -110,7 +120,7 @@
         <div class="container">
           <header class="section-header">
             <span class="eyebrow">An example</span>
-            <h2>从一个问题，慢慢看见更多。</h2>
+            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 16.5c-1.8 0-3.2-1.3-3.2-3.1S7.2 10.3 9 10.3C9 8.2 8 7 6.2 6.5"/><path d="M17.2 16.5c-1.8 0-3.2-1.3-3.2-3.1s1.4-3.1 3.2-3.1c0-2.1-1-3.3-2.8-3.8"/></svg></span>从一个问题，慢慢看见更多。</h2>
             <p class="sub">这是一个匿名的、合并后的例子。</p>
           </header>
           <div class="reading-cols reading-cols--3">
@@ -135,7 +145,7 @@
         <div class="container">
           <header class="section-header">
             <span class="eyebrow">SeeSoul Method</span>
-            <h2>我们会一起看什么？</h2>
+            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12s3.4-5 9-5 9 5 9 5-3.4 5-9 5-9-5-9-5z"/><circle cx="12" cy="12" r="2.2"/></svg></span>我们会一起看什么？</h2>
             <p class="sub">我们用六个非常直观的问题，陪你看清一件事。</p>
           </header>
           <div class="method-grid">
@@ -157,7 +167,7 @@
         <div class="container">
           <header class="section-header">
             <span class="eyebrow">Self exploration</span>
-            <h2>也可以先自己看看。</h2>
+            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.2C10 5.8 7.8 5 5 5v11.2c2.8 0 5 .7 7 2.2 2-1.5 4.2-2.2 7-2.2V5c-2.8 0-5 .8-7 2.2z"/><path d="M12 7.2v11.2"/></svg></span>也可以先自己看看。</h2>
             <p class="sub">从你好奇的问题开始。</p>
           </header>
           <div class="content-grid">
@@ -183,7 +193,7 @@
           </div>
           <div>
             <span class="eyebrow">Founder</span>
-            <h2 style="font-size:clamp(1.6rem,2.8vw,2.2rem)">陪你一起看的人</h2>
+            <h2 style="font-size:clamp(1.6rem,2.8vw,2.2rem);display:flex;align-items:flex-start;gap:0.55rem"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="2.4"/><path d="M6.6 18.4c.7-2.5 2.7-3.9 5.4-3.9s4.7 1.4 5.4 3.9"/></svg></span>陪你一起看的人</h2>
             <h3 style="font-size:1.4rem;margin-top:.2rem">容熙</h3>
             <p style="margin-top:.4rem;color:var(--color-muted);line-height:1.7">SeeSoul 创始人 · Wisewave 创始人<br />心理咨询师 · Counsellor<br />心理治疗与个人成长工作者</p>
             <blockquote style="margin-top:1.3rem">我一直相信，很多时候，人并不需要另一个人急着告诉自己答案。我们更需要的，是一个足够安全、清楚的空间，重新看见：我正在经历什么？什么正在影响我？而我还可以怎样选择？</blockquote>
@@ -211,13 +221,13 @@
         <div class="container">
           <header class="section-header">
             <span class="eyebrow">Safety & trust</span>
-            <h2>有些事情，我们希望先说清楚。</h2>
+            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6 19 6.4v5.1c0 3.5-2.6 6.2-7 8.1-4.4-1.9-7-4.6-7-8.1V6.4z"/></svg></span>有些事情，我们希望先说清楚。</h2>
           </header>
           <div class="trust-grid">
-            <div class="trust-block"><div class="icon">🔒</div><h4>保密</h4><p>咨询内容遵循专业保密原则及适用例外。</p></div>
-            <div class="trust-block"><div class="icon">🏷️</div><h4>不贴标签</h4><p>SeeSoul Compass 不用于心理诊断。</p></div>
-            <div class="trust-block"><div class="icon">🤲</div><h4>不替你决定</h4><p>咨询和探索的目的不是告诉你「应该怎么做」。</p></div>
-            <div class="trust-block"><div class="icon">🌱</div><h4>灵性经验也可以谈</h4><p>但不会把未经验证的灵性解释当作客观事实。</p></div>
+            <div class="trust-block"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="8" rx="1.5"/><path d="M8.5 11V8.6a3.5 3.5 0 0 1 7 0V11"/></svg></span><h4>保密</h4><p>咨询内容遵循专业保密原则及适用例外。</p></div>
+            <div class="trust-block"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 9 4.2-4.2H14l5.5 5.5-6.2 6.2L4.5 9z"/><path d="M9.2 8.4h.01M5.2 18.8 18.8 5.2"/></svg></span><h4>不贴标签</h4><p>SeeSoul Compass 不用于心理诊断。</p></div>
+            <div class="trust-block"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5v5.5"/><path d="m12 10-5 6.2M12 10l5 6.2"/><circle cx="7" cy="17.6" r="1.2"/><circle cx="17" cy="17.6" r="1.2"/></svg></span><h4>不替你决定</h4><p>咨询和探索的目的不是告诉你「应该怎么做」。</p></div>
+            <div class="trust-block"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18C6 10.5 11.5 5.5 19 5.5 19 13 14 18 6 18z"/><path d="M8.2 15.2c2-1.8 4-3.6 6.6-5.4"/></svg></span><h4>灵性经验也可以谈</h4><p>但不会把未经验证的灵性解释当作客观事实。</p></div>
           </div>
           <div style="margin-top:1.8rem"><a class="btn btn--ghost-ivory" href="life-theme.html">了解专业边界与伦理 →</a></div>
         </div>
@@ -228,7 +238,7 @@
         <div class="container">
           <header class="section-header">
             <span class="eyebrow">FAQ</span>
-            <h2>也许你也在想这些</h2>
+            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M9.6 9.6a2.4 2.4 0 1 1 3.1 2.3c-.7.4-1.2.9-1.2 1.8"/><path d="M12 16.8h.01"/></svg></span>也许你也在想这些</h2>
           </header>
           <div class="faq">
             <div class="faq__item"><button class="faq__q" aria-expanded="false">第一次咨询需要准备什么？<span class="chev">▾</span></button><div class="faq__a"><p>不需要准备很多东西。从一个最近让你困扰的具体事情开始即可。放松一些，如实说出你在想什么，就已经很好。</p></div></div>
@@ -278,6 +288,50 @@
     </footer>
 
     <script>
+      (function () {
+        var rite = document.getElementById("rite");
+        if (!rite) return;
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var seen = false;
+        try { seen = sessionStorage.getItem("seesoul-rite") === "1"; } catch (e) {}
+        if (reduce || seen) return;
+        var timer = 0;
+        function finish() {
+          if (rite.classList.contains("is-done")) return;
+          window.clearTimeout(timer);
+          try { sessionStorage.setItem("seesoul-rite", "1"); } catch (e) {}
+          rite.classList.add("is-done");
+          document.body.classList.remove("has-rite");
+          window.setTimeout(function () {
+            rite.remove();
+            var main = document.getElementById("main-content");
+            if (main) main.focus();
+          }, 700);
+        }
+        function open() {
+          if (rite.classList.contains("is-open")) {
+            finish();
+            return;
+          }
+          var iris = rite.querySelector(".rite__iris");
+          if (iris) {
+            var current = window.getComputedStyle(iris).transform;
+            iris.style.animation = "none";
+            iris.style.transform = current && current !== "none" ? current : "scaleY(0.22)";
+            void iris.offsetWidth;
+            iris.style.transition = "transform 1.05s cubic-bezier(0.16, 0.84, 0.3, 1)";
+            iris.style.transform = "scaleY(1)";
+          }
+          rite.classList.add("is-open");
+          rite.setAttribute("aria-label", "Welcome to SeeSoul");
+          timer = window.setTimeout(finish, 2400);
+        }
+        rite.hidden = false;
+        rite.classList.add("is-on");
+        document.body.classList.add("has-rite");
+        rite.addEventListener("click", open);
+        rite.focus();
+      })();
       var t = document.getElementById("navToggle");
       if (t) {
         t.addEventListener("click", function () {

@@ -269,12 +269,88 @@ img, svg { display: block; max-width: 100%; }
 .hero__foot { margin-top: 1.4rem; font-size: 0.92rem; color: var(--color-muted-navy); letter-spacing: 0; }
 
 /* — 首页欢迎：一栏往下读 —— */
+/* — 进门：合眼，点一下再睁开 —— */
+body.has-rite { overflow: hidden; }
+.rite {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 1.5rem;
+  border: 0;
+  background: var(--color-navy-deep);
+  color: var(--color-gold-soft);
+  font: inherit;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+}
+.rite.is-on { display: flex; }
+.rite.is-done { opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
+.rite__eye {
+  position: relative;
+  width: min(22rem, 74vw);
+  aspect-ratio: 572 / 250;
+  overflow: hidden;
+}
+.rite__iris {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: url("assets/seesoul-logo-gold.png") center top / 100% auto no-repeat;
+  transform: scaleY(0.22);
+  transform-origin: center center;
+  animation: rite-rest 3.6s ease-in-out infinite;
+}
+.rite.is-open .rite__iris {
+  animation: none;
+  transform: scaleY(1);
+  transition: transform 1.05s cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+@keyframes rite-rest {
+  0%, 100% { transform: scaleY(0.2); }
+  50% { transform: scaleY(0.3); }
+}
+.rite__hint,
+.rite__hello {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% + 6.4rem);
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-display);
+  letter-spacing: 0.12em;
+}
+.rite__hint {
+  font-size: 0.95rem;
+  color: var(--color-muted-navy);
+  transition: opacity 0.35s ease;
+}
+.rite.is-open .rite__hint { opacity: 0; }
+.rite__hello {
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  opacity: 0;
+  transform: translateY(0.35rem);
+  transition: opacity 0.6s ease 0.65s, transform 0.6s ease 0.65s;
+}
+.rite.is-open .rite__hello { opacity: 1; transform: none; }
 .welcome { background: var(--color-ivory); color: var(--color-text); }
 .welcome__inner {
-  max-width: 34rem;
+  width: 100%;
+  max-width: var(--content-width);
   margin: 0 auto;
   padding: 4.5rem 1.5rem 3.2rem;
 }
+.welcome__brand,
+.welcome h1,
+.welcome__prose,
+.welcome__paths { max-width: 42rem; }
 .welcome__brand {
   margin: 0 0 1rem;
   font-family: var(--font-display);
@@ -304,11 +380,38 @@ img, svg { display: block; max-width: 100%; }
   gap: 2.2rem;
 }
 .welcome__paths h2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
   font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.5;
   margin: 0 0 0.45rem;
   color: var(--color-navy);
+}
+.mark {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.16rem;
+  color: var(--color-gold);
+}
+.mark svg { width: 100%; height: 100%; }
+.section-header h2 { display: flex; align-items: flex-start; gap: 0.55rem; }
+.section--navy .mark,
+.section--navy-deep .mark,
+.service-card .mark { color: var(--color-gold-soft); }
+.service-card .mark,
+.trust-block .mark {
+  width: 2.45rem;
+  height: 2.45rem;
+  margin: 0 0 0.95rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: rgba(183, 154, 99, 0.16);
 }
 .welcome__paths p {
   margin: 0;
