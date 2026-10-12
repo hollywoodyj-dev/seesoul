@@ -505,6 +505,9 @@ body.has-rite { overflow: hidden; }
 .problem-card h3 { font-size: 1.3rem; margin-bottom: 0.4rem; }
 .problem-card p { font-size: 0.98rem; color: var(--color-muted); flex: 1; }
 .problem-card__cta { margin-top: 1.1rem; color: var(--color-navy); font-weight: 600; font-size: 0.94rem; }
+.topic-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.8rem; max-width: 46rem; }
+.topic-list h3 { font-size: 1.12rem; margin: 0 0 0.35rem; }
+.topic-list p { margin: 0; color: var(--color-muted); line-height: 1.75; }
 .problem-card__cta::after { content: "→"; margin-left: 0.35rem; color: var(--color-gold); }
 
 /* — 服务卡 —— */
@@ -523,6 +526,7 @@ body.has-rite { overflow: hidden; }
 
 /* — 内容卡 —— */
 .content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+.content-grid--3 { grid-template-columns: repeat(3, 1fr); }
 .content-card {
   background: var(--color-ivory-card);
   border: 1px solid var(--color-border-soft);
@@ -802,7 +806,7 @@ button.chip { font: inherit; cursor: pointer; }
   .site-nav--open { display: flex; position: absolute; top: 3.9rem; left: 0; right: 0; background: var(--color-navy); flex-direction: column; align-items: stretch; padding: 1rem 1.5rem 1.4rem; gap: 0; border-bottom: 1px solid var(--color-border-navy); }
   .site-nav--open a { padding: 0.9rem 0; border-bottom: 1px solid var(--color-border-navy); opacity: 1; }
   .nav-toggle { display: grid; place-items: center; background: none; border: 1px solid var(--color-border-navy); color: var(--color-gold-soft); border-radius: var(--radius-sm); width: 2.5rem; height: 2.5rem; }
-  .problem-grid, .service-grid, .trust-grid, .content-grid, .method-grid, .reading-cols, .reading-cols--3 { grid-template-columns: 1fr !important; }
+  .problem-grid, .service-grid, .trust-grid, .content-grid, .method-grid, .reading-cols, .reading-cols--3, .topic-list { grid-template-columns: 1fr !important; }
   .compass-band .compass-band__inner { grid-template-columns: 1fr; }
   .hero__inner { padding-block: var(--space-16); }
   .welcome__inner { padding-block: 2.4rem 2.2rem; }

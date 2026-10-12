@@ -59,6 +59,19 @@
           </p>
         </div>
       </section>
+
+      <section class="section section--ivory" style="padding-top:0">
+        <div class="container">
+          <header class="section-header">
+            <span class="eyebrow">FAQ</span>
+            <h2>也许你也在想这些</h2>
+          </header>
+          <div class="faq">
+            <div class="faq__item"><button class="faq__q" aria-expanded="false">第一次咨询需要准备什么？<span class="chev">▾</span></button><div class="faq__a"><p>不需要准备很多东西。从一个最近让你困扰的具体事情开始即可。放松一些，如实说出你在想什么，就已经很好。</p></div></div>
+            <div class="faq__item"><button class="faq__q" aria-expanded="false">心理咨询和生命课题解读有什么不同？<span class="chev">▾</span></button><div class="faq__a"><p>心理咨询通常从当下正在困扰你的一件具体事情开始；生命课题解读更侧重整理那些长期重复的人生主题。两者也可以结合。</p></div></div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -72,6 +85,7 @@
     <script>
       var t = document.getElementById("navToggle");
       if (t) t.addEventListener("click", function () { var n = document.getElementById("siteNav"); var o = n.classList.toggle("site-nav--open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
+      document.querySelectorAll(".faq__q").forEach(function (b) { b.addEventListener("click", function () { var it = b.closest(".faq__item"); var o = it.getAttribute("data-open") === "true"; it.setAttribute("data-open", o ? "false" : "true"); b.setAttribute("aria-expanded", o ? "false" : "true"); }); });
     </script>
   </body>
 </html>
