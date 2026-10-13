@@ -4,18 +4,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SeeSoul 熙愈心空间 · 心理咨询</title>
-    <meta name="description" content="有些时候，你只是知道：最近的自己，好像有点不对劲。我们可以从你现在最在意的那件事，慢慢说起。" />
+    <meta name="description" content="SeeSoul 一对一心理咨询：从你此刻最想谈的事情开始。60 分钟，AUD $150。你可以先了解咨询方式，再预约。预约需要由你发出邮件，时间要等回复才会确认。" />
     <link rel="stylesheet" href="./theme.css" />
+    <style>
+      .home-hero { padding-block: 2.8rem 2.4rem; }
+      .home-hero h1 { max-width: 11em; }
+      .home-hero p { max-width: 36rem; }
+      .home-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1rem; margin-top: 1.35rem; }
+      .home-hero__actions .btn { margin-top: 0; }
+      .home-main .section-header h2 { display: block; }
+      .home-topics { display: grid; grid-template-columns: 1fr 1fr; gap: 1.35rem 2rem; max-width: 46rem; }
+      .home-topics h3 { margin: 0 0 0.35rem; font-size: 1.16rem; color: var(--color-navy); }
+      .home-topics p { margin: 0; color: var(--color-muted); line-height: 1.75; }
+      .home-copy { max-width: 40rem; }
+      .home-copy p { margin: 0 0 0.9rem; line-height: 1.85; }
+      .home-price { margin: 1.2rem 0 0.9rem; font-family: var(--font-display); font-size: 1.25rem; color: var(--color-navy); }
+      .home-reads .content-card p { margin: 0.55rem 0 0; color: var(--color-muted); font-size: 0.95rem; line-height: 1.7; }
+      .home-quiet { margin-top: 1.3rem; color: var(--color-muted); }
+      .faq__a[hidden] { display: none; }
+      @media (max-width: 640px) {
+        .home-hero { padding-block: 1.5rem 1.4rem; }
+        .home-hero p { margin-top: 0.75rem; font-size: 1rem; }
+        .home-topics { grid-template-columns: 1fr; }
+      }
+    </style>
   </head>
   <body data-page-id="home" data-entry="true">
     <a class="skip-link" href="#main-content">跳转到主要内容</a>
-    <button class="rite" id="rite" type="button" hidden aria-label="点一下，睁开眼睛">
-      <span class="rite__eye">
-        <span class="rite__iris"></span>
-      </span>
-      <span class="rite__hint">点一下</span>
-      <span class="rite__hello">Welcome to SeeSoul</span>
-    </button>
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
@@ -28,191 +43,162 @@
           <a href="explore.html">自我探索</a>
           <a href="philosophy.html">Our Philosophy</a>
           <a href="founder.html">认识容熙</a>
-          <a class="btn btn--gold" href="booking.html">提交预约请求</a>
+          <a class="btn btn--gold" href="booking.html">预约咨询</a>
         </nav>
       </div>
     </header>
 
-    <main id="main-content" tabindex="-1">
-
-      <section class="welcome">
-        <div class="welcome__inner">
-          <p class="welcome__brand">SeeSoul 熙愈心空间</p>
-          <h1>有些时候，你只是知道：<br /><strong>最近的自己，好像有点不对劲。</strong></h1>
-          <div class="welcome__prose">
-            <p>也许是一直很累，脑子停不下来。</p>
-            <p>也许是一段关系，让你反复难过、怀疑自己。</p>
-            <p>也许生活看起来都还好，你却越来越不知道自己为什么不开心。</p>
-            <p class="welcome__turn">也可能，你根本说不清发生了什么。</p>
-            <p class="welcome__arrive"><strong>没关系。我们可以从你现在最在意的那件事，慢慢说起。</strong></p>
-          </div>
-          <div class="welcome__paths">
-            <div>
-              <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="m14.7 9.3-1.6 4.1-4.1 1.6 1.6-4.1z"/></svg></span>还说不太清楚？</h2>
-              <p>不用急着给自己找一个答案。<br />先花 3–5 分钟，看看最近到底什么最牵动你。</p>
-              <p class="welcome__go"><a href="compass-start.html">开始 SeeSoul Compass →</a></p>
-              <p class="welcome__meta">免费 · 约 3–5 分钟</p>
-            </div>
-            <div>
-              <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.2V7.6A1.6 1.6 0 0 1 7.6 6h9.2A1.6 1.6 0 0 1 18.4 7.6v6.2a1.6 1.6 0 0 1-1.6 1.6H9.2z"/><path d="M9 9.4h6.2M9 12.1h3.8"/></svg></span>心里已经有一件事了吗？</h2>
-              <p>可能是一段关系、一种情绪、一个决定，<br />或者一个反复很久的问题。</p>
-              <p class="welcome__go"><a href="services.html">看看我可以怎样开始 →</a></p>
-            </div>
-          </div>
+    <main id="main-content" class="home-main" tabindex="-1">
+      <section class="page-hero home-hero">
+        <div class="page-hero__inner">
+          <span class="eyebrow" style="color:var(--color-gold-soft)">SeeSoul 熙愈心空间</span>
+          <h1>有些事情，<br />不必一个人反复想。</h1>
+          <p>也许你一直在努力处理一段关系，却还是感到疲惫。也许你知道自己需要改变，却不知道从哪里开始。也许生活看起来没有什么问题，心里却总有些说不清楚的困扰。</p>
+          <p>你不需要等到一切都变得难以承受，才开始寻求理解与支持。<strong>在 SeeSoul，我们可以从你此刻最想谈的事情开始。</strong></p>
+          <p class="home-hero__actions">
+            <a class="btn btn--gold" href="counselling.html">了解一对一心理咨询</a>
+            <a class="btn btn--ghost-nav" href="booking.html">预约咨询</a>
+          </p>
         </div>
       </section>
 
-      <!-- 04 HOW SEESOUL HELPS（用户层） -->
       <section class="section section--ivory">
-        <div class="container">
+        <div class="container home-copy">
           <header class="section-header">
-            <span class="eyebrow">How SeeSoul helps</span>
-            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="18" cy="17" r="1.5"/><path d="m7.3 8.1 3.4 2.7M13.3 13.2l3.4 2.6"/></svg></span>在这里，我们可以慢慢理清楚。</h2>
-            <p class="sub">不用把它想得很正式。一次谈话，往往就是这样进行的。</p>
+            <span class="eyebrow">01</span>
+            <h2>你可以从这些事情开始谈</h2>
           </header>
+          <div class="home-topics">
+            <div>
+              <h3>情绪与压力</h3>
+              <p>反复担忧、难以放松、情绪起伏，或长期感到疲惫。</p>
+            </div>
+            <div>
+              <h3>关系与家庭</h3>
+              <p>亲密关系中的困扰、沟通困难、家庭期待，以及个人边界。</p>
+            </div>
+            <div>
+              <h3>自我价值与人生选择</h3>
+              <p>自我怀疑、反复犹豫、生活方向不清楚，或面对重要转变。</p>
+            </div>
+            <div>
+              <h3>生命意义与个人探索</h3>
+              <p>希望更深入理解自己、个人信念，以及生命经历对自己的意义。</p>
+            </div>
+          </div>
+          <p style="margin-top:1.3rem"><strong>你不需要先确定自己的问题属于哪一类。</strong>这些只是可能的谈话起点。</p>
+        </div>
+      </section>
+
+      <section class="section section--ivory-deep">
+        <div class="container home-copy">
+          <header class="section-header">
+            <span class="eyebrow">02</span>
+            <h2>一对一咨询，可以怎样帮助你？</h2>
+          </header>
+          <p>咨询不是让别人替你决定应该怎样生活。它提供一段有专业边界的对话，让你有机会认真讨论正在经历的困难。</p>
           <div class="steps">
-            <div class="step"><span class="n">STEP 01</span><div><h3>先说发生了什么</h3><p>不用整理得很完整。从最近让你最困扰的一件事情开始。</p></div></div>
-            <div class="step"><span class="n">STEP 02</span><div><h3>看看什么正在让你卡住</h3><p>先看这一件事情停在哪里。</p></div></div>
-            <div class="step"><span class="n">STEP 03</span><div><h3>理解它为什么会发生</h3><p>一起看看它是怎样发生的。不必先懂一套理论。</p></div></div>
-            <div class="step"><span class="n">STEP 04</span><div><h3>回到现实生活</h3><p>最后的问题不是「我懂了多少？」，而是「接下来，我可以有什么不同？」</p></div></div>
+            <div class="step"><span class="n">01</span><div><h3>理解现状</h3><p>从你目前最关心的事情开始，了解它如何影响你的生活。</p></div></div>
+            <div class="step"><span class="n">02</span><div><h3>共同探索</h3><p>梳理相关的想法、情绪、关系与现实处境，不急着作出单一解释。</p></div></div>
+            <div class="step"><span class="n">03</span><div><h3>寻找方向</h3><p>根据你的目标、需要和实际条件，讨论可以尝试的选择与行动。</p></div></div>
           </div>
+          <p>每个人的咨询过程都不同，也不需要每次谈话都得到明确答案。</p>
+          <p class="home-price">一对一心理咨询 · 60 分钟 · AUD $150</p>
+          <p><a class="btn btn--gold" href="counselling.html">了解咨询方式与预约</a></p>
+          <p class="home-quiet">如果你希望从生命经历、反复出现的主题来探索，也可以了解<a class="text-link" href="life-theme.html">生命课题解读</a>。50 分钟 · AUD $100。它与心理咨询的目标和方法不同，不替代心理健康评估或治疗。</p>
         </div>
       </section>
 
-      <!-- 05 SERVICES -->
-      <section class="section section--navy">
-        <div class="container">
-          <header class="section-header">
-            <span class="eyebrow">How you can begin</span>
-            <h2>你想从哪里开始？</h2>
-          </header>
-          <div class="service-grid">
-            <div class="service-card">
-              <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 15.5V8A1.5 1.5 0 0 1 7 6.5h7A1.5 1.5 0 0 1 15.5 8v4.5A1.5 1.5 0 0 1 14 14H8z"/><path d="M13 10.2h5A1.5 1.5 0 0 1 19.5 11.7V16a1.5 1.5 0 0 1-1.5 1.5H16l-2.2 1.8v-1.8"/></svg></span>
-              <h3>熙愈心理咨询</h3>
-              <p class="lead">现在有一件事情正在困扰你</p>
-              <p>情绪、关系、家庭、自我价值、人生选择……可以从具体的一件事情开始谈。</p>
-              <div style="display:flex;gap:0.7rem;flex-wrap:wrap">
-                <a class="btn btn--gold" href="counselling.html">了解心理咨询</a>
-                <a class="btn btn--ghost-nav" href="booking.html">提交预约请求</a>
-              </div>
-            </div>
-            <div class="service-card">
-              <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 8.2A5 5 0 0 1 16 6.4"/><path d="M16 4.6V7.6h-3"/><path d="M16.8 15.8A5 5 0 0 1 8 17.6"/><path d="M8 19.4v-3h3"/></svg></span>
-              <h3>生命课题解读</h3>
-              <p class="lead">你发现某些事情已经重复很久</p>
-              <p>相似的关系、相似的情绪、相似的选择，或一种一直说不清楚的人生主题。我们一起来整理：到底什么正在重复？</p>
-              <a class="btn btn--gold" href="life-theme.html">了解生命课题解读</a>
-            </div>
-            <div class="service-card">
-              <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.2C10 5.8 7.8 5 5 5v11.2c2.8 0 5 .7 7 2.2 2-1.5 4.2-2.2 7-2.2V5c-2.8 0-5 .8-7 2.2z"/><path d="M12 7.2v11.2"/></svg></span>
-              <h3>自我探索</h3>
-              <p class="lead">你暂时不需要咨询，只想先理解自己</p>
-              <p>使用 SeeSoul Compass™、心理学内容、反思练习与 SeeSoul Wisdom，自己先看看。不需要懂专业词汇，也不需要准备什么，从你好奇的地方开始就好。</p>
-              <a class="btn btn--gold" href="explore.html">开始自己探索</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- METHOD -->
-      <section class="section section--navy">
-        <div class="container">
-          <header class="section-header">
-            <span class="eyebrow">SeeSoul Method</span>
-            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12s3.4-5 9-5 9 5 9 5-3.4 5-9 5-9-5-9-5z"/><circle cx="12" cy="12" r="2.2"/></svg></span>看见自己，可以从六个问题开始。</h2>
-            <p class="sub">先用这六个问题看一件事。不必一次懂完整个方法。</p>
-          </header>
-          <div class="method-grid">
-            <div class="method-item"><span class="zh">发生了什么？</span><span class="en">Reality</span></div>
-            <div class="method-item"><span class="zh">我有什么感觉？</span><span class="en">Emotion</span></div>
-            <div class="method-item"><span class="zh">身体在告诉我什么？</span><span class="en">Body</span></div>
-            <div class="method-item"><span class="zh">我怎样理解这件事？</span><span class="en">Mind</span></div>
-            <div class="method-item"><span class="zh">什么模式正在重复？</span><span class="en">Pattern</span></div>
-            <div class="method-item"><span class="zh">接下来我想怎样生活？</span><span class="en">Life</span></div>
-          </div>
-          <div style="text-align:center;margin-top:2rem"><a class="btn btn--ghost-nav" href="counselling.html">了解 SeeSoul 的方法 →</a></div>
-        </div>
-      </section>
-
-      <!-- 08 SELF EXPLORATION -->
       <section class="section section--ivory">
-        <div class="container">
-          <header class="section-header">
-            <span class="eyebrow">Self exploration</span>
-            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.2C10 5.8 7.8 5 5 5v11.2c2.8 0 5 .7 7 2.2 2-1.5 4.2-2.2 7-2.2V5c-2.8 0-5 .8-7 2.2z"/><path d="M12 7.2v11.2"/></svg></span>从一个你也想过的问题开始。</h2>
-            <p class="sub">先看三篇。想继续，再往下找。</p>
-          </header>
-          <div class="content-grid content-grid--3">
-            <a class="content-card" href="article-overthinking.html"><span class="tag">心理学 · 情绪</span><h3>为什么大脑总是反复想最坏的结果？</h3></a>
-            <a class="content-card" href="article-loneliness.html"><span class="tag">心理学 · 关系</span><h3>为什么人会时不时感到孤独？</h3></a>
-            <a class="content-card" href="article-knowing-vs-doing.html"><span class="tag">心理学 · 认知</span><h3>为什么明白很多道理，却还是做不到？</h3></a>
-          </div>
-          <div style="margin-top:1.6rem">
-            <a class="btn btn--navy" href="explore.html">看看更多问题 →</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- FOUNDER + TRUST -->
-      <section class="section section--ivory-deep" id="trust">
         <div class="container founder">
           <div>
-            <div class="founder__portrait"><img class="founder__portrait-img" src="assets/rongxi-portrait.png" alt="容熙 · SEESOUL 熙愈心空间创始人" loading="lazy" /></div>
+            <div class="founder__portrait"><img class="founder__portrait-img" src="assets/rongxi-portrait.png" width="1145" height="1374" alt="容熙，SeeSoul 心理咨询师" /></div>
           </div>
           <div>
-            <span class="eyebrow">Founder</span>
-            <h2 style="font-size:clamp(1.6rem,2.8vw,2.2rem);display:flex;align-items:flex-start;gap:0.55rem"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="2.4"/><path d="M6.6 18.4c.7-2.5 2.7-3.9 5.4-3.9s4.7 1.4 5.4 3.9"/></svg></span>陪你一起看的人</h2>
-            <h3 style="font-size:1.4rem;margin-top:.2rem">容熙</h3>
-            <p style="margin-top:.4rem;color:var(--color-muted);line-height:1.7">SeeSoul 创始人 · 心理咨询师 · Counsellor</p>
-            <blockquote style="margin-top:1.3rem">我一直相信，很多时候，人并不需要另一个人急着告诉自己答案。我们更需要的，是一个足够安全、清楚的空间，重新看见：我正在经历什么？什么正在影响我？而我还可以怎样选择？</blockquote>
-            <div class="btn-row" style="margin-top:1.5rem">
-              <a class="btn btn--gold" href="founder.html">认识容熙 →</a>
-            </div>
+            <span class="eyebrow">03</span>
+            <h2 style="font-size:clamp(1.6rem,2.8vw,2.2rem)">你好，我是容熙。</h2>
+            <p style="margin-top:0.45rem;color:var(--color-muted)">心理咨询师 · SeeSoul 创始人</p>
+            <p style="margin-top:1rem;line-height:1.85">我相信，一个人的经历值得被认真理解，而不是被简单归类。在咨询中，我希望与你一起看清那些让你困扰的事情，理解它们如何影响你的生活，并探索更适合你的应对方式。</p>
+            <p style="margin-top:0.9rem;line-height:1.85">我的专业背景包括心理咨询、战略心理治疗、临床催眠治疗及相关训练，并拥有澳洲心理咨询实践经验。</p>
+            <p style="margin-top:0.9rem;line-height:1.85">你不需要准备好完整的故事。我们可以从你此刻最想谈的事情开始。</p>
+            <p style="margin-top:1.3rem"><a class="btn btn--gold" href="founder.html">认识容熙与专业背景</a></p>
           </div>
-        </div>
-        <div class="container" style="margin-top:3.2rem">
-          <header class="section-header">
-            <span class="eyebrow">Safety & trust</span>
-            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6 19 6.4v5.1c0 3.5-2.6 6.2-7 8.1-4.4-1.9-7-4.6-7-8.1V6.4z"/></svg></span>有些事情，我们希望先说清楚。</h2>
-          </header>
-          <div class="trust-grid">
-            <div class="trust-block"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="8" rx="1.5"/><path d="M8.5 11V8.6a3.5 3.5 0 0 1 7 0V11"/></svg></span><h4>保密</h4><p>咨询内容遵循专业保密原则及适用例外。</p></div>
-            <div class="trust-block"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 9 4.2-4.2H14l5.5 5.5-6.2 6.2L4.5 9z"/><path d="M9.2 8.4h.01M5.2 18.8 18.8 5.2"/></svg></span><h4>不贴标签</h4><p>SeeSoul Compass 不用于心理诊断。</p></div>
-            <div class="trust-block"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5v5.5"/><path d="m12 10-5 6.2M12 10l5 6.2"/><circle cx="7" cy="17.6" r="1.2"/><circle cx="17" cy="17.6" r="1.2"/></svg></span><h4>不替你决定</h4><p>这里不替你决定应该怎么做。</p></div>
-            <div class="trust-block"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18C6 10.5 11.5 5.5 19 5.5 19 13 14 18 6 18z"/><path d="M8.2 15.2c2-1.8 4-3.6 6.6-5.4"/></svg></span><h4>灵性经验也可以谈</h4><p>未经验证的解释，不会被当成事实。</p></div>
-          </div>
-          <div style="margin-top:1.8rem"><a class="btn btn--ghost-ivory" href="counselling.html#consent">阅读完整的保密与专业边界 →</a></div>
         </div>
       </section>
 
-      <!-- 11 FAQ -->
+      <section class="section section--ivory-deep" id="trust">
+        <div class="container">
+          <header class="section-header">
+            <span class="eyebrow">04</span>
+            <h2>第一次咨询，你可能想知道</h2>
+          </header>
+          <div class="faq">
+            <div class="faq__item">
+              <button class="faq__q" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">我不知道自己怎么了，也可以预约吗？<span class="chev" aria-hidden="true">▾</span></button>
+              <div class="faq__a" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden><p>可以。你不需要先找到问题的名称。我们可以在咨询中一起了解你希望讨论的事情。</p></div>
+            </div>
+            <div class="faq__item">
+              <button class="faq__q" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">咨询时，我一定要谈过去的经历吗？<span class="chev" aria-hidden="true">▾</span></button>
+              <div class="faq__a" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden><p>不一定。咨询可以从当下的困扰开始。是否讨论过去，以及讨论到什么程度，需要结合你的目标与实际情况。</p></div>
+            </div>
+            <div class="faq__item">
+              <button class="faq__q" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">心理咨询和生命课题解读有什么不同？<span class="chev" aria-hidden="true">▾</span></button>
+              <div class="faq__a" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden><p>心理咨询主要围绕情绪、关系、心理困扰与生活中的应对方式展开。生命课题解读则更侧重个人经历、生命主题及意义探索，不替代心理健康评估或治疗。</p></div>
+            </div>
+            <div class="faq__item">
+              <button class="faq__q" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">咨询内容会保密吗？<span class="chev" aria-hidden="true">▾</span></button>
+              <div class="faq__a" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden><p>咨询遵循适用的专业保密原则，但可能存在法律、安全及其他专业要求下的例外。具体内容会在<a class="text-link" href="consent.html">知情同意说明</a>中解释。</p></div>
+            </div>
+            <div class="faq__item">
+              <button class="faq__q" id="faq-q5" aria-expanded="false" aria-controls="faq-a5">如果我现在处在紧急危险中，怎么办？<span class="chev" aria-hidden="true">▾</span></button>
+              <div class="faq__a" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden><p>如果你的生命正在受到威胁，请拨打澳大利亚紧急电话 000。也可以联系 Lifeline 13 11 14，全天都有人接听。心理咨询和网站上的阅读不能代替紧急帮助。</p></div>
+            </div>
+          </div>
+          <p style="margin-top:1.4rem"><a class="text-link" href="counselling.html">查看完整咨询说明 →</a></p>
+        </div>
+      </section>
+
       <section class="section section--ivory">
         <div class="container">
           <header class="section-header">
-            <span class="eyebrow">FAQ</span>
-            <h2><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M9.6 9.6a2.4 2.4 0 1 1 3.1 2.3c-.7.4-1.2.9-1.2 1.8"/><path d="M12 16.8h.01"/></svg></span>也许你也在想这些</h2>
+            <span class="eyebrow">05</span>
+            <h2>也可以先阅读，认识自己的经历</h2>
+            <p class="sub">如果你暂时不准备预约，也可以从 SeeSoul 的心理学文章开始。</p>
           </header>
-          <div class="faq">
-            <div class="faq__item"><button class="faq__q" aria-expanded="false">我不知道自己要谈什么，可以提交预约请求吗？<span class="chev">▾</span></button><div class="faq__a"><p>可以。你写下最近的情况，发出请求即可。这还不是一次已经确认的预约，时间没有被占住，也还没有付款。也可以先做 SeeSoul Compass。</p></div></div>
-            <div class="faq__item"><button class="faq__q" aria-expanded="false">SeeSoul Compass 是心理测试吗？<span class="chev">▾</span></button><div class="faq__a"><p>不是。Compass 是一段简短的自我整理过程，无诊断、无标签，不给你贴任何结果。</p></div></div>
-            <div class="faq__item"><button class="faq__q" aria-expanded="false">如果我正在经历严重心理危机怎么办？<span class="chev">▾</span></button><div class="faq__a"><p>如果你现在有伤害自己或他人的念头，请立即联系当地紧急服务或心理援助热线。网站的探索与在线咨询不能替代紧急干预。</p></div></div>
+          <div class="content-grid content-grid--3 home-reads">
+            <a class="content-card" href="article-overthinking.html">
+              <h3>为什么大脑总是反复想最坏的结果？</h3>
+              <p>了解担忧与反复思考如何影响日常生活。</p>
+            </a>
+            <a class="content-card" href="article-relationship-patterns.html">
+              <h3>为什么我们总在关系里重复相似的模式？</h3>
+              <p>探索关系互动中可能反复出现的习惯与选择。</p>
+            </a>
+            <a class="content-card" href="article-meaninglessness.html">
+              <h3>为什么明明很努力，却越来越觉得没意义？</h3>
+              <p>理解疲惫、价值感与生活方向之间可能存在的关系。</p>
+            </a>
           </div>
+          <p style="margin-top:1.5rem"><a class="btn btn--navy" href="explore.html">进入 SeeSoul 自我探索</a></p>
+          <p class="home-quiet">如果还没准备预约，也可以先做一次 <a class="text-link" href="compass-start.html">SeeSoul Compass</a>，用自己的节奏看看最近什么最牵动你。</p>
         </div>
       </section>
 
-      <!-- 12 FINAL CTA -->
-      <section class="section section--navy-deep final-cta">
-        <div>
-          <h2>你不需要等到事情变得很严重，<br />才允许自己找一个地方好好谈谈。</h2>
-          <p>如果你已经知道自己想谈什么，可以先提交一个预约请求。时间还没有被占住。如果你还不知道，SeeSoul Compass 可以陪你先找找方向。</p>
-          <div class="btn-row">
-            <a class="btn btn--gold" href="booking.html">提交预约请求</a>
-            <a class="btn btn--ghost-nav" href="compass-start.html">做 SeeSoul Compass</a>
-          </div>
+      <section class="section section--navy">
+        <div class="container home-copy">
+          <header class="section-header">
+            <span class="eyebrow">06</span>
+            <h2>如果你愿意，我们可以从这里开始</h2>
+          </header>
+          <p>有些事情，独自思考了很久，仍然不知道怎样面对。你不需要先想清楚所有答案，也不需要等到情况变得严重。</p>
+          <p>如果你希望找一个专业而有边界的空间，认真谈谈自己的经历，可以先了解咨询安排，再决定是否预约。</p>
+          <p class="home-price" style="color:var(--color-gold-soft)">一对一心理咨询 · 60 分钟 · AUD $150</p>
+          <p><a class="btn btn--gold" href="booking.html">预约咨询</a></p>
+          <p class="home-quiet" style="color:var(--color-muted-navy)">预约页会让你选择希望的时间，并写一封邮件。邮件需要由你发出。发出之前，时间没有被占住，也没有在线付款。</p>
+          <p class="book-sign" style="margin-top:1.6rem;font-family:var(--font-display);color:var(--color-gold-soft)">Seeing Before Being™</p>
+          <p>先看见，再选择如何生活。</p>
         </div>
       </section>
-
     </main>
 
     <footer class="site-footer">
@@ -232,57 +218,13 @@
           <span style="font-weight:600;color:var(--color-text-navy)">了解更多</span>
           <a href="philosophy.html">Our Philosophy</a>
           <a href="founder.html">认识容熙</a>
-          <a href="booking.html">提交预约请求</a>
+          <a href="booking.html">预约咨询</a>
           <a href="#trust">隐私 · 专业边界 · 免责声明</a>
         </div>
       </div>
     </footer>
 
     <script>
-      (function () {
-        var rite = document.getElementById("rite");
-        if (!rite) return;
-        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        var seen = false;
-        try { seen = sessionStorage.getItem("seesoul-rite") === "1"; } catch (e) {}
-        if (reduce || seen) return;
-        var timer = 0;
-        function finish() {
-          if (rite.classList.contains("is-done")) return;
-          window.clearTimeout(timer);
-          try { sessionStorage.setItem("seesoul-rite", "1"); } catch (e) {}
-          rite.classList.add("is-done");
-          document.body.classList.remove("has-rite");
-          window.setTimeout(function () {
-            rite.remove();
-            var main = document.getElementById("main-content");
-            if (main) main.focus();
-          }, 700);
-        }
-        function open() {
-          if (rite.classList.contains("is-open")) {
-            finish();
-            return;
-          }
-          var iris = rite.querySelector(".rite__iris");
-          if (iris) {
-            var current = window.getComputedStyle(iris).transform;
-            iris.style.animation = "none";
-            iris.style.transform = current && current !== "none" ? current : "scaleY(0.22)";
-            void iris.offsetWidth;
-            iris.style.transition = "transform 1.05s cubic-bezier(0.16, 0.84, 0.3, 1)";
-            iris.style.transform = "scaleY(1)";
-          }
-          rite.classList.add("is-open");
-          rite.setAttribute("aria-label", "Welcome to SeeSoul");
-          timer = window.setTimeout(finish, 2400);
-        }
-        rite.hidden = false;
-        rite.classList.add("is-on");
-        document.body.classList.add("has-rite");
-        rite.addEventListener("click", open);
-        rite.focus();
-      })();
       var t = document.getElementById("navToggle");
       if (t) {
         t.addEventListener("click", function () {
@@ -291,13 +233,14 @@
           t.setAttribute("aria-expanded", open ? "true" : "false");
         });
       }
-      // FAQ 手风琴
       document.querySelectorAll(".faq__q").forEach(function (btn) {
+        var item = btn.closest(".faq__item");
+        var panel = item.querySelector(".faq__a");
         btn.addEventListener("click", function () {
-          var item = btn.closest(".faq__item");
           var open = item.getAttribute("data-open") === "true";
           item.setAttribute("data-open", open ? "false" : "true");
           btn.setAttribute("aria-expanded", open ? "false" : "true");
+          if (panel) panel.hidden = open;
         });
       });
     </script>

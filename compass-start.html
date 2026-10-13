@@ -18,30 +18,31 @@
       </div>
 
       <main id="main-content" tabindex="-1">
-        <section class="compass-question" style="padding-block:var(--space-16)">
+        <section class="compass-question">
           <div class="compass-question__inner" style="max-width:44rem">
             <span class="compass-badge">SeeSoul Compass™</span>
-            <p class="compass-q-kicker">一段简短的自我整理 · 约 3–5 分钟</p>
-            <h2 class="compass-q-title" style="font-size:clamp(1.6rem,3vw,2.3rem)">在开始之前，请放心：<br />这里没有对错，没有诊断，没有标签。</h2>
-            <p style="color:var(--color-muted-navy);max-width:34em;margin-bottom:2rem">
-              Compass 会通过几个简单的问题，陪你看看此刻什么最需要被看见。你可以随时停下来，也可以随时返回。
-            </p>
+            <h2 class="compass-q-title" style="font-size:clamp(1.6rem,3vw,2.3rem)">花几分钟，看看最近什么最牵动你。</h2>
+            <p class="compass-q-kicker">约 3–5 分钟 · 免费 · 非心理诊断</p>
+            <div style="color:var(--color-muted-navy);max-width:34em;margin-bottom:1.6rem;line-height:1.8">
+              <p>有时候，我们知道自己有点累、有点乱，却不知道该从哪里说起。</p>
+              <p>接下来有几个简单的问题。没有标准答案，选最接近你现在状态的就好。</p>
+            </div>
 
-            <p class="compass-q-kicker" style="margin-top:1.5rem">第一步 · 定位</p>
-            <h3 style="font-size:1.5rem;margin-bottom:1.4rem">最近，什么最占据你的心？</h3>
-            <div class="option-list" role="list">
-              <button class="option" type="button" data-anchor-id="compass-start.orientation-emo"><span>情绪</span><span class="hint">最近很累、焦虑、内耗，或情绪停不下来</span></button>
-              <button class="option" type="button" data-anchor-id="compass-start.orientation-relation"><span>一段关系</span><span class="hint">反复牵动你，不知该如何相处</span></button>
-              <button class="option" type="button" data-anchor-id="compass-start.orientation-family"><span>家庭</span><span class="hint">和父母、伴侣或孩子的关系让你觉得累</span></button>
-              <button class="option" type="button" data-anchor-id="compass-start.orientation-self"><span>自己</span><span class="hint">总觉得自己不够好，在意别人怎么看你</span></button>
-              <button class="option" type="button" data-anchor-id="compass-start.orientation-life-direction"><span>人生方向</span><span class="hint">面对选择，不知道下一步怎么走</span></button>
-              <button class="option" type="button" data-anchor-id="compass-start.orientation-meaning"><span>意义 / 存在困惑</span><span class="hint">说不清，但总觉得缺了点什么</span></button>
-              <button class="option" type="button" data-anchor-id="compass-start.orientation-unclear"><span>说不清楚</span><span class="hint">没有特别明确的事，但知道自己不太对劲</span></button>
+            <p class="compass-q-kicker">第一步 · 从这里开始</p>
+            <h3 id="start-q" style="font-size:1.5rem;margin-bottom:1.4rem">最近，什么事情最让你<span style="white-space:nowrap">放不下？</span></h3>
+            <div class="option-list" role="radiogroup" aria-labelledby="start-q">
+              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-emo"><span>情绪与压力</span><span class="hint">最近容易焦虑、疲惫，或总是想个不停。</span></button>
+              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-relation"><span>亲密关系</span><span class="hint">一段关系让我反复难过、不安，或不知道<span style="white-space:nowrap">怎样相处。</span></span></button>
+              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-family"><span>家庭关系</span><span class="hint">和父母、伴侣或孩子之间，有些事情一直让我<span style="white-space:nowrap">觉得累。</span></span></button>
+              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-self"><span>自我价值</span><span class="hint">经常怀疑自己，或太在意别人怎么看我。</span></button>
+              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-life-direction"><span>人生选择</span><span class="hint">面临某个决定，不知道下一步该怎么走。</span></button>
+              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-meaning"><span>意义与方向</span><span class="hint">生活好像还过得去，却不知道自己想要什么。</span></button>
+              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-unclear"><span>暂时说不清楚</span><span class="hint">没有特别明确的事情，只是觉得最近的自己<span style="white-space:nowrap">不太对劲。</span></span></button>
             </div>
 
             <div class="compass-nav" style="border-top:1px solid var(--color-border-navy);margin-top:2.4rem;padding-top:1.2rem">
-              <a class="btn btn--gold" href="compass-question.html" style="width:100%">继续 →</a>
-              <p style="margin:1rem 0 0;text-align:center"><a class="text-link" href="compass-result.html">先看看结果页长什么样 →</a></p>
+              <p id="startHint" role="status" hidden style="margin:0 0 0.8rem;color:var(--color-gold-soft)">先选一个最接近的就好。</p>
+              <button class="btn btn--gold" id="startNext" type="button" style="width:100%">继续 →</button>
             </div>
           </div>
         </section>
@@ -49,18 +50,56 @@
 
       <div class="compass-nav">
         <div class="compass-nav__inner">
-          <span style="color:var(--color-muted-navy);font-size:0.9rem">SeeSoul Compass · 无诊断 · 无标签 · 可随时停下</span>
+          <span style="color:var(--color-muted-navy);font-size:0.9rem">你可以随时停止。</span>
         </div>
       </div>
     </div>
 
     <script>
-      document.querySelectorAll(".option").forEach(function (o) {
-        o.addEventListener("click", function () {
-          document.querySelectorAll(".option").forEach(function (x) { x.removeAttribute("aria-pressed"); });
-          o.setAttribute("aria-pressed", "true");
+      (function () {
+        var options = Array.prototype.slice.call(document.querySelectorAll(".option"));
+        var hint = document.getElementById("startHint");
+        var next = document.getElementById("startNext");
+        var chosen = "";
+
+        function select(option) {
+          chosen = option.getAttribute("data-anchor-id") || "";
+          options.forEach(function (item) {
+            var on = item === option;
+            item.setAttribute("aria-checked", on ? "true" : "false");
+            if (on) item.setAttribute("aria-pressed", "true");
+            else item.removeAttribute("aria-pressed");
+          });
+          if (hint) hint.hidden = true;
+        }
+
+        options.forEach(function (option) {
+          option.addEventListener("click", function () { select(option); });
         });
-      });
+
+        var list = document.querySelector(".option-list");
+        if (list) list.addEventListener("keydown", function (event) {
+          var index = options.indexOf(document.activeElement);
+          if (index < 0) return;
+          var move = 0;
+          if (event.key === "ArrowDown" || event.key === "ArrowRight") move = 1;
+          if (event.key === "ArrowUp" || event.key === "ArrowLeft") move = -1;
+          if (!move) return;
+          event.preventDefault();
+          var target = options[(index + move + options.length) % options.length];
+          target.focus();
+          select(target);
+        });
+
+        if (next) next.addEventListener("click", function () {
+          if (!chosen) {
+            if (hint) hint.hidden = false;
+            if (options[0]) options[0].focus();
+            return;
+          }
+          window.location.href = "compass-question.html";
+        });
+      })();
     </script>
   </body>
 </html>

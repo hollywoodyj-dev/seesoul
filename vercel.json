@@ -7,5 +7,17 @@
     "api/booking.py": {
       "includeFiles": "booking/**"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/exercise-three-columns.html",
+      "destination": "/exercise-three-sentences.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/exercise-three-columns",
+      "destination": "/exercise-three-sentences.html",
+      "statusCode": 301
+    }
+  ]
 }

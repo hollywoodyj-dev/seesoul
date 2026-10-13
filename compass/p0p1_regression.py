@@ -97,7 +97,7 @@ root = __import__("pathlib").Path(__file__).resolve().parents[1]
 pages = {
     "counselling.html": ["提交预约请求", "这还不是一次已经确认的预约", "阅读知情同意与保密说明"],
     "life-theme.html": ["提交预约请求", "这还不是一次已经确认的预约"],
-    "consent.html": ["这一页只是说明，不是已经完成的签署", "Compass 的七个选择和你写下的话保存在这台浏览器里"],
+    "consent.html": ["这一页只是说明，不是已经完成的签署", "保存在这台浏览器里", "OpenAI", "000", "13 11 14"],
     "lt-safety.html": ["如果你在澳大利亚", "如果你在中国大陆", "如果你在其他地区", "13 11 14", "12356"],
     "lt-draw.html": ["这一版结构对照还不是最终计算规则，不能当作定论。"],
     "compass-result.html": ["我想先确认一下你的安全", "是，我现在需要立即的帮助", "没有，我现在是安全的", "查看其他地区支持 →", 'href="lt-safety.html"'],
@@ -107,6 +107,9 @@ for name, needles in pages.items():
     text = (root / name).read_text(encoding="utf-8")
     missing = [n for n in needles if n not in text]
     check("page-" + name, not missing, ",".join(missing))
+consent_absent = ["严格保密", "不会向任何第三方", "在有外部法律与专业复核之前", "咨询记录仅用于"]
+consent_text = (root / "consent.html").read_text(encoding="utf-8")
+check("consent-no-internal-or-absolute", not any(n in consent_text for n in consent_absent), ",".join(n for n in consent_absent if n in consent_text))
 banned = ["预约已确认", "已确认并签署", "我已阅读并同意签署", "400-161-9995"]
 for name in ("counselling.html", "life-theme.html", "consent.html", "lt-safety.html", "booking.js"):
     text = (root / name).read_text(encoding="utf-8")

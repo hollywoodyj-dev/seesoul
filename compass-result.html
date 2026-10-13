@@ -63,7 +63,7 @@
         }
 
         function emptyState() {
-          bodyEl.innerHTML = '<section class="result-section"><span class="k">还没有留下回答</span><h3>好像还没有完成问卷</h3><p style="margin-top:0.6rem">你可以先回去做完 SeeSoul Compass，再回来看这份「此刻的你」。</p><div class="next-options" style="margin-top:1.4rem"><a class="next-option" href="compass-start.html"><div><strong>去做 SeeSoul Compass →</strong></div><span class="g">→</span></a></div></section>';
+          bodyEl.innerHTML = '<section class="result-section"><span class="k">还没有留下回答</span><h3>好像还没走完这几个问题</h3><p style="margin-top:0.6rem">你可以先回去做完 SeeSoul Compass，再回来看这份「此刻的你」。</p><div class="next-options" style="margin-top:1.4rem"><a class="next-option" href="compass-start.html"><div><strong>去做 SeeSoul Compass →</strong></div><span class="g">→</span></a></div></section>';
         }
 
         function nextStep(payload) {
@@ -76,7 +76,7 @@
           if (payload.router === "LIFE_THEME_INFORMATION") {
             return '<a class="next-option" href="life-theme.html"><div><strong>想看看反复出现的主题</strong><div style="color:var(--color-muted);font-size:0.9rem;margin-top:0.2rem">这是一种整理，不是结论。</div></div><span class="g">→</span></a>';
           }
-          return '<a class="next-option" href="explore.html"><div><strong>我想先自己看看</strong><div style="color:var(--color-muted);font-size:0.9rem;margin-top:0.2rem">一个与你刚才觉察有关的小练习</div></div><span class="g">→</span></a>';
+          return '<a class="next-option" href="explore.html"><div><strong>继续阅读与探索</strong></div><span class="g">→</span></a>';
         }
 
         function render(payload) {
