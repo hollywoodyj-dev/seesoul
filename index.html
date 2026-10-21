@@ -34,7 +34,7 @@
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
-        <button class="nav-toggle" id="navToggle" aria-controls="siteNav" aria-expanded="false" aria-label="打开导航">☰</button>
+        <button class="nav-toggle" id="navToggle" type="button" aria-controls="siteNav" aria-expanded="false" aria-label="打开导航菜单"><span class="nav-toggle__bars" aria-hidden="true"></span></button>
         <nav class="site-nav" id="siteNav">
           <a href="index.html" aria-current="page">首页</a>
           <a href="counselling.html">心理咨询</a>
@@ -225,14 +225,6 @@
     </footer>
 
     <script>
-      var t = document.getElementById("navToggle");
-      if (t) {
-        t.addEventListener("click", function () {
-          var nav = document.getElementById("siteNav");
-          var open = nav.classList.toggle("site-nav--open");
-          t.setAttribute("aria-expanded", open ? "true" : "false");
-        });
-      }
       document.querySelectorAll(".faq__q").forEach(function (btn) {
         var item = btn.closest(".faq__item");
         var panel = item.querySelector(".faq__a");
@@ -244,5 +236,6 @@
         });
       });
     </script>
+    <script src="nav.js" defer></script>
   </body>
 </html>

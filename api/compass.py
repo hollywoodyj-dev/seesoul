@@ -1,50 +1,22 @@
 # -*- coding: utf-8 -*-
-"""POST /api/compass — Compass reflection. Fail closed when no model is configured."""
+"""POST /api/compass — retired. Compass v2 builds its note in the page and sends nothing here."""
 
 import json
-import sys
 from http.server import BaseHTTPRequestHandler
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "compass"))
-
-from reflect import reflect  # noqa: E402
-
-_MAX_BODY = 8000
+_BODY = json.dumps({"ok": False, "status": "RETIRED"}).encode("utf-8")
 
 
 class handler(BaseHTTPRequestHandler):
-    def do_POST(self):
-        try:
-            length = int(self.headers.get("Content-Length") or 0)
-        except ValueError:
-            length = 0
-        if length < 0 or length > _MAX_BODY:
-            self._send(413, {"ok": False, "status": "PAYLOAD_TOO_LARGE"})
-            return
-        raw = self.rfile.read(length) if length else b"{}"
-        try:
-            body = json.loads(raw.decode("utf-8"))
-        except (UnicodeDecodeError, json.JSONDecodeError):
-            self._send(400, {"ok": False, "status": "INVALID_JSON"})
-            return
-        if not isinstance(body, dict):
-            self._send(400, {"ok": False, "status": "INVALID_JSON"})
-            return
-        answers = body.get("answers") if isinstance(body.get("answers"), dict) else {}
-        free_text = body.get("free_text") if isinstance(body.get("free_text"), str) else ""
-        confirmation = body.get("safety_confirmation") if isinstance(body.get("safety_confirmation"), str) else None
-        notes = body.get("notes") if isinstance(body.get("notes"), dict) else {}
-        self._send(200, reflect(answers, free_text, confirmation, notes))
-
-    def do_GET(self):
-        self._send(405, {"ok": False, "status": "POST_ONLY"})
-
-    def _send(self, code, payload):
-        data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-        self.send_response(code)
+    def _gone(self):
+        self.send_response(410)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Cache-Control", "no-store")
-        self.send_header("Content-Length", str(len(data)))
+        self.send_header("Content-Length", str(len(_BODY)))
         self.end_headers()
-        self.wfile.write(data)
+        self.wfile.write(_BODY)
+
+    do_GET = _gone
+    do_POST = _gone
+    do_PUT = _gone
+    do_DELETE = _gone

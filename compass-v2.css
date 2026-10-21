@@ -1,0 +1,126 @@
+/* SeeSoul Compass v2 only. Loaded after theme.css on compass-* pages. */
+
+.ssc-inner { max-width: 45rem; }
+.ssc-question { align-content: start; padding-top: clamp(2rem, 6vw, 4rem); }
+
+.compass-top__inner { flex-wrap: nowrap; }
+.ssc-top { flex: 1; display: grid; justify-items: center; gap: 0.45rem; min-width: 0; }
+.ssc-top[hidden] { display: none; }
+.ssc-top .compass-progress { margin: 0; white-space: nowrap; }
+.ssc-exit { margin-right: 0; white-space: nowrap; padding: 0.6rem 0.2rem; }
+.ssc-dots { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.4rem; }
+.ssc-dots li { width: 0.5rem; height: 0.5rem; border-radius: 50%; border: 1px solid var(--color-gold); background: transparent; }
+.ssc-dots li.is-done { background: rgba(183, 154, 99, 0.55); }
+.ssc-dots li.is-current { background: var(--color-gold-soft); box-shadow: 0 0 0 3px rgba(214, 195, 159, 0.18); }
+
+.ssc-eyebrow { color: var(--color-gold-soft); font-size: 0.78rem; letter-spacing: 0.16em; margin: 0 0 1rem; opacity: 0.85; }
+.ssc-title { font-size: clamp(1.55rem, 4.2vw, 2.35rem); line-height: 1.4; margin-bottom: 0.8rem; }
+.ssc-title:focus, #sscSafetyTitle:focus, #sscResultTitle:focus { outline: none; }
+.ssc-title:focus-visible, #sscSafetyTitle:focus-visible, #sscResultTitle:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 4px; }
+.ssc-help { color: var(--color-muted-navy); font-size: 1.02rem; line-height: 1.75; margin: 0 0 1.6rem; max-width: 36em; }
+.ssc-small { color: var(--color-muted-navy); font-size: 0.9rem; line-height: 1.7; margin: 0.9rem 0 0; }
+
+.ssc-context {
+  display: grid; gap: 0.45rem;
+  border-left: 2px solid var(--color-gold); background: rgba(255, 255, 255, 0.04);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 0.75rem 1rem; margin: 0 0 1.2rem; font-size: 0.95rem; color: var(--color-muted-navy);
+}
+.ssc-context[hidden], .ssc-context [hidden] { display: none; }
+.ssc-context__bridge { margin: 0; line-height: 1.7; }
+.ssc-context__quote { margin: 0; display: flex; gap: 0.4rem; align-items: baseline; flex-wrap: wrap; }
+.ssc-context__prefix { flex: none; }
+.ssc-context__text {
+  color: var(--color-text-navy); flex: 1 1 12rem; min-width: 0;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+  overflow-wrap: anywhere; white-space: pre-line;
+}
+
+.ssc-multi { color: var(--color-gold-soft); font-size: 0.92rem; margin: -0.8rem 0 1rem; }
+.ssc-multi[hidden] { display: none; }
+.ssc-question .option { min-height: 3.3rem; display: flex; align-items: center; gap: 0.8rem; line-height: 1.5; overflow-wrap: anywhere; }
+.ssc-question .option::before {
+  content: ""; flex: none; width: 1.1rem; height: 1.1rem; border-radius: 50%;
+  border: 1.5px solid var(--color-muted-navy);
+}
+.ssc-question .option[aria-pressed="true"]::before { border-color: var(--color-gold-soft); background: var(--color-gold-soft); box-shadow: inset 0 0 0 3px var(--color-navy); }
+.ssc-question .option:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.ssc-limit { min-height: 1.5rem; margin: 0.6rem 0 0; color: var(--color-gold-soft); font-size: 0.92rem; }
+
+.ssc-text { margin-top: 0.6rem; }
+.ssc-text-toggle {
+  background: none; border: 0; color: var(--color-gold-soft); font-size: 0.98rem; cursor: pointer;
+  padding: 0.7rem 0; min-height: 2.75rem; text-decoration: underline; text-underline-offset: 0.25em;
+}
+.ssc-text-toggle[aria-expanded="true"] { text-decoration: none; }
+.ssc-text-toggle:focus-visible, .ssc-link:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.ssc-text .q-note { margin-top: 0.2rem; }
+.ssc-text .q-note[hidden] { display: none; }
+.ssc-text label { color: var(--color-muted-navy); font-size: 0.92rem; }
+.ssc-count { margin: 0; text-align: right; color: var(--color-muted-navy); font-size: 0.82rem; }
+
+.ssc-nav .compass-nav__inner { max-width: 45rem; flex-wrap: wrap; justify-content: flex-end; }
+.ssc-nav .compass-back { min-height: 2.75rem; background: none; border: 0; cursor: pointer; padding: 0 0.2rem; }
+.ssc-nav .compass-back:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.ssc-link {
+  background: none; border: 0; cursor: pointer; color: var(--color-muted-navy); font-size: 0.92rem;
+  min-height: 2.75rem; padding: 0 0.4rem; text-decoration: underline; text-underline-offset: 0.25em;
+}
+.ssc-link:hover { color: var(--color-gold-soft); }
+.ssc-next { min-width: 10rem; min-height: 2.9rem; }
+
+.ssc-panel .option-list { margin-top: 0.4rem; }
+
+.ssc-result { background: var(--color-ivory); color: var(--color-text); border-radius: 1rem; overflow: hidden; margin: 0 0 2rem; }
+.ssc-result[hidden] { display: none; }
+.ssc-result__head { background: var(--color-navy-deep); color: var(--color-text-navy); padding: 2rem 1.6rem 1.8rem; border-bottom: 1px solid rgba(183, 154, 99, 0.35); }
+.ssc-result__head h1 { font-size: clamp(1.7rem, 4.6vw, 2.4rem); margin: 0 0 0.7rem; }
+.ssc-result__head p:last-child { color: var(--color-muted-navy); margin: 0; line-height: 1.75; }
+.ssc-mark { display: inline-flex; gap: 0.35rem; margin-bottom: 1rem; }
+.ssc-mark i { width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--color-gold-soft); opacity: 0.4; }
+.ssc-mark i:last-child { opacity: 1; box-shadow: 0 0 0 3px rgba(214, 195, 159, 0.2); }
+.ssc-result__body { padding: 0 1.6rem; }
+.ssc-result .result-section { padding-block: 1.6rem; }
+.ssc-result .result-section .k { display: block; font-family: inherit; font-size: 0.8rem; }
+.ssc-result .ssc-line { color: var(--color-text); line-height: 1.8; margin: 0.35rem 0 0; overflow-wrap: anywhere; white-space: pre-line; }
+.ssc-result .ssc-result-intro { color: var(--color-text); font-size: 1.1rem; }
+.ssc-result .result-question { overflow-wrap: anywhere; }
+.ssc-result .action-card p { color: var(--color-text); }
+.ssc-result__actions { padding: 0.4rem 1.6rem 2rem; display: grid; gap: 0.6rem; justify-items: start; }
+.ssc-result__actions .btn { min-height: 2.9rem; }
+.ssc-result__actions .ssc-small { color: var(--color-muted); margin: 0; }
+.ssc-result__actions .ssc-link { color: var(--color-navy); padding-inline: 0; }
+.ssc-result__actions .text-link { color: #7a6131; }
+.ssc-btn-line { border: 1px solid var(--color-border-soft); }
+
+/* Start page */
+.ssc-start { display: grid; gap: clamp(1.5rem, 4vw, 3rem); grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: center; }
+.ssc-totem { margin: 0; background: #030d21; border-radius: 1.25rem; border: 1px solid rgba(183, 154, 99, 0.25); overflow: hidden; aspect-ratio: 1 / 1; }
+.ssc-totem img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.ssc-start h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.4; margin: 0 0 1rem; }
+.ssc-start .ssc-help { margin-bottom: 1rem; }
+.ssc-facts { color: var(--color-gold-soft); font-size: 0.95rem; line-height: 1.7; margin: 0 0 1.6rem; }
+.ssc-start .btn--gold { min-height: 3rem; padding-inline: 1.8rem; }
+.ssc-details { margin-top: 1.4rem; color: var(--color-muted-navy); }
+.ssc-details summary { cursor: pointer; color: var(--color-gold-soft); min-height: 2.75rem; display: flex; align-items: center; }
+.ssc-details summary:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.ssc-details ol { margin: 0.4rem 0 0; padding-left: 1.3rem; line-height: 1.8; }
+.ssc-details li span { color: var(--color-text-navy); }
+
+@media (max-width: 760px) {
+  .ssc-start { grid-template-columns: 1fr; }
+  .ssc-totem { max-width: 17rem; margin-inline: auto; width: 100%; }
+}
+@media (max-width: 480px) {
+  .ssc-totem { max-width: 12.5rem; }
+  .ssc-top .compass-progress { font-size: 0.82rem; letter-spacing: 0.04em; }
+  .ssc-dots { gap: 0.3rem; }
+  .ssc-nav .compass-nav__inner { gap: 0.5rem 0.8rem; }
+  .ssc-next { flex: 1 0 100%; order: 3; }
+  .ssc-nav .compass-back { margin-right: auto; }
+  .ssc-result__head, .ssc-result__body, .ssc-result__actions { padding-inline: 1.15rem; }
+  .ssc-result__actions .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ssc-question .option { transition: none; }
+}

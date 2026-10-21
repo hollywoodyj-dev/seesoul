@@ -3,216 +3,105 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SeeSoul Compass™ · 正在整理 · SEESOUL 熙愈心空间</title>
+    <title>SeeSoul Compass™ · 七层看见 · SEESOUL 熙愈心空间</title>
+    <meta name="referrer" content="no-referrer" />
     <link rel="stylesheet" href="./theme.css" />
+    <link rel="stylesheet" href="./compass-v2.css" />
   </head>
   <body data-page-id="compass-question">
     <a class="skip-link" href="#main-content">跳转到主要内容</a>
 
-    <div class="compass-shell">
+    <div class="compass-shell" id="sscApp">
       <div class="compass-top">
         <div class="compass-top__inner">
           <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
-          <div>
-            <div class="compass-progress" id="progressLabel">1 / 7</div>
-            <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill" style="--p:14%"></div></div>
+          <div class="ssc-top" id="sscTop">
+            <p class="compass-progress" id="sscProgress">第 1 步，共 7 步</p>
+            <ol class="ssc-dots" id="sscDots" aria-hidden="true"></ol>
           </div>
+          <a class="compass-back ssc-exit" href="index.html">退出</a>
         </div>
       </div>
 
       <main id="main-content" tabindex="-1">
-        <div class="compass-question">
-          <div class="compass-question__inner">
+        <div class="compass-question ssc-question">
+          <div class="compass-question__inner ssc-inner">
 
-            <!-- 1 Reality -->
-            <section class="q-screen" data-q="1">
-              <p class="compass-q-kicker">Seven Layers of Seeing™ · Reality</p>
-              <h2 class="compass-q-title">最近发生了什么？</h2>
-              <div class="option-list">
-                <button class="option" type="button" data-code="event"><span>一件最近发生、让我一直惦记的事</span></button>
-                <button class="option" type="button" data-code="relation"><span>一段关系里的变化</span></button>
-                <button class="option" type="button" data-code="body"><span>身体或状态上持续的不舒服</span></button>
-                <button class="option" type="button" data-code="unclear"><span>很难说清到底发生了什么</span></button>
-              </div>
-              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="1" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
+            <p id="sscLoading" class="ssc-help">正在打开问题……</p>
+            <noscript><p class="ssc-help">这个练习需要浏览器启用 JavaScript。你没有提交任何内容。可以先 <a class="text-link" href="index.html">返回首页</a>。</p></noscript>
+
+            <section id="sscError" class="ssc-panel" role="alert" hidden>
+              <h1 class="compass-q-title">问题没能加载出来</h1>
+              <p class="ssc-help">这不是你的问题。你写下的内容没有被发送，也没有被保存。可以刷新页面再试一次，或者先返回首页。</p>
+              <p><a class="btn btn--gold" href="compass-start.html">重新开始</a></p>
             </section>
 
-            <!-- 2 Feeling -->
-            <section class="q-screen" data-q="2">
-              <p class="compass-q-kicker">Seven Layers of Seeing™ · Feeling</p>
-              <h2 class="compass-q-title">这件事最容易带起什么感受？</h2>
-              <div class="option-list">
-                <button class="option" type="button" data-code="anxiety"><span>焦虑、紧张</span></button>
-                <button class="option" type="button" data-code="tired"><span>疲惫、麻木</span></button>
-                <button class="option" type="button" data-code="lonely"><span>孤单、被忽略</span></button>
-                <button class="option" type="button" data-code="unsafe"><span>害怕、没有安全感</span></button>
-                <button class="option" type="button" data-code="heavy"><span>说不清的沉重</span></button>
+            <section id="sscQuestion" aria-labelledby="sscTitle" hidden>
+              <p class="ssc-eyebrow" id="sscEyebrow"></p>
+              <div class="ssc-context" id="sscContext" hidden>
+                <p class="ssc-context__bridge" id="sscContextBridge" hidden></p>
+                <p class="ssc-context__quote" id="sscContextQuote" hidden>
+                  <span class="ssc-context__prefix" id="sscContextPrefix"></span>
+                  <span class="ssc-context__text" id="sscContextText"></span>
+                </p>
               </div>
-              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="2" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
+              <h1 class="compass-q-title ssc-title" id="sscTitle" tabindex="-1"></h1>
+              <p class="ssc-help" id="sscHelp"></p>
+              <p class="ssc-multi" id="sscMulti" hidden></p>
+              <div class="option-list" id="sscOptions" role="group" aria-labelledby="sscTitle"></div>
+              <p class="ssc-limit" id="sscLimit" role="status" aria-live="polite"></p>
+              <div class="ssc-text">
+                <button class="ssc-text-toggle" id="sscTextToggle" type="button" aria-expanded="false" aria-controls="sscTextPanel"></button>
+                <div class="q-note" id="sscTextPanel" hidden>
+                  <label for="sscText" id="sscTextLabel"></label>
+                  <textarea id="sscText" rows="3" aria-describedby="sscCount"></textarea>
+                  <p class="ssc-count" id="sscCount" aria-live="polite"></p>
+                </div>
+              </div>
             </section>
 
-            <!-- 3 Body -->
-            <section class="q-screen" data-q="3">
-              <p class="compass-q-kicker">Seven Layers of Seeing™ · Body</p>
-              <h2 class="compass-q-title">想到它时，身体最明显的感觉在哪里？</h2>
+            <section id="sscSafety" class="ssc-panel" aria-labelledby="sscSafetyTitle" hidden>
+              <p class="ssc-eyebrow">先确认安全</p>
+              <h1 class="compass-q-title" id="sscSafetyTitle" tabindex="-1">我想先确认一下你的安全。</h1>
+              <p class="ssc-help">此刻，你有没有正在考虑伤害自己，或者觉得自己可能无法保证自己的安全？</p>
               <div class="option-list">
-                <button class="option" type="button" data-code="chest"><span>胸口闷闷的、发紧</span></button>
-                <button class="option" type="button" data-code="stomach"><span>胃不舒服、没胃口</span></button>
-                <button class="option" type="button" data-code="shoulder"><span>肩膀/脖子紧绷、疲惫</span></button>
-                <button class="option" type="button" data-code="unclear"><span>说不上来，但身体记得</span></button>
+                <button class="option" type="button" id="sscSafetyHelp"><span>是，我现在需要立即的帮助</span></button>
+                <button class="option" type="button" id="sscSafetyOk"><span>没有，我现在是安全的</span></button>
               </div>
-              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="3" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
+              <p class="ssc-small">这个确认只在这台设备上进行，不会被保存或发送。</p>
             </section>
 
-            <!-- 4 Thought -->
-            <section class="q-screen" data-q="4">
-              <p class="compass-q-kicker">Seven Layers of Seeing™ · Thought</p>
-              <h2 class="compass-q-title">脑海里最常出现哪一句话？</h2>
-              <div class="option-list">
-                <button class="option" type="button" data-code="not-good-enough"><span>「是不是我不够好？」</span></button>
-                <button class="option" type="button" data-code="why-always"><span>「为什么总是这样？」</span></button>
-                <button class="option" type="button" data-code="not-care"><span>「他/她是不是不在乎我？」</span></button>
-                <button class="option" type="button" data-code="what-to-do"><span>「我到底该怎么办？」</span></button>
+            <section id="sscResult" class="ssc-result" aria-labelledby="sscResultTitle" hidden>
+              <div class="ssc-result__head">
+                <span class="ssc-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                <p class="ssc-eyebrow">SEESOUL COMPASS™ · 此刻觉察笔记</p>
+                <h1 id="sscResultTitle" tabindex="-1"></h1>
+                <p id="sscResultSubtitle"></p>
               </div>
-              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="4" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
-            </section>
-
-            <!-- 5 Impulse -->
-            <section class="q-screen" data-q="5">
-              <p class="compass-q-kicker">Seven Layers of Seeing™ · Impulse</p>
-              <h2 class="compass-q-title">你通常最想做什么？</h2>
-              <div class="option-list">
-                <button class="option" type="button" data-code="avoid"><span>躲开、不去想它</span></button>
-                <button class="option" type="button" data-code="prove"><span>拼命解释或证明自己</span></button>
-                <button class="option" type="button" data-code="ruminate"><span>一遍遍回想，找不到出口</span></button>
-                <button class="option" type="button" data-code="seek-talk"><span>想找人说说，又怕麻烦</span></button>
+              <div class="ssc-result__body" id="sscResultBody"></div>
+              <div class="ssc-result__actions">
+                <button class="btn btn--gold" id="sscCopy" type="button"></button>
+                <p class="ssc-small" id="sscCopyStatus" role="status" aria-live="polite"></p>
+                <button class="btn btn--ghost-ivory ssc-btn-line" id="sscRestart" type="button"></button>
+                <button class="ssc-link" id="sscEdit" type="button">← 返回修改回答</button>
+                <p class="ssc-small">这份笔记没有被保存。关闭或刷新页面后，它就不在了；需要的话，请先复制。</p>
+                <p class="ssc-small"><a class="text-link" href="counselling.html">了解 SeeSoul 心理咨询</a>：这只是服务介绍，进入页面不等于预约或付款。</p>
               </div>
-              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="5" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
-            </section>
-
-            <!-- 6 Protection -->
-            <section class="q-screen" data-q="6">
-              <p class="compass-q-kicker">Seven Layers of Seeing™ · Protection</p>
-              <h2 class="compass-q-title">如果继续这样下去，你最担心什么？</h2>
-              <div class="option-list">
-                <button class="option" type="button" data-code="lose-relation"><span>失去一段重要的关系</span></button>
-                <button class="option" type="button" data-code="stuck-emotion"><span>一直被情绪拖住，做不了想做的事</span></button>
-                <button class="option" type="button" data-code="lose-self"><span>越来越没有自己</span></button>
-                <button class="option" type="button" data-code="break-down"><span>担心自己会撑不住</span></button>
-              </div>
-              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="6" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
-            </section>
-
-            <!-- 7 Awareness -->
-            <section class="q-screen" data-q="7">
-              <p class="compass-q-kicker">Seven Layers of Seeing™ · Awareness</p>
-              <h2 class="compass-q-title">此刻回头看，你觉得什么最需要被照顾？</h2>
-              <div class="option-list">
-                <button class="option" type="button" data-code="relation-loop"><span>一直在纠缠的一段关系</span></button>
-                <button class="option" type="button" data-code="own-emotion"><span>我自己的情绪和状态</span></button>
-                <button class="option" type="button" data-code="body-rest"><span>身体这一侧，包括累和需要休息</span></button>
-                <button class="option" type="button" data-code="undecided"><span>一个迟迟没有决定的念头</span></button>
-                <button class="option" type="button" data-code="slow-down"><span>说不上来，但我知道需要慢一点</span></button>
-              </div>
-              <label class="q-note"><span>用你自己的话写在这里</span><textarea data-note="7" rows="3" placeholder="可以只写一句话，也可以留空。"></textarea></label>
             </section>
 
           </div>
         </div>
       </main>
 
-      <div class="compass-nav">
+      <div class="compass-nav ssc-nav" id="sscNav" hidden>
         <div class="compass-nav__inner">
-          <button class="compass-back" id="backBtn" type="button">← 返回上一题</button>
-          <button class="btn btn--navy" id="nextBtn" style="width:12rem" type="button">继续</button>
+          <button class="compass-back" id="sscBack" type="button"></button>
+          <button class="ssc-link" id="sscSkip" type="button"></button>
+          <button class="btn btn--navy ssc-next" id="sscNext" type="button"></button>
         </div>
       </div>
     </div>
 
-    <script>
-      (function () {
-        var screens = Array.from(document.querySelectorAll(".q-screen"));
-        var idx = 0;
-        var fill = document.getElementById("progressFill");
-        var label = document.getElementById("progressLabel");
-        var back = document.getElementById("backBtn");
-        var next = document.getElementById("nextBtn");
-
-        function showScreen(i) {
-          screens.forEach(function (s, j) {
-            s.style.display = (j === i) ? "" : "none";
-          });
-        }
-
-        function render() {
-          showScreen(idx);
-          if (fill) fill.style.setProperty("--p", ((idx + 1) / screens.length * 100) + "%");
-          if (label) label.textContent = (idx + 1) + " / " + screens.length;
-          if (back) back.style.visibility = idx === 0 ? "hidden" : "visible";
-          if (next) next.textContent = idx === screens.length - 1 ? "看看此刻的你 →" : "继续";
-        }
-
-        // 选项选中反馈（单选）+ 记录每题的选择
-        var answers = {};
-        try {
-          var saved = JSON.parse(localStorage.getItem("seesoul_compass_answers") || "{}");
-          if (saved && typeof saved === "object") { answers = saved; }
-        } catch (e) {}
-
-        document.querySelectorAll(".option").forEach(function (o) {
-          // 回显已选（若之前选过）
-          var cur = o.getAttribute("data-code");
-          if (cur && answers[o.closest(".q-screen").getAttribute("data-q")] === cur) {
-            o.setAttribute("aria-pressed", "true");
-          }
-          o.addEventListener("click", function () {
-            var q = o.closest(".q-screen").getAttribute("data-q");
-            o.parentNode.querySelectorAll(".option").forEach(function (x) { x.removeAttribute("aria-pressed"); });
-            o.setAttribute("aria-pressed", "true");
-            answers[q] = o.getAttribute("data-code");
-            saveAnswers();
-          });
-        });
-
-        if (!answers.notes || typeof answers.notes !== "object") answers.notes = {};
-        if (!answers.notes["7"] && typeof answers.free_text === "string") answers.notes["7"] = answers.free_text;
-        document.querySelectorAll("textarea[data-note]").forEach(function (box) {
-          var key = box.getAttribute("data-note");
-          if (typeof answers.notes[key] === "string") box.value = answers.notes[key];
-          box.addEventListener("input", function () {
-            answers.notes[key] = box.value;
-            saveAnswers();
-          });
-        });
-
-        function writtenText() {
-          return ["1", "2", "3", "4", "5", "6", "7"].map(function (k) {
-            return (answers.notes[k] || "").trim();
-          }).filter(Boolean).join("\n");
-        }
-
-        function saveAnswers() {
-          document.querySelectorAll("textarea[data-note]").forEach(function (box) {
-            answers.notes[box.getAttribute("data-note")] = box.value;
-          });
-          answers.free_text = writtenText();
-          try { localStorage.setItem("seesoul_compass_answers", JSON.stringify(answers)); } catch (e) {}
-        }
-
-        if (next) next.addEventListener("click", function () {
-          saveAnswers();
-          if (idx < screens.length - 1) { idx++; render(); }
-          else { window.location.href = "compass-result.html"; }
-        });
-        if (back) back.addEventListener("click", function (e) {
-          e.preventDefault();
-          saveAnswers();
-          if (idx > 0) { idx--; render(); }
-        });
-
-        // 初始显示第一题
-        render();
-      })();
-    </script>
+    <script src="compass-v2.js" defer></script>
   </body>
 </html>

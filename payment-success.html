@@ -3,10 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>付款已收到 · SEESOUL 熙愈心空间</title>
-    <meta name="description" content="SeeSoul 已收到 AUD $150，对应 60-Minute Counselling Session。付款不是预约，60 分钟咨询尚未排定。" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+    <title>付款状态 · SEESOUL 熙愈心空间</title>
+    <meta name="description" content="核对 SeeSoul 一对一心理咨询的付款状态。付款不是预约，也不代表已经签署知情同意书。" />
     <link rel="stylesheet" href="./theme.css" />
+    <style>[data-pay-state][hidden] { display: none !important; }</style>
   </head>
   <body data-page-id="payment-success">
     <a class="skip-link" href="#main-content">跳转到主要内容</a>
@@ -30,27 +32,40 @@
     <main id="main-content" tabindex="-1">
       <section class="page-hero">
         <div class="page-hero__inner">
-          <span class="eyebrow" style="color:var(--color-gold-soft)">Payment received</span>
-          <h1>已收到<br />AUD $150</h1>
-          <p>这笔付款对应 SeeSoul — 60-Minute Counselling Session，一次性。咨询时间还没有排上。</p>
+          <span class="eyebrow" style="color:var(--color-gold-soft)" id="payEyebrow">Payment status</span>
+          <h1 id="payTitle">付款之后，<br />接下来怎么做</h1>
+          <p id="payLead">打开这一页，并不代表 SeeSoul 已经确认收到付款。</p>
         </div>
       </section>
 
       <section class="section section--ivory">
         <div class="container">
-          <div class="consent-panel">
-            <div class="consent-section">
+          <div class="consent-panel" role="status" aria-live="polite">
+            <div class="consent-section" data-pay-state="unverified">
+              <h3>怎样知道付款是否完成</h3>
+              <p>这一页不能确认付款是否完成。如果你已进行付款，请保留支付平台提供的交易记录。SeeSoul 将根据实际支付记录核对付款状态。</p>
+              <p>一对一心理咨询的费用是 AUD $150 / 60 分钟。</p>
+            </div>
+            <div class="consent-section" data-pay-state="checking" hidden>
+              <h3>正在核对付款</h3>
+              <p>正在向 Stripe 核对这笔付款。请不要关闭页面，也不要重复付款。</p>
+            </div>
+            <div class="consent-section" data-pay-state="paid" hidden>
               <h3>付款已经收到</h3>
-              <p>SeeSoul 已收到 AUD $150。这项费用用于 60 分钟心理咨询，SeeSoul — 60-Minute Counselling Session。</p>
-              <p>60 分钟咨询还没有被预约。时间没有被占住。付款不是预约。</p>
+              <p>Stripe 已确认这笔 AUD $150 一次性付款，对应 SeeSoul — 60-Minute Counselling Session。</p>
+              <p>请保留 Stripe 发给你的收据邮件。</p>
+            </div>
+            <div class="consent-section" data-pay-state="pending" hidden>
+              <h3>付款还没有确认</h3>
+              <p>Stripe 还没有确认收到这笔 AUD $150 付款。请先查看 Stripe 的收据邮件，或联系我们核对，避免重复付款。</p>
             </div>
             <div class="consent-section">
-              <h3>接下来安排时间</h3>
+              <h3>付款、预约与签署是分开的</h3>
+              <p>付款成功不代表预约时间已经确认，也不代表已经完成知情同意书签署。60 分钟咨询还没有被预约，时间没有被占住。</p>
               <p>请到预约页选择你希望的日期和时间，并自己发出预约邮件。邮件发出之前，请求还没有送到。发出之后，要等回复，才是一次确认的咨询。</p>
-              <p>这笔付款也不代表已经签署知情同意书。</p>
               <p><a class="btn btn--gold" href="counselling.html#booking">去写预约邮件 →</a></p>
             </div>
-            <div class="consent-note">如果你不是刚完成这笔付款而打开了这一页，请用预约邮件和容熙核对。这一页不会替你占住时间。</div>
+            <div class="consent-note">如果不确定付款是否成功，请先联系我们核对，避免重复付款。</div>
           </div>
         </div>
       </section>
@@ -66,6 +81,43 @@
     <script>
       var t = document.getElementById("navToggle");
       if (t) t.addEventListener("click", function () { var n = document.getElementById("siteNav"); var o = n.classList.toggle("site-nav--open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
+    </script>
+    <script>
+      (function () {
+        var hero = {
+          unverified: ["Payment status", "付款之后，<br />接下来怎么做", "打开这一页，并不代表 SeeSoul 已经确认收到付款。"],
+          paid: ["Payment received", "已收到<br />AUD $150", "这笔付款对应 SeeSoul — 60-Minute Counselling Session，一次性。咨询时间还没有排上。"],
+          pending: ["Payment pending", "付款还没有确认", "Stripe 还没有确认收到这笔付款。"],
+          checking: ["Checking payment", "正在核对付款", "正在向 Stripe 核对付款状态。"]
+        };
+        function show(state) {
+          document.querySelectorAll("[data-pay-state]").forEach(function (el) {
+            el.hidden = el.getAttribute("data-pay-state") !== state;
+          });
+          if (!hero[state]) return;
+          document.getElementById("payEyebrow").textContent = hero[state][0];
+          document.getElementById("payTitle").innerHTML = hero[state][1];
+          document.getElementById("payLead").textContent = hero[state][2];
+        }
+        var id = new URLSearchParams(window.location.search).get("session_id");
+        if (!id || !/^cs_(test|live)_[A-Za-z0-9]{10,250}$/.test(id)) return;
+        show("checking");
+        var controller = new AbortController();
+        var timer = setTimeout(function () { controller.abort(); }, 10000);
+        fetch("/api/seesoul-payment-status?session_id=" + encodeURIComponent(id), {
+          cache: "no-store", credentials: "same-origin", signal: controller.signal, headers: { Accept: "application/json" }
+        }).then(function (res) {
+          if (!res.ok) throw new Error("unavailable");
+          return res.json();
+        }).then(function (body) {
+          var s = body && body.status;
+          show(s === "paid" || s === "pending" ? s : "unverified");
+        }).catch(function () {
+          show("unverified");
+        }).then(function () {
+          clearTimeout(timer);
+        });
+      })();
     </script>
   </body>
 </html>

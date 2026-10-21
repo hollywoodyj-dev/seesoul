@@ -5,101 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SeeSoul Compass™ · 开始 · SEESOUL 熙愈心空间</title>
     <link rel="stylesheet" href="./theme.css" />
+    <link rel="stylesheet" href="./compass-v2.css" />
   </head>
   <body data-page-id="compass-start">
     <a class="skip-link" href="#main-content">跳转到主要内容</a>
 
     <div class="compass-shell">
       <div class="compass-top">
-        <div class="compass-top__inner">
+        <div class="compass-top__inner" style="max-width:68rem">
           <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
-          <a class="compass-back" href="index.html">← 返回首页</a>
+          <a class="compass-back ssc-exit" href="index.html">← 返回首页</a>
         </div>
       </div>
 
       <main id="main-content" tabindex="-1">
-        <section class="compass-question">
-          <div class="compass-question__inner" style="max-width:44rem">
-            <span class="compass-badge">SeeSoul Compass™</span>
-            <h2 class="compass-q-title" style="font-size:clamp(1.6rem,3vw,2.3rem)">花几分钟，看看最近什么最牵动你。</h2>
-            <p class="compass-q-kicker">约 3–5 分钟 · 免费 · 非心理诊断</p>
-            <div style="color:var(--color-muted-navy);max-width:34em;margin-bottom:1.6rem;line-height:1.8">
-              <p>有时候，我们知道自己有点累、有点乱，却不知道该从哪里说起。</p>
-              <p>接下来有几个简单的问题。没有标准答案，选最接近你现在状态的就好。</p>
-            </div>
+        <section class="compass-question ssc-question">
+          <div class="compass-question__inner" style="max-width:68rem">
+            <div class="ssc-start">
+              <figure class="ssc-totem">
+                <picture>
+                  <source srcset="assets/compass-totem-full-navy.webp" type="image/webp" />
+                  <img src="assets/compass-totem-full-navy.jpg" width="720" height="720" alt="SeeSoul Compass 图腾：一只眼睛，中心是一颗指引的星，上方是七重弧线。" />
+                </picture>
+              </figure>
 
-            <p class="compass-q-kicker">第一步 · 从这里开始</p>
-            <h3 id="start-q" style="font-size:1.5rem;margin-bottom:1.4rem">最近，什么事情最让你<span style="white-space:nowrap">放不下？</span></h3>
-            <div class="option-list" role="radiogroup" aria-labelledby="start-q">
-              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-emo"><span>情绪与压力</span><span class="hint">最近容易焦虑、疲惫，或总是想个不停。</span></button>
-              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-relation"><span>亲密关系</span><span class="hint">一段关系让我反复难过、不安，或不知道<span style="white-space:nowrap">怎样相处。</span></span></button>
-              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-family"><span>家庭关系</span><span class="hint">和父母、伴侣或孩子之间，有些事情一直让我<span style="white-space:nowrap">觉得累。</span></span></button>
-              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-self"><span>自我价值</span><span class="hint">经常怀疑自己，或太在意别人怎么看我。</span></button>
-              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-life-direction"><span>人生选择</span><span class="hint">面临某个决定，不知道下一步该怎么走。</span></button>
-              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-meaning"><span>意义与方向</span><span class="hint">生活好像还过得去，却不知道自己想要什么。</span></button>
-              <button class="option" type="button" role="radio" aria-checked="false" data-anchor-id="compass-start.orientation-unclear"><span>暂时说不清楚</span><span class="hint">没有特别明确的事情，只是觉得最近的自己<span style="white-space:nowrap">不太对劲。</span></span></button>
-            </div>
+              <div>
+                <p class="ssc-eyebrow">SEESOUL COMPASS™ · 七层看见</p>
+                <h1>从一件放在心上的事，开始看见自己。</h1>
+                <p class="ssc-help">也许你正在烦恼一段关系、一个决定，或者说不清的一种状态。我们用七个很轻的问题，陪你把发生的事、感受和想法慢慢分开。</p>
+                <p class="ssc-facts">约 3–5 分钟 · 免费 · 不是心理测试或诊断 · 可以随时跳过或退出</p>
+                <a class="btn btn--gold" href="compass-question.html">开始整理自己 →</a>
 
-            <div class="compass-nav" style="border-top:1px solid var(--color-border-navy);margin-top:2.4rem;padding-top:1.2rem">
-              <p id="startHint" role="status" hidden style="margin:0 0 0.8rem;color:var(--color-gold-soft)">先选一个最接近的就好。</p>
-              <button class="btn btn--gold" id="startNext" type="button" style="width:100%">继续 →</button>
+                <details class="ssc-details">
+                  <summary>先看看会做些什么</summary>
+                  <ol>
+                    <li><span>从生活开始</span>：选一件最近放在心上的事。</li>
+                    <li><span>走近自己的反应</span>：看看感受、身体、想法和你通常的回应。</li>
+                    <li><span>看见在意之物</span>：留意这件事里你最想守住的是什么。</li>
+                    <li><span>带走一点清晰</span>：把你说过的话整理成一份觉察笔记。</li>
+                  </ol>
+                  <p class="ssc-small">每一题都可以选现成的选项、写自己的话，或者直接跳过。没有标准答案。完成之后不会自动预约心理咨询。</p>
+                </details>
+
+                <p class="ssc-small">你的回答只留在这一页里，不会发送给本网站或任何 AI，也不会被保存；关闭或刷新页面后就会消失。<a class="text-link" href="compass-privacy.html">阅读 Compass 隐私与使用说明</a></p>
+                <p class="ssc-small">Compass 不提供紧急支持。如果你的生命正处于危险中，在澳大利亚请拨 000；Lifeline 13 11 14 提供 24 小时支持。</p>
+              </div>
             </div>
           </div>
         </section>
       </main>
-
-      <div class="compass-nav">
-        <div class="compass-nav__inner">
-          <span style="color:var(--color-muted-navy);font-size:0.9rem">你可以随时停止。</span>
-        </div>
-      </div>
     </div>
-
-    <script>
-      (function () {
-        var options = Array.prototype.slice.call(document.querySelectorAll(".option"));
-        var hint = document.getElementById("startHint");
-        var next = document.getElementById("startNext");
-        var chosen = "";
-
-        function select(option) {
-          chosen = option.getAttribute("data-anchor-id") || "";
-          options.forEach(function (item) {
-            var on = item === option;
-            item.setAttribute("aria-checked", on ? "true" : "false");
-            if (on) item.setAttribute("aria-pressed", "true");
-            else item.removeAttribute("aria-pressed");
-          });
-          if (hint) hint.hidden = true;
-        }
-
-        options.forEach(function (option) {
-          option.addEventListener("click", function () { select(option); });
-        });
-
-        var list = document.querySelector(".option-list");
-        if (list) list.addEventListener("keydown", function (event) {
-          var index = options.indexOf(document.activeElement);
-          if (index < 0) return;
-          var move = 0;
-          if (event.key === "ArrowDown" || event.key === "ArrowRight") move = 1;
-          if (event.key === "ArrowUp" || event.key === "ArrowLeft") move = -1;
-          if (!move) return;
-          event.preventDefault();
-          var target = options[(index + move + options.length) % options.length];
-          target.focus();
-          select(target);
-        });
-
-        if (next) next.addEventListener("click", function () {
-          if (!chosen) {
-            if (hint) hint.hidden = false;
-            if (options[0]) options[0].focus();
-            return;
-          }
-          window.location.href = "compass-question.html";
-        });
-      })();
-    </script>
+    <script src="compass-v2.js" defer></script>
   </body>
 </html>

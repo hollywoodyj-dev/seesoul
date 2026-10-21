@@ -1,9 +1,5 @@
 {
   "functions": {
-    "api/compass.py": {
-      "includeFiles": "compass/**",
-      "maxDuration": 60
-    },
     "api/booking.py": {
       "includeFiles": "booking/**"
     }

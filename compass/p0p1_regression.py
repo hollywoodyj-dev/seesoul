@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Local P0/P1 regression. Does not call a model and does not deploy."""
+import re
 import reflect
 from compass_engine import LABELS, R0_MIRROR, _audit_question, build_evidence, sufficiency
 
@@ -95,13 +96,22 @@ check("question-only-keeps-mirror", replaced.get("mirror") == "你停在这里�
 
 root = __import__("pathlib").Path(__file__).resolve().parents[1]
 pages = {
-    "counselling.html": ["提交预约请求", "这还不是一次已经确认的预约", "阅读知情同意与保密说明"],
+    "counselling.html": ["写好预约邮件", "要等回复，才是一次确认的咨询", "时间仍然没有被占住", "阅读知情同意与保密说明", "cancellation-policy.html"],
+    "payment-success.html": ["并不代表 SeeSoul 已经确认收到付款", "根据实际支付记录核对付款状态", "不代表预约时间已经确认", "知情同意书签署", "避免重复付款", "counselling.html#booking", "noindex"],
     "life-theme.html": ["提交预约请求", "这还不是一次已经确认的预约"],
-    "consent.html": ["这一页只是说明，不是已经完成的签署", "保存在这台浏览器里", "OpenAI", "000", "13 11 14"],
+    "consent.html": ["这一页只是说明，不是已经完成的签署", "CONSENT-DRAFT-2026-10-13", "000", "13 11 14", "consent-counselling.html", "consent-sign.html"],
+    "consent-counselling.html": ["Draft v1.0", "Online Counselling", "Face-to-Face Counselling", "AUD $150", "待确认", "000", "13 11 14", "迟到本身不构成未出席", "不因迟到而自动延长", "整个预约时段内始终没有参加咨询"],
+    "consent-sign.html": ["尚未启用", "consent-counselling.html", "付款状态分开", "cancellation-policy.html"],
+    "cancellation-policy.html": ["24 小时", "AUD $75", "全额退款", "澳大利亚消费者法", "生命课题解读（AUD $100 / 50 分钟）不适用本政策", "还没有生效"],
+    "booking.html": ["cancellation-policy.html", "AUD $75", "生命课题解读不适用", "仍可使用原定时段内的剩余时间", "整个预约时段结束后仍未参加"],    "lt-intake.html": ["不是命运预测，也不是心理测评", "LT-12", "lt-safety.html", "life-theme.html#booking", "网站不会替你发送"],
+    "compass-privacy.html": ["不会发送给本网站，也不会发送给 OpenAI", "不会保存在这台浏览器里", "不使用 AI 生成结果", "所填内容不会发送给 OpenAI 用于生成觉察笔记", "本页只说明 Compass", "不能识别所有风险", "compass-safety.html", "旧记录会被清除", "不是心理测试或诊断", "000", "13 11 14", "COMPASS-PRIVACY-2026-10-20-DRAFT"],
+    "compass-start.html": ["不是心理测试或诊断", "compass-privacy.html", "开始整理自己", "不会发送给本网站或任何 AI", "000", "13 11 14", "compass-v2.js"],
     "lt-safety.html": ["如果你在澳大利亚", "如果你在中国大陆", "如果你在其他地区", "13 11 14", "12356"],
     "lt-draw.html": ["这一版结构对照还不是最终计算规则，不能当作定论。"],
-    "compass-result.html": ["我想先确认一下你的安全", "是，我现在需要立即的帮助", "没有，我现在是安全的", "查看其他地区支持 →", 'href="lt-safety.html"'],
-    "compass-question.html": ["身体这一侧，包括累和需要休息"],
+    "compass-result.html": ["觉察笔记不会被保存", "compass-start.html", "compass-v2.js"],
+    "compass-question.html": ["我想先确认一下你的安全", "是，我现在需要立即的帮助", "没有，我现在是安全的", "compass-v2.js", "这份笔记没有被保存", "不等于预约或付款"],
+    "compass-safety.html": ["先把安全放在前面", "这里的自我整理先暂时停下", "无法判断你的具体情况", "000", "Lifeline 13 11 14", "12356"],
+    "compass-v2.js": ['SAFETY_PAGE = "compass-safety.html"', "seesoul_compass_answers", "removeItem"],
 }
 for name, needles in pages.items():
     text = (root / name).read_text(encoding="utf-8")
@@ -110,11 +120,64 @@ for name, needles in pages.items():
 consent_absent = ["严格保密", "不会向任何第三方", "在有外部法律与专业复核之前", "咨询记录仅用于"]
 consent_text = (root / "consent.html").read_text(encoding="utf-8")
 check("consent-no-internal-or-absolute", not any(n in consent_text for n in consent_absent), ",".join(n for n in consent_absent if n in consent_text))
-banned = ["预约已确认", "已确认并签署", "我已阅读并同意签署", "400-161-9995"]
-for name in ("counselling.html", "life-theme.html", "consent.html", "lt-safety.html", "booking.js"):
+banned = ["预约已确认", "已确认并签署", "我已阅读并同意签署", "400-161-9995", "任何情况下不退款", "概不退款"]
+for name in ("counselling.html", "life-theme.html", "consent.html", "consent-counselling.html", "consent-sign.html", "cancellation-policy.html", "booking.html", "lt-safety.html", "booking.js", "compass-safety.html", "compass-question.html", "compass-start.html"):
     text = (root / name).read_text(encoding="utf-8")
     hit = [n for n in banned if n in text]
     check("banned-" + name, not hit, ",".join(hit))
+
+pay_patterns = [r"buy\.stripe\.com", r"checkout\.stripe\.com", r"paypal\.me", r"paypal\.com/", r"(?i)westpac", r"\bBSB\b", r"(?i)hotmail\.com", r"\b04\d{2}\s?\d{3}\s?\d{3}\b", r"\b\d{3}-\d{3}\b.*\b\d{6}\b", r"[sp]k_(live|test)_"]
+pay_hits = []
+for f in list(root.glob("*.html")) + list(root.glob("*.js")):
+    text = f.read_text(encoding="utf-8", errors="ignore")
+    pay_hits += [f.name + ":" + p for p in pay_patterns if re.search(p, text)]
+check("no-unverified-payment-details-public", not pay_hits, ",".join(pay_hits))
+
+nav_bad = []
+for f in root.glob("*.html"):
+    text = f.read_text(encoding="utf-8")
+    if 'id="siteNav"' not in text or f.name == "payment-success.html":
+        continue
+    if '<script src="nav.js" defer></script>' not in text: nav_bad.append(f.name + ":no-nav.js")
+    if 'getElementById("navToggle")' in text: nav_bad.append(f.name + ":inline-toggle")
+    if 'aria-label="打开导航菜单"' not in text or 'aria-controls="siteNav"' not in text: nav_bad.append(f.name + ":toggle-aria")
+    if not re.search(r'href="booking\.html"[^>]*>预约咨询</a>\s*</nav>', text): nav_bad.append(f.name + ":cta")
+check("shared-mobile-nav", not nav_bad, ",".join(nav_bad))
+
+pay_text = (root / "payment-success.html").read_text(encoding="utf-8")
+pay_default = re.sub(r"<script[\s\S]*?</script>", "", pay_text)
+pay_default = re.sub(r'<div[^>]*data-pay-state="(paid|pending|checking)"[^>]*\bhidden\b[^>]*>[\s\S]*?</div>', "", pay_default)
+pay_absent = ["已收到", "付款已经收到", "Payment received"]
+check("payment-success-no-unverified-claim", not any(n in pay_default for n in pay_absent), ",".join(n for n in pay_absent if n in pay_default))
+check("payment-success-no-1320", "1320" not in pay_text)
+check("payment-success-verifies-server-side", "/api/seesoul-payment-status?session_id=" in pay_text and 'data-pay-state="paid" hidden' in pay_text and "[data-pay-state][hidden] { display: none !important; }" in pay_text)
+
+import json
+compass_copy = json.loads((root / "compass-copy-zh-v2.1.json").read_text(encoding="utf-8"))
+csteps = compass_copy["steps"]
+check("compass-v2-copy-registry",
+      [s["key"] for s in csteps] == ["reality", "feeling", "body", "thought", "impulse", "protection", "awareness"]
+      and all(s["selectMax"] == (2 if s["key"] == "feeling" else 1) for s in csteps)
+      and all(len({c["id"] for c in s["choices"]}) == len(s["choices"]) for s in csteps)
+      and compass_copy["interaction"]["freeTextMaxLength"] == 280 and compass_copy["interaction"]["allowSkipEveryStep"] is True
+      and compass_copy["privacy"]["resultAI"] == "NONE"
+      and set(compass_copy["reflectionLibrary"]) == {c["id"] for c in csteps[5]["choices"]} | {"default"})
+check("compass-v2-no-stale-copy-file", not (root / "compass-copy-zh-v2.json").exists() and 'COPY_URL = "compass-copy-zh-v2.1.json"' in (root / "compass-v2.js").read_text(encoding="utf-8"))
+from compass_engine import CRITICAL_TERMS, CONCERN_TERMS
+v2_js = (root / "compass-v2.js").read_text(encoding="utf-8")
+def js_list(name):
+    m = re.search(name + r"\s*=\s*(\[[^\]]*\])", v2_js)
+    return json.loads(m.group(1)) if m else None
+check("compass-v2-safety-terms-match-engine", js_list("CRITICAL_TERMS") == CRITICAL_TERMS and js_list("CONCERN_TERMS") == CONCERN_TERMS)
+compass_leaks = []
+for name in ("compass-start.html", "compass-question.html", "compass-result.html", "compass-safety.html", "compass-v2.js"):
+    text = (root / name).read_text(encoding="utf-8")
+    compass_leaks += [name + ":" + n for n in ("/api/compass", "localStorage.setItem", "sessionStorage", "innerHTML", "XMLHttpRequest", "sendBeacon", "gtag(", "1320") if n in text]
+check("compass-v2-local-only", not compass_leaks, ",".join(compass_leaks))
+
+intake_text = (root / "lt-intake.html").read_text(encoding="utf-8")
+intake_absent = ["1320", "lt-data.js", "lt-profile.html", "fetch(", "XMLHttpRequest", "/api/", "localStorage"]
+check("lt-intake-independent", not any(n in intake_text for n in intake_absent), ",".join(n for n in intake_absent if n in intake_text))
 
 print("FAILURES", len(failures))
 raise SystemExit(1 if failures else 0)

@@ -1,0 +1,392 @@
+{
+  "document": "SeeSoul Compass Seven Layers of Seeing Chinese copy lock candidate",
+  "version": "2.1.0-founder-review",
+  "date": "2026-10-20",
+  "status": "SEMANTIC_COPY_FINAL_CANDIDATE__FOUNDER_APPROVAL_REQUIRED__LOCAL_ONLY",
+  "locale": "zh-CN",
+  "interaction": {
+    "selectMaxDefault": 1,
+    "feelingSelectMax": 2,
+    "allowSkipEveryStep": true,
+    "freeTextOptionalEveryStep": true,
+    "freeTextMaxLength": 280,
+    "showContextOnlyIfPriorAnswerAndScreenIsSafe": true
+  },
+  "labels": {
+    "next": "继续 →",
+    "back": "← 返回上一题",
+    "skip": "暂时跳过",
+    "final": "整理我刚刚看见的 →",
+    "freeText": "也可以用自己的话补充（选填）",
+    "resultTitle": "此刻，我看见了什么",
+    "resultSubtitle": "这是一份根据你的选择与原话整理的觉察笔记，不是心理测评、诊断或咨询建议。",
+    "copyResult": "复制这份觉察笔记",
+    "restart": "重新开始",
+    "unsure": "说不清也没关系"
+  },
+  "bridges": {
+    "feeling": "刚才你说到一件放在心上的事。现在看看，它在你心里带来了什么。",
+    "body": "我们刚刚留意了感受。接下来可以看看身体有没有什么变化。",
+    "thought": "感受之外，有时脑海里也会出现一些念头。我们来留意一下。",
+    "impulse": "看见了可能出现的念头，我们再看看自己通常怎样回应。",
+    "protection": "刚刚看见了自己的回应方式。现在换个角度，看看什么对你很重要。",
+    "awareness": "最后，回头看看刚才的过程，有没有什么值得带走的发现。"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "key": "reality",
+      "eyebrow": "REALITY · 看见现实",
+      "title": "最近，有什么事情让你一直放在心上？",
+      "help": "也许是一件刚发生的事，也许是一种持续了一段时间的状态。我们可以先从这里开始。",
+      "selectMax": 1,
+      "choices": [
+        {
+          "id": "repeated_event",
+          "label": "一件让我反复想起的事"
+        },
+        {
+          "id": "relationship_change",
+          "label": "一段关系正在发生变化"
+        },
+        {
+          "id": "recurring_issue",
+          "label": "某种困扰一直重复出现"
+        },
+        {
+          "id": "unclear",
+          "label": "我说不清楚，但觉得有些不对劲"
+        }
+      ],
+      "freeTextLabel": "如果愿意，可以用一两句话说说。（选填）"
+    },
+    {
+      "step": 2,
+      "key": "feeling",
+      "eyebrow": "FEELING · 看见感受",
+      "title": "想到这件事时，你心里最明显的感受是什么？",
+      "help": "同一件事可能带来不止一种感受。先不急着解释，选最接近的就好。",
+      "selectMax": 2,
+      "choices": [
+        {
+          "id": "anxiety",
+          "label": "担心、紧张"
+        },
+        {
+          "id": "sadness",
+          "label": "难过、失落"
+        },
+        {
+          "id": "anger",
+          "label": "生气、委屈"
+        },
+        {
+          "id": "numbness",
+          "label": "疲惫、麻木"
+        },
+        {
+          "id": "calm",
+          "label": "平静，或松了一口气"
+        },
+        {
+          "id": "unclear",
+          "label": "现在还说不清"
+        }
+      ],
+      "freeTextLabel": "也可以用自己的话描述。（选填）"
+    },
+    {
+      "step": 3,
+      "key": "body",
+      "eyebrow": "BODY · 留意身体",
+      "title": "想到这件事时，你注意到身体有什么反应吗？",
+      "help": "有时会有明显感觉，有时不会。没有特别的感觉，也是一种真实的回答。",
+      "selectMax": 1,
+      "choices": [
+        {
+          "id": "chest",
+          "label": "胸口发紧，或呼吸变浅"
+        },
+        {
+          "id": "neck",
+          "label": "肩膀、脖子紧绷"
+        },
+        {
+          "id": "stomach",
+          "label": "胃部有些不舒服"
+        },
+        {
+          "id": "tired",
+          "label": "感到疲倦、没有力气"
+        },
+        {
+          "id": "none",
+          "label": "没有特别明显的感觉"
+        },
+        {
+          "id": "unknown",
+          "label": "不确定，或暂时不想观察"
+        }
+      ],
+      "freeTextLabel": "也可以用自己的话描述。（选填）"
+    },
+    {
+      "step": 4,
+      "key": "thought",
+      "eyebrow": "THOUGHT · 看见想法",
+      "title": "想到这件事时，脑海里最容易冒出哪句话？",
+      "help": "这只是你注意到的念头，不必急着判断它是不是事实。",
+      "selectMax": 1,
+      "choices": [
+        {
+          "id": "self_doubt",
+          "label": "是不是我哪里做错了？"
+        },
+        {
+          "id": "catastrophizing",
+          "label": "接下来会不会变得更糟？"
+        },
+        {
+          "id": "other_mind",
+          "label": "对方到底是怎么想的？"
+        },
+        {
+          "id": "urgency",
+          "label": "我得赶快把这件事解决"
+        },
+        {
+          "id": "need_info",
+          "label": "我想先弄明白发生了什么"
+        },
+        {
+          "id": "other",
+          "label": "还有别的想法"
+        }
+      ],
+      "freeTextLabel": "如果愿意，记下一句最常出现的念头。（选填）"
+    },
+    {
+      "step": 5,
+      "key": "impulse",
+      "eyebrow": "IMPULSE · 看见反应",
+      "title": "面对这样的情况，你通常会怎样回应？",
+      "help": "看看自己最常出现的反应就好。这里没有对错，也不代表你总是如此。",
+      "selectMax": 1,
+      "choices": [
+        {
+          "id": "fix",
+          "label": "马上联系相关的人，想把话说清楚"
+        },
+        {
+          "id": "ruminate",
+          "label": "一个人在心里反复想、反复分析"
+        },
+        {
+          "id": "avoid",
+          "label": "先避开这件事，不太想碰它"
+        },
+        {
+          "id": "pause",
+          "label": "先停一停，给自己一点时间"
+        },
+        {
+          "id": "support",
+          "label": "找信任的人聊聊，听听意见"
+        },
+        {
+          "id": "unsure",
+          "label": "暂时不知道该怎么回应"
+        }
+      ],
+      "freeTextLabel": "也可以用自己的话描述。（选填）"
+    },
+    {
+      "step": 6,
+      "key": "protection",
+      "eyebrow": "PROTECTION · 看见在意的东西",
+      "title": "面对这件事，你最希望守住的是什么？",
+      "help": "我们在意的东西，有时会影响回应方式。你不必找出什么隐藏的原因；选最接近的即可。",
+      "selectMax": 1,
+      "choices": [
+        {
+          "id": "relationship",
+          "label": "一段重要的关系"
+        },
+        {
+          "id": "respect",
+          "label": "被理解、被尊重"
+        },
+        {
+          "id": "safety",
+          "label": "安全感与确定感"
+        },
+        {
+          "id": "boundary",
+          "label": "自己的空间和边界"
+        },
+        {
+          "id": "responsibility",
+          "label": "把事情妥善处理"
+        },
+        {
+          "id": "unsure",
+          "label": "我还不确定"
+        }
+      ],
+      "freeTextLabel": "也可以用自己的话描述。（选填）"
+    },
+    {
+      "step": 7,
+      "key": "awareness",
+      "eyebrow": "AWARENESS · 看见新的可能",
+      "title": "回头看看，刚才有什么是你比之前更留意到的？",
+      "help": "哪怕只是看见一点点，或者仍然不清楚，都可以。",
+      "selectMax": 1,
+      "choices": [
+        {
+          "id": "feelings",
+          "label": "我更留意到自己的感受"
+        },
+        {
+          "id": "facts_vs_interpretation",
+          "label": "我开始区分发生的事和自己的想法"
+        },
+        {
+          "id": "response",
+          "label": "我注意到自己常见的回应方式"
+        },
+        {
+          "id": "values",
+          "label": "我更清楚自己重视什么"
+        },
+        {
+          "id": "confused",
+          "label": "我现在仍然有些混乱"
+        },
+        {
+          "id": "write_own",
+          "label": "我想用自己的话记录下来"
+        }
+      ],
+      "freeTextLabel": "如果愿意，写下你的发现，或仍不清楚的地方。（选填）"
+    }
+  ],
+  "reflectionLibrary": {
+    "relationship": {
+      "label": "一段重要的关系",
+      "questions": [
+        "在这段关系里，我最希望被看见或理解的是什么？",
+        "关于这段关系，我现在确定知道什么，又有什么还不清楚？"
+      ],
+      "actions": [
+        "如果愿意，把已经发生的互动和自己的猜测分开写一写。",
+        "写下一句话：这段关系对我重要，是因为……。不必立刻做什么。"
+      ]
+    },
+    "respect": {
+      "label": "被理解、被尊重",
+      "questions": [
+        "我希望别人怎样理解或尊重我的感受？",
+        "如果只说一件事，我最希望对方明白什么？"
+      ],
+      "actions": [
+        "试着写一句“我希望……”，写给自己看即可，不必发送。",
+        "回想一个具体片段，只记录发生了什么以及自己当时的感受。"
+      ]
+    },
+    "safety": {
+      "label": "安全感与确定感",
+      "questions": [
+        "我现在真正知道的是什么？又有哪些只是我对这件事的猜测？",
+        "在不确定之中，有哪一件事是我此刻可以确认的？"
+      ],
+      "actions": [
+        "画出两栏“已经知道／还不知道”，每栏写一件事。",
+        "如果愿意，挑一条可以核实的信息；不必现在做决定。"
+      ]
+    },
+    "boundary": {
+      "label": "自己的空间和边界",
+      "questions": [
+        "这件事里，什么属于我的选择，什么不属于？",
+        "有没有一条边界，是我希望再想清楚一点的？"
+      ],
+      "actions": [
+        "写下这样一句话：“这件事，我需要一点时间想想。”暂时不必告诉别人。",
+        "在纸上写一件目前可以由自己决定的小事。"
+      ]
+    },
+    "responsibility": {
+      "label": "把事情妥善处理",
+      "questions": [
+        "这件事里，哪些部分确实需要我负责？",
+        "如果不必一次解决全部，我愿意先处理哪一小部分？"
+      ],
+      "actions": [
+        "把事情分成“现在能做”和“暂时做不了”两栏，每栏写一件。",
+        "只写下一个最小的下一步；不要求自己今天完成。"
+      ]
+    },
+    "unsure": {
+      "label": "我还不确定",
+      "questions": [
+        "此刻有没有一个小地方，是我愿意慢慢弄清楚的？",
+        "即使还不确定，我有没有注意到一点点变化？"
+      ],
+      "actions": [
+        "如果愿意，写下“我现在还说不清”，再补一个当下的词；不想写也可以。",
+        "可以停一分钟，留意脚接触地面的感觉；不舒服就跳过。"
+      ]
+    },
+    "default": {
+      "label": "未回答第六题",
+      "questions": [
+        "这件事里，我最愿意先看清哪一小部分？",
+        "如果不急着得出结论，我想先留意什么？"
+      ],
+      "actions": [
+        "如果愿意，写一句此刻想到的话；不想写也完全可以。",
+        "把今天先留给自己一点时间，不必马上找到答案。"
+      ]
+    }
+  },
+  "selectionPolicy": {
+    "primary": "If protection choice matches a library key, use questions[0] + actions[0]; otherwise use default.",
+    "alternative": "Index 1 remains a reviewed alternative only; no random selection or LLM selection in v1.",
+    "fallbackWhenUncertain": "protection.unsure uses its own gentle library; no inference.",
+    "noChoices": "Do not pretend a personally meaningful theme has been found.",
+    "copyRules": "Personal lines come from user selected labels or the exact free text, not from inferred causes."
+  },
+  "safety": {
+    "route": "TO_BE_CONFIRMED_IN_CODE_REPOSITORY",
+    "checking": "every free-text field across all seven steps, while editing and before continue/result, and before any quote/display",
+    "triggerPolicy": "locally evaluated curated crisis-keyword rules; no free text sent to OpenAI or other text-processing third parties",
+    "onTrigger": "stop questionnaire, suppress previous-answer quote and result generation, clear sensitive client-only transient state as appropriate, route to reviewed safety page",
+    "disclaimer": "keyword screening is not a comprehensive safety assessment; crisis lexicon needs professional review and documented false-positive tests",
+    "shouldNotTriggerFromOption": "No option label or selection (including non-crisis uncertainty or overwhelm wording) should itself be the trigger"
+  },
+  "privacy": {
+    "resultAI": "NONE",
+    "freeTextToOpenAI": false,
+    "freeTextToAnalytics": false,
+    "freeTextInURL": false,
+    "freeTextToLogging": false,
+    "defaultPersistentStorage": false,
+    "policyUpdateOnlyAfterNetworkAudit": true
+  },
+  "repoSupplement": {
+    "note": "Labels the candidate file does not define but the page needs. Candidate labels always win. Pending Founder review with the rest of the copy.",
+    "labels": {
+      "progress": "第 {current} 步，共 7 步",
+      "multipleHelp": "最多选择两项",
+      "contextPrefix": "你刚才提到：",
+      "noAnswers": "你选择先停在这里。现在还说不清，也没有关系。"
+    },
+    "sources": {
+      "progress": "SeeSoul_Compass_Cursor_Execution_v1.0 compass_copy_zh_v2.json",
+      "multipleHelp": "SeeSoul_Compass_Cursor_Execution_v1.0 compass_copy_zh_v2.json",
+      "contextPrefix": "SeeSoul_Compass_Cursor_Execution_v1.0 compass_copy_zh_v2.json",
+      "noAnswers": "SEESOUL_COMPASS_COPY_SAFETY_RESULT_FINAL_REVIEW_v1.1.md section E"
+    }
+  }
+}

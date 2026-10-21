@@ -3,132 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>此刻的你 · SeeSoul Compass™ · SEESOUL 熙愈心空间</title>
+    <title>此刻觉察笔记 · SeeSoul Compass™ · SEESOUL 熙愈心空间</title>
+    <meta name="robots" content="noindex" />
     <link rel="stylesheet" href="./theme.css" />
+    <link rel="stylesheet" href="./compass-v2.css" />
   </head>
   <body data-page-id="compass-result">
-    <header class="site-header">
-      <div class="site-header__inner">
-        <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
-        <a class="btn btn--gold" href="counselling.html#booking" style="margin-left:auto">预约咨询</a>
-      </div>
-    </header>
+    <a class="skip-link" href="#main-content">跳转到主要内容</a>
 
-    <main id="main-content" tabindex="-1">
-      <div class="result-head">
-        <div class="result-head__inner">
-          <span class="eyebrow" style="color:var(--color-gold-soft)">SeeSoul Compass™</span>
-          <h1>此刻的你</h1>
-          <p>这不是「测试结果」，也不是关于「你是什么样的人」的结论。<br />只是把你刚才说过的东西放在一起，陪你多看一眼。</p>
+    <div class="compass-shell">
+      <div class="compass-top">
+        <div class="compass-top__inner">
+          <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+          <a class="compass-back ssc-exit" href="index.html">← 返回首页</a>
         </div>
       </div>
 
-      <div class="result-body" id="resultBody">
-        <!-- 动态内容由脚本按你的选择生成 -->
-        <section class="result-section"><p style="color:var(--color-muted);padding:2rem 0;text-align:center">正在整理你的回答……</p></section>
-      </div>
-    </main>
-
-    <footer class="site-footer">
-      <div class="site-footer__inner">
-        <div>
-          <div class="brand brand--logo"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></div>
-          <p class="footer-tagline"><small>Seeing Before Being™</small></p>
-        </div>
-        <div style="display:grid;gap:0.5rem">
-          <a href="index.html">返回首页</a>
-          <a href="counselling.html">预约咨询</a>
-          <a href="explore.html">自我探索</a>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      (function () {
-        var bodyEl = document.getElementById("resultBody");
-        var a = {};
-        try { a = JSON.parse(localStorage.getItem("seesoul_compass_answers") || "{}") || {}; } catch (e) {}
-        function notesText(store) {
-          var notes = store.notes && typeof store.notes === "object" ? store.notes : {};
-          var parts = ["1", "2", "3", "4", "5", "6", "7"].map(function (k) { return String(notes[k] || "").trim(); }).filter(Boolean);
-          if (parts.length) return parts.join("\n");
-          return String(store.free_text || "").trim();
-        }
-        var hasAny = a["1"] || a["2"] || a["3"] || a["4"] || a["5"] || a["6"] || a["7"] || notesText(a);
-
-        function esc(s) {
-          var d = document.createElement("div");
-          d.textContent = s || "";
-          return d.innerHTML;
-        }
-
-        function emptyState() {
-          bodyEl.innerHTML = '<section class="result-section"><span class="k">还没有留下回答</span><h3>好像还没走完这几个问题</h3><p style="margin-top:0.6rem">你可以先回去做完 SeeSoul Compass，再回来看这份「此刻的你」。</p><div class="next-options" style="margin-top:1.4rem"><a class="next-option" href="compass-start.html"><div><strong>去做 SeeSoul Compass →</strong></div><span class="g">→</span></a></div></section>';
-        }
-
-        function nextStep(payload) {
-          if (payload.safety === "CRITICAL") {
-            return '<a class="next-option" href="lt-safety.html"><div><strong>查看其他地区支持 →</strong></div></a>';
-          }
-          if (payload.router === "COUNSELLING_INFORMATION") {
-            return '<a class="next-option" href="counselling.html"><div><strong>想找个人一起谈谈</strong><div style="color:var(--color-muted);font-size:0.9rem;margin-top:0.2rem">可以从一次咨询了解怎么开始。</div></div><span class="g">→</span></a>';
-          }
-          if (payload.router === "LIFE_THEME_INFORMATION") {
-            return '<a class="next-option" href="life-theme.html"><div><strong>想看看反复出现的主题</strong><div style="color:var(--color-muted);font-size:0.9rem;margin-top:0.2rem">这是一种整理，不是结论。</div></div><span class="g">→</span></a>';
-          }
-          return '<a class="next-option" href="explore.html"><div><strong>继续阅读与探索</strong></div><span class="g">→</span></a>';
-        }
-
-        function render(payload) {
-          var html = "";
-          html += '<section class="result-section" data-anchor-id="compass-result.result-see-now"><span class="k">01 · 你正在面对</span><p style="white-space:pre-line">' + esc(payload.mirror) + "</p></section>";
-          if (payload.bounded_reflection) {
-            html += '<section class="result-section"><span class="k">02 · 也许值得再看看</span><p>' + esc(payload.bounded_reflection) + "</p></section>";
-          }
-          if (payload.discovery_question) {
-            html += '<section class="result-section"><span class="k">03 · 留给自己的一个问题</span><div class="result-question">' + esc(payload.discovery_question) + "</div></section>";
-          }
-          if (payload.small_movement) {
-            html += '<section class="result-section action-card"><span class="k">04 · 今天可以试试</span><p>' + esc(payload.small_movement) + "</p></section>";
-          }
-          html += '<section class="result-section" style="border-bottom:0"><span class="k">现在可以怎样开始</span><h3 style="margin-bottom:1.2rem">不用马上做决定。</h3><div class="next-options">' + nextStep(payload) + "</div></section>";
-          bodyEl.innerHTML = html;
-        }
-
-        if (!hasAny) {
-          emptyState();
-          return;
-        }
-
-        var answers = {};
-        ["1", "2", "3", "4", "5", "6", "7"].forEach(function (k) { if (a[k]) answers[k] = a[k]; });
-
-        function failState() {
-          bodyEl.innerHTML = '<section class="result-section"><span class="k">还没能整理出来</span><h3>这一次没有生成反思</h3><p style="margin-top:0.6rem">你可以回到问卷再走一次。你的选择还留在这台设备上。</p><div class="next-options" style="margin-top:1.4rem"><a class="next-option" href="compass-question.html"><div><strong>返回问卷 →</strong></div><span class="g">→</span></a></div></section>';
-        }
-
-        function showClarify() {
-          bodyEl.innerHTML = '<section class="result-section"><span class="k">先确认安全</span><h3>我想先确认一下你的安全。</h3><p style="margin-top:0.8rem">此刻，你有没有正在考虑伤害自己，或者觉得自己可能无法保证自己的安全？</p><div class="next-options" style="margin-top:1.4rem"><button class="next-option" type="button" id="safetyYes"><div><strong>是，我现在需要立即的帮助</strong></div></button><button class="next-option" type="button" id="safetyNo"><div><strong>没有，我现在是安全的</strong></div></button></div></section>';
-          document.getElementById("safetyYes").addEventListener("click", function () { ask("needs_help"); });
-          document.getElementById("safetyNo").addEventListener("click", function () { ask("safe_now"); });
-        }
-
-        function ask(safetyConfirmation) {
-          var body = { answers: answers, free_text: notesText(a), notes: (a.notes && typeof a.notes === "object") ? a.notes : {} };
-          if (safetyConfirmation) body.safety_confirmation = safetyConfirmation;
-          fetch("/api/compass", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
-          }).then(function (res) { return res.json(); }).then(function (payload) {
-            if (!payload || !payload.ok) { emptyState(); return; }
-            if (payload.safety === "CLARIFY") { showClarify(); return; }
-            render(payload);
-          }).catch(failState);
-        }
-
-        ask(null);
-      })();
-    </script>
+      <main id="main-content" tabindex="-1">
+        <section class="compass-question ssc-question">
+          <div class="compass-question__inner ssc-inner">
+            <p class="ssc-eyebrow">SEESOUL COMPASS™ · 此刻觉察笔记</p>
+            <h1 class="compass-q-title ssc-title">觉察笔记不会被保存</h1>
+            <p class="ssc-help">觉察笔记只会出现在你回答完七个问题的那一页上。它不会被保存，也不会发送给本网站，所以这个地址不能显示之前的内容。</p>
+            <p class="ssc-help">如果你想留下它，请在笔记出现时点「复制这份觉察笔记」。</p>
+            <a class="btn btn--gold" href="compass-start.html">开始一次 SeeSoul Compass →</a>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="compass-v2.js" defer></script>
   </body>
 </html>

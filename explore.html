@@ -11,7 +11,7 @@
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
-        <button class="nav-toggle" id="navToggle" aria-controls="siteNav" aria-expanded="false">☰</button>
+        <button class="nav-toggle" id="navToggle" type="button" aria-controls="siteNav" aria-expanded="false" aria-label="打开导航菜单"><span class="nav-toggle__bars" aria-hidden="true"></span></button>
         <nav class="site-nav" id="siteNav">
           <a href="index.html">首页</a>
           <a href="counselling.html">心理咨询</a>
@@ -115,8 +115,6 @@
     </footer>
 
     <script>
-      var t = document.getElementById("navToggle");
-      if (t) t.addEventListener("click", function () { var n = document.getElementById("siteNav"); var o = n.classList.toggle("site-nav--open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
 
       (function () {
         var chips = document.querySelectorAll("[data-filter]");
@@ -144,5 +142,6 @@
         });
       })();
     </script>
+    <script src="nav.js" defer></script>
   </body>
 </html>
