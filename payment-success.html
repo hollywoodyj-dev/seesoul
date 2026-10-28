@@ -53,7 +53,12 @@
             <div class="consent-section" data-pay-state="paid" hidden>
               <h3>付款已经收到</h3>
               <p>Stripe 已确认这笔 AUD $150 一次性付款，对应 SeeSoul — 60-Minute Counselling Session。</p>
+              <p><strong>付款成功，但咨询时间尚未确认。</strong></p>
               <p>请保留 Stripe 发给你的收据邮件。</p>
+              <div class="consent-note" style="margin-top:1rem">
+                <strong>下一步：</strong>请发送预约邮件，告诉我们你希望安排的咨询时间。收到 SeeSoul 的正式回复后，预约才算确认。
+              </div>
+              <p style="margin-top:1.1rem"><a class="btn btn--gold" href="booking.html#booking-email">前往发送预约邮件</a></p>
             </div>
             <div class="consent-section" data-pay-state="pending" hidden>
               <h3>付款还没有确认</h3>
@@ -63,7 +68,7 @@
               <h3>付款、预约与签署是分开的</h3>
               <p>付款成功不代表预约时间已经确认，也不代表已经完成知情同意书签署。60 分钟咨询还没有被预约，时间没有被占住。</p>
               <p>请到预约页选择你希望的日期和时间，并自己发出预约邮件。邮件发出之前，请求还没有送到。发出之后，要等回复，才是一次确认的咨询。</p>
-              <p><a class="btn btn--gold" href="counselling.html#booking">去写预约邮件 →</a></p>
+              <p><a class="btn btn--gold" href="booking.html#booking-email">前往发送预约邮件</a></p>
             </div>
             <div class="consent-note">如果不确定付款是否成功，请先联系我们核对，避免重复付款。</div>
           </div>
@@ -86,7 +91,7 @@
       (function () {
         var hero = {
           unverified: ["Payment status", "付款之后，<br />接下来怎么做", "打开这一页，并不代表 SeeSoul 已经确认收到付款。"],
-          paid: ["Payment received", "已收到<br />AUD $150", "这笔付款对应 SeeSoul — 60-Minute Counselling Session，一次性。咨询时间还没有排上。"],
+          paid: ["Payment received", "已收到<br />AUD $150", "付款成功，但咨询时间尚未确认。"],
           pending: ["Payment pending", "付款还没有确认", "Stripe 还没有确认收到这笔付款。"],
           checking: ["Checking payment", "正在核对付款", "正在向 Stripe 核对付款状态。"]
         };

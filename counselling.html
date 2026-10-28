@@ -33,7 +33,7 @@
           <p>可能是一段让你疲惫的关系，一种反复出现的情绪，或一个迟迟做不下去的决定。你不一定需要等到问题很严重，才来找人谈谈。也不用事先想清楚自己到底怎么了。</p>
           <p><strong>我们可以从最近最困扰你的那件事开始。</strong></p>
           <div class="hero__actions">
-            <a class="btn btn--gold" href="#booking">看看怎样预约</a>
+            <a class="btn btn--gold" href="booking.html">查看预约与付款方式</a>
           </div>
         </div>
       </section>
@@ -105,7 +105,15 @@
             <h3 style="font-size:1.2rem;margin:0 0 0.4rem">一对一心理咨询</h3>
             <p style="margin:0;font-family:var(--font-display);font-size:1.35rem">60 分钟 · AUD $150</p>
             <p style="margin-top:0.8rem;color:var(--color-muted);line-height:1.8">可选择 Online Counselling（线上视频咨询），或 Face-to-Face Counselling（悉尼面对面咨询）。两种形式使用同一份知情同意书。线下地址在预约确认时提供。</p>
-            <p style="margin-top:0.8rem;color:var(--color-muted);line-height:1.8">提前至少 24 小时可免费取消或改期。不足 24 小时取消或未出席，收取 AUD $75。<a class="text-link" href="cancellation-policy.html">取消、改期及退款政策</a></p>
+            <div class="policy-summary" data-policy-summary="cancellation-v1.1" style="margin-top:0.8rem;color:var(--color-muted);line-height:1.8">
+              <p style="margin:0 0 0.5rem"><strong>取消与改期说明</strong></p>
+              <p style="margin:0 0 0.5rem">如需取消或改期，请至少在已确认的咨询开始前 24 小时通知 SeeSoul。提前至少 24 小时取消或改期，不收取取消或改期费用。</p>
+              <p style="margin:0 0 0.5rem">不足 24 小时取消，或在整个已确认的咨询时段内均未出席且未提前取消，原则上拟收取 AUD $75（标准咨询费用的 50%）。是否适用，须以事先清楚告知并经客户接受的有效条款、具体情况及适用法律为准。</p>
+              <p style="margin:0 0 0.5rem">迟到不自动构成未出席，同一次预约不会同时收取迟取消费用和未出席费用。遇有突发情况或技术问题，可联系 SeeSoul 讨论适当安排。</p>
+              <p style="margin:0 0 0.5rem">目前取消、改期及退款政策 v1.1 尚待法律及专业审核，尚未正式生效。以上为拟定规则，不构成现阶段收取 AUD $75 的依据。</p>
+              <p style="margin:0 0 0.5rem;font-size:0.9em">该摘要并非独立的合同承诺，不取代完整政策及对既有预约已接受条款的核查。</p>
+              <p style="margin:0"><a class="text-link" href="cancellation-policy.html">取消、改期及退款政策</a></p>
+            </div>
           </div>
         </div>
       </section>
@@ -127,65 +135,17 @@
         </div>
       </section>
 
-      <!-- Booking -->
+      <!-- Booking CTA — payment and email booking live on booking.html only -->
       <section class="section section--ivory" id="booking">
-        <div class="container">
+        <div class="container" style="max-width:40rem">
           <header class="section-header">
             <span class="eyebrow">Booking</span>
             <h2>预约咨询</h2>
             <p class="sub">如果你准备好了，可以从一次 60 分钟的咨询开始。AUD $150 · Online 线上视频 / Face-to-Face 悉尼面对面。</p>
-            <p class="sub">你选一个希望的日期和时间，留下联系方式。点下去之后，邮件软件会打开一封写好的请求。需要由你把这封邮件发出去，容熙才能看到。日历里的时间不是已经空出来的档期，也没有被占住。邮件发出之前，这次请求还没有送出。发出之后，也要等回复，才是一次确认的咨询。没有付款。</p>
           </header>
-
-          <div class="booking-panel" data-booking="counselling">
-            <div class="booking-meta">
-              <strong>一对一咨询</strong>
-              <span class="price">60 分钟 · AUD $150</span>
-            </div>
-
-            <fieldset class="field-group">
-              <legend class="field-label">选择咨询方式</legend>
-              <div class="choice-group">
-                <label class="choice"><input type="radio" name="bmode" value="online" checked><span>Online · 线上视频</span></label>
-                <label class="choice"><input type="radio" name="bmode" value="offline"><span>Face-to-Face · 悉尼面对面</span></label>
-              </div>
-            </fieldset>
-
-            <fieldset class="field-group">
-              <legend class="field-label">选择日期</legend>
-              <div class="calendar">
-                <div class="cal-head">
-                  <button class="cal-nav" type="button" aria-label="上个月">‹</button>
-                  <span class="cal-title">2026 年 9 月</span>
-                  <button class="cal-nav" type="button" aria-label="下个月">›</button>
-                </div>
-                <div class="cal-grid" id="calGrid"></div>
-              </div>
-            </fieldset>
-
-            <fieldset class="field-group">
-              <legend class="field-label">选择时间</legend>
-              <div class="slots" id="slotGrid"></div>
-            </fieldset>
-
-            <div class="book-form">
-              <div class="two-col">
-                <label class="field"><span>姓名</span><input type="text" name="bname" placeholder="怎么称呼你"></label>
-                <label class="field"><span>Email</span><input type="email" name="bemail" placeholder="用来回复这次请求的邮箱" autocomplete="email"></label>
-              </div>
-              <label class="field"><span>联系方式</span><input type="text" name="bcontact" placeholder="电话或其他便于联系你的方式（选填）"></label>
-              <label class="field"><span>有什么是你希望我在见面前知道的吗？（选填）</span><textarea name="bnote" placeholder="不需要写得很完整，一两句话就可以。也可以留空，见面以后再谈。"></textarea></label>
-            </div>
-
-            <p class="book-loc" id="locNote" hidden>线下地点不会显示在这个页面上。地点会在回复里说明。</p>
-
-            <div class="book-actions">
-              <button class="btn btn--gold btn--full" type="button" id="bookSubmit">写好预约邮件</button>
-              <p class="book-status" id="bookStatus" role="status"></p>
-            </div>
-            <p class="book-note">点这个按钮不会把请求直接送到容熙。它只是打开一封写好的邮件。你发出去之后，时间仍然没有被占住，也还没有付款。</p>
-            <p class="book-note" style="margin-top:1.2rem">还不知道自己想谈什么？可以先做一次 SeeSoul Compass™。<a class="text-link" href="compass-start.html">先做 SeeSoul Compass →</a></p>
-          </div>
+          <p style="margin:0 0 0.9rem;line-height:1.85;color:var(--color-muted)">预约与付款在预约页完成：先支付咨询费用，再发送预约邮件，然后等待 SeeSoul 确认。付款成功不代表预约时间已经确认；发出邮件也不等于预约已成立。</p>
+          <p style="margin:0 0 1.2rem"><a class="btn btn--gold" href="booking.html">查看预约与付款方式</a></p>
+          <p class="book-note" style="text-align:left;margin:0">还不知道自己想谈什么？可以先做一次 SeeSoul Compass™。<a class="text-link" href="compass-start.html">先做 SeeSoul Compass →</a></p>
         </div>
       </section>
 
@@ -216,10 +176,8 @@
       </div>
     </footer>
 
-    <script src="booking.js"></script>
     <script>
       document.querySelectorAll(".faq__q").forEach(function (b) { b.addEventListener("click", function () { var it = b.closest(".faq__item"); var o = it.getAttribute("data-open") === "true"; it.setAttribute("data-open", o ? "false" : "true"); b.setAttribute("aria-expanded", o ? "false" : "true"); }); });
-
     </script>
     <script src="nav.js" defer></script>
   </body>

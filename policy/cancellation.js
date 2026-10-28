@@ -36,6 +36,33 @@ function sydneyLabel(instant) {
   return p.year + " 年 " + p.month + " 月 " + p.day + " 日 " + p.weekday + " " + p.hour + ":" + p.minute + " " + sydneyZone(d) + "（悉尼时间）";
 }
 
+function sydneyParts(instant) {
+  const p = {};
+  new Intl.DateTimeFormat("zh-CN", {
+    timeZone: TZ, year: "numeric", month: "numeric", day: "numeric", weekday: "long",
+    hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+  }).formatToParts(toInstant(instant)).forEach((x) => { p[x.type] = x.value; });
+  return {
+    date: p.year + " 年 " + p.month + " 月 " + p.day + " 日 " + p.weekday,
+    time: p.hour + ":" + p.minute,
+    zone: sydneyZone(instant),
+  };
+}
+
+// Fills only the time placeholders of policy/confirmation-email-draft.md; every status field stays manual.
+function emailTimeFields(start) {
+  const booking = sydneyParts(start);
+  const cutoff = sydneyParts(freeDeadline(start));
+  return {
+    booking_date: booking.date,
+    booking_time: booking.time,
+    timezone_abbr: booking.zone,
+    cutoff_date: cutoff.date,
+    cutoff_time: cutoff.time,
+    cutoff_timezone_abbr: cutoff.zone,
+  };
+}
+
 /*
  * request: {
  *   service: "counselling" | "life-theme",
@@ -100,4 +127,4 @@ function assess(request) {
   };
 }
 
-module.exports = { FEE, LATE_FEE, TZ, freeDeadline, sydneyZone, sydneyLabel, assess };
+module.exports = { FEE, LATE_FEE, TZ, freeDeadline, sydneyZone, sydneyLabel, emailTimeFields, assess };

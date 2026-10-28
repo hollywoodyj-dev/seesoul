@@ -99,8 +99,17 @@ test('page never claims receipt outside the verified branch', () => {
 test('page keeps appointment and consent separate in every state', () => {
   assert.ok(page.includes('付款成功不代表预约时间已经确认，也不代表已经完成知情同意书签署'));
   assert.ok(page.includes('避免重复付款'));
+  assert.ok(page.includes('付款成功，但咨询时间尚未确认'));
+  assert.ok(page.includes('booking.html#booking-email'));
+  assert.ok(page.includes('前往发送预约邮件'));
 });
 test('page has no 1320 reference and no secret', () => {
   assert.ok(!page.includes('1320'));
   assert.ok(!/(sk|rk)_(live|test)_/.test(page));
+});
+test('page does not treat session_id alone as paid', () => {
+  assert.ok(page.includes('/api/seesoul-payment-status?session_id='));
+  assert.ok(/data-pay-state="paid"[^>]*\bhidden\b/.test(page) || /data-pay-state="paid" hidden/.test(page));
+  const visible = page.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<div[^>]*data-pay-state="paid"[^>]*>[\s\S]*?<\/div>/, '');
+  assert.ok(!visible.includes('已收到 AUD $150'));
 });

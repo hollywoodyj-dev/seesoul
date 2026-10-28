@@ -96,14 +96,15 @@ check("question-only-keeps-mirror", replaced.get("mirror") == "你停在这里�
 
 root = __import__("pathlib").Path(__file__).resolve().parents[1]
 pages = {
-    "counselling.html": ["写好预约邮件", "要等回复，才是一次确认的咨询", "时间仍然没有被占住", "阅读知情同意与保密说明", "cancellation-policy.html"],
-    "payment-success.html": ["并不代表 SeeSoul 已经确认收到付款", "根据实际支付记录核对付款状态", "不代表预约时间已经确认", "知情同意书签署", "避免重复付款", "counselling.html#booking", "noindex"],
+    "counselling.html": ["查看预约与付款方式", "booking.html", "付款成功不代表预约时间已经确认", "阅读知情同意与保密说明", "cancellation-policy.html", 'data-policy-summary="cancellation-v1.1"'],
+    "payment-success.html": ["并不代表 SeeSoul 已经确认收到付款", "根据实际支付记录核对付款状态", "不代表预约时间已经确认", "知情同意书签署", "避免重复付款", "booking.html#booking-email", "前往发送预约邮件", "付款成功，但咨询时间尚未确认", "noindex"],
     "life-theme.html": ["提交预约请求", "这还不是一次已经确认的预约"],
-    "consent.html": ["这一页只是说明，不是已经完成的签署", "CONSENT-DRAFT-2026-10-13", "000", "13 11 14", "consent-counselling.html", "consent-sign.html"],
-    "consent-counselling.html": ["Draft v1.0", "Online Counselling", "Face-to-Face Counselling", "AUD $150", "待确认", "000", "13 11 14", "迟到本身不构成未出席", "不因迟到而自动延长", "整个预约时段内始终没有参加咨询"],
+    "consent.html": ["这一页只是说明，不是已经完成的签署", "CONSENT-DRAFT-2026-10-13", "000", "13 11 14", "consent-counselling.html", "consent-sign.html", 'data-policy-summary="cancellation-v1.1"'],
+    "consent-counselling.html": ["Draft v1.0", "Online Counselling", "Face-to-Face Counselling", "AUD $150", "待确认", "000", "13 11 14", 'data-policy-summary="cancellation-v1.1"', "迟到不自动构成未出席", "不构成现阶段收取 AUD $75 的依据", "cancellation-policy.html"],
     "consent-sign.html": ["尚未启用", "consent-counselling.html", "付款状态分开", "cancellation-policy.html"],
-    "cancellation-policy.html": ["24 小时", "AUD $75", "全额退款", "澳大利亚消费者法", "生命课题解读（AUD $100 / 50 分钟）不适用本政策", "还没有生效"],
-    "booking.html": ["cancellation-policy.html", "AUD $75", "生命课题解读不适用", "仍可使用原定时段内的剩余时间", "整个预约时段结束后仍未参加"],    "lt-intake.html": ["不是命运预测，也不是心理测评", "LT-12", "lt-safety.html", "life-theme.html#booking", "网站不会替你发送"],
+    "cancellation-policy.html": ["版本：v1.1｜文案定稿 · 待法律及专业审核", "状态：尚未正式生效", "24 小时前", "AUD $75", "全额退款", "Australian Consumer Law（澳大利亚消费者法）", "生命课题解读服务（AUD $100／50 分钟）不适用本政策", "同一次预约不会同时收取迟取消费用和未出席费用", "Australia/Sydney", "实际经过的 24 小时", "恰好在截止时间收到的通知，仍属于免费取消或改期范围", "不因网站后续更新而自动追溯适用新版本", "尚未作为正式收费条款生效"],
+    "booking.html": ["cancellation-policy.html", 'data-policy-summary="cancellation-v1.1"', "原则上拟收取 AUD $75", "生命课题解读不适用", "迟到不自动构成未出席", "尚未正式生效", "支付咨询费用 AUD $150", "https://buy.stripe.com/cNi7sK59I7VtbKncMo8og00", "发送预约邮件", "booking-email", "付款成功不代表预约时间已经确认", "只有收到 SeeSoul 的正式预约确认回复，预约才算成立", "知情同意书会独立处理"],
+    "lt-intake.html": ["不是命运预测，也不是心理测评", "LT-12", "lt-safety.html", "life-theme.html#booking", "网站不会替你发送"],
     "compass-privacy.html": ["不会发送给本网站，也不会发送给 OpenAI", "不会保存在这台浏览器里", "不使用 AI 生成结果", "所填内容不会发送给 OpenAI 用于生成觉察笔记", "本页只说明 Compass", "不能识别所有风险", "compass-safety.html", "旧记录会被清除", "不是心理测试或诊断", "000", "13 11 14", "COMPASS-PRIVACY-2026-10-20-DRAFT"],
     "compass-start.html": ["不是心理测试或诊断", "compass-privacy.html", "开始整理自己", "不会发送给本网站或任何 AI", "000", "13 11 14", "compass-v2.js"],
     "lt-safety.html": ["如果你在澳大利亚", "如果你在中国大陆", "如果你在其他地区", "13 11 14", "12356"],
@@ -126,12 +127,27 @@ for name in ("counselling.html", "life-theme.html", "consent.html", "consent-cou
     hit = [n for n in banned if n in text]
     check("banned-" + name, not hit, ",".join(hit))
 
+AUTHORIZED_PAY_LINK = "https://buy.stripe.com/cNi7sK59I7VtbKncMo8og00"
 pay_patterns = [r"buy\.stripe\.com", r"checkout\.stripe\.com", r"paypal\.me", r"paypal\.com/", r"(?i)westpac", r"\bBSB\b", r"(?i)hotmail\.com", r"\b04\d{2}\s?\d{3}\s?\d{3}\b", r"\b\d{3}-\d{3}\b.*\b\d{6}\b", r"[sp]k_(live|test)_"]
 pay_hits = []
 for f in list(root.glob("*.html")) + list(root.glob("*.js")):
     text = f.read_text(encoding="utf-8", errors="ignore")
-    pay_hits += [f.name + ":" + p for p in pay_patterns if re.search(p, text)]
+    for p in pay_patterns:
+        if not re.search(p, text):
+            continue
+        if p == r"buy\.stripe\.com" and f.name == "booking.html" and AUTHORIZED_PAY_LINK in text and text.count("buy.stripe.com") == 1 and "test_" not in text:
+            continue
+        pay_hits.append(f.name + ":" + p)
 check("no-unverified-payment-details-public", not pay_hits, ",".join(pay_hits))
+booking_html = (root / "booking.html").read_text(encoding="utf-8")
+check("booking-single-authorized-live-pay-link",
+      booking_html.count(AUTHORIZED_PAY_LINK) == 1
+      and 'id="seesoulPayLink"' in booking_html
+      and "buy.stripe.com/test" not in booking_html
+      and "cs_test_" not in booking_html)
+check("counselling-no-second-payment-flow",
+      "buy.stripe.com" not in (root / "counselling.html").read_text(encoding="utf-8")
+      and "查看预约与付款方式" in (root / "counselling.html").read_text(encoding="utf-8"))
 
 nav_bad = []
 for f in root.glob("*.html"):
