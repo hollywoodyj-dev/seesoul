@@ -169,6 +169,12 @@ check("insights-no-fake-doi", "doi.org" not in insights_sample.lower() and "10.1
 check("insights-nav-on-home", 'href="insights/"' in (root / "index.html").read_text(encoding="utf-8") and "心理智库" in (root / "index.html").read_text(encoding="utf-8"))
 check("insights-explore-urls-unchanged", (root / "article-loneliness.html").exists() and 'href="article-loneliness.html"' in (root / "explore.html").read_text(encoding="utf-8"))
 
+daily_index = (root / "daily" / "index.html").read_text(encoding="utf-8")
+check("daily-hub-exists", "心理学日签" in daily_index and "emotional-avoidance" in (root / "daily" / "emotional-avoidance.html").read_text(encoding="utf-8"))
+check("daily-draft-future-not-public", not (root / "daily" / "draft-must-not-publish.html").exists() and not (root / "daily" / "future-must-not-publish.html").exists())
+check("daily-nav-on-home", 'href="daily/"' in (root / "index.html").read_text(encoding="utf-8"))
+check("daily-no-save-button", 'id="dailySave"' not in daily_index)
+
 nav_bad = []
 for f in root.glob("*.html"):
     text = f.read_text(encoding="utf-8")

@@ -27,6 +27,7 @@ NAV = """          <a href="{p}index.html">首页</a>
           <a href="{p}compass-start.html">SeeSoul Compass</a>
           <a href="{p}explore.html">自我探索</a>
           <a href="{here}" {cur}>心理智库</a>
+          <a href="{p}daily/">心理学日签</a>
           <a href="{p}philosophy.html">Our Philosophy</a>
           <a href="{p}founder.html">认识容熙</a>
           <a class="btn btn--gold" href="{p}booking.html">预约咨询</a>"""
@@ -124,9 +125,12 @@ def _scalar(val: str):
 def load_articles() -> list[dict]:
     articles = []
     for path in sorted(CONTENT.glob("*.md")):
-        if path.name.upper() == "SCHEMA.MD":
+        if path.name.upper() in ("SCHEMA.MD", "CMS_UPGRADE.MD", "SCHEDULE.MD"):
             continue
-        meta, body = parse_frontmatter(path.read_text(encoding="utf-8"))
+        text = path.read_text(encoding="utf-8")
+        if not text.startswith("---"):
+            continue
+        meta, body = parse_frontmatter(text)
         missing = [k for k in REQUIRED if k not in meta or meta[k] in ("", None)]
         if missing:
             raise ValueError(f"{path.name} missing {missing}")
@@ -235,7 +239,7 @@ def shell(title, description, canonical, extra_head, main, current="insights"):
     <footer class="site-footer">
       <div class="site-footer__inner">
         <div><div class="brand" style="color:var(--color-gold-soft)">SEESOUL<small>熙愈心空间</small></div><p class="footer-tagline"><small>Seeing Before Being™</small></p></div>
-        <div style="display:grid;gap:0.5rem"><a href="../index.html">首页</a><a href="../counselling.html">心理咨询</a><a href="../explore.html">自我探索</a><a href="./">心理智库</a></div>
+        <div style="display:grid;gap:0.5rem"><a href="../index.html">首页</a><a href="../counselling.html">心理咨询</a><a href="../explore.html">自我探索</a><a href="./">心理智库</a><a href="../daily/">心理学日签</a></div>
         <div style="display:grid;gap:0.5rem"><a href="../compass-start.html">SeeSoul Compass</a><a href="../booking.html">预约咨询</a><a href="../index.html#trust">隐私 · 专业边界 · 免责声明</a></div>
       </div>
     </footer>

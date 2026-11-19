@@ -1,0 +1,16 @@
+{
+  "id": "daily-draft-test",
+  "slug": "draft-must-not-publish",
+  "title_zh": "草稿测试（不得公开）",
+  "term_en": "Draft",
+  "published_at": "2026-01-01",
+  "status": "draft",
+  "category": "测试",
+  "one_liner": "若你在网站上看到这张卡，说明草稿过滤失败。",
+  "manifestations": ["测试"],
+  "mechanism": "测试",
+  "suggestion": "测试",
+  "reflection": "测试",
+  "image": null,
+  "related_insight_slug": null
+}

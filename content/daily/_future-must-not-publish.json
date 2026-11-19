@@ -1,0 +1,16 @@
+{
+  "id": "daily-future-test",
+  "slug": "future-must-not-publish",
+  "title_zh": "未来日期测试（不得公开）",
+  "term_en": "Scheduled",
+  "published_at": "2029-01-01",
+  "status": "published",
+  "category": "测试",
+  "one_liner": "若你在网站上看到这张卡，说明未来日期在构建时没有被挡住。",
+  "manifestations": ["测试"],
+  "mechanism": "测试",
+  "suggestion": "测试",
+  "reflection": "测试",
+  "image": null,
+  "related_insight_slug": null
+}

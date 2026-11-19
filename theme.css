@@ -1120,3 +1120,28 @@ html[lang="en"] .page-hero h1 { line-height: 1.22; letter-spacing: -0.01em; }
 .insights-disclaimer { margin-top: 2rem; color: var(--color-muted); font-size: 0.95rem; }
 .insights-refs { margin-top: 0.8rem; }
 .insights-article { padding-bottom: 3rem; }
+
+/* 心理学日签：仅卡片白底黑字，站点壳层不变 */
+.daily-page { padding-block: 2.4rem 3rem; }
+.daily-lead { max-width: 36rem; margin: 0.6rem 0 1.6rem; color: var(--color-muted); }
+.daily-card {
+  max-width: 28rem;
+  margin: 0 auto 2.4rem;
+  padding: 1.6rem 1.5rem 1.4rem;
+  background: #fff;
+  color: #111;
+  border: 1px solid #d8d8d8;
+}
+.daily-card h1,
+.daily-card h2 { font-family: var(--font-body); color: #111; letter-spacing: 0; }
+.daily-card__kicker { margin: 0; font-size: 0.78rem; letter-spacing: 0.08em; color: #666; }
+.daily-card__title { font-size: clamp(1.6rem, 5vw, 2.1rem); line-height: 1.25; margin: 0.7rem 0 0.25rem; font-weight: 700; }
+.daily-card__term { margin: 0 0 1rem; color: #555; font-size: 0.95rem; }
+.daily-card__line { margin: 0 0 1.2rem; font-size: 1.05rem; line-height: 1.75; }
+.daily-card section { margin-top: 1.15rem; padding-top: 1rem; border-top: 1px solid #ececec; }
+.daily-card h2 { font-size: 0.92rem; font-weight: 700; margin: 0 0 0.45rem; }
+.daily-card p, .daily-card li { line-height: 1.75; font-size: 0.98rem; }
+.daily-card ul { margin: 0; padding-left: 1.15rem; }
+.daily-card__note, .daily-web-note { font-size: 0.86rem; color: #666; margin-top: 1.1rem; }
+.daily-share { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+.daily-card__related a { color: #111; }
