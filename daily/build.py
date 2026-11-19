@@ -6,7 +6,7 @@ import html
 import json
 import os
 import re
-from datetime import date, datetime
+from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from typing import Optional
 
@@ -32,6 +32,27 @@ NAV = """          <a href="{p}index.html">首页</a>
           <a class="btn btn--gold" href="{p}booking.html">预约咨询</a>"""
 
 
+def _first_sunday(year: int, month: int) -> date:
+    first = date(year, month, 1)
+    return date(year, month, 1 + (6 - first.weekday()) % 7)
+
+
+def sydney_date_from_utc(utc: datetime) -> date:
+    """Calendar date in Australia/Sydney from a naive UTC datetime.
+
+    NSW DST: first Sunday in October 02:00 AEST -> AEDT (UTC+11);
+    first Sunday in April 03:00 AEDT -> AEST (UTC+10).
+    Does not require the tzdata package.
+    """
+    if utc.tzinfo is not None:
+        utc = (utc - utc.utcoffset()).replace(tzinfo=None)
+    year = utc.year
+    dst_start = datetime.combine(_first_sunday(year, 10), time(2, 0)) - timedelta(hours=10)
+    dst_end = datetime.combine(_first_sunday(year, 4), time(3, 0)) - timedelta(hours=11)
+    in_dst = utc >= dst_start or utc < dst_end
+    return (utc + timedelta(hours=11 if in_dst else 10)).date()
+
+
 def sydney_today() -> date:
     env = os.environ.get("DAILY_TODAY")
     if env:
@@ -40,7 +61,7 @@ def sydney_today() -> date:
         from zoneinfo import ZoneInfo
         return datetime.now(ZoneInfo("Australia/Sydney")).date()
     except Exception:
-        return date.today()
+        return sydney_date_from_utc(datetime.utcnow())
 
 
 def load_cards() -> list[dict]:

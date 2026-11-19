@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 import os
 import sys
@@ -56,6 +56,30 @@ class DailyTests(unittest.TestCase):
     def test_crisis(self):
         self.assertIn("000", self.d1)
         self.assertIn("13 11 14", self.d1)
+
+    def test_no_public_json_feed(self):
+        self.assertFalse((build.OUT / "cards.json").exists())
+        self.assertFalse((build.OUT / "index.json").exists())
+
+    def test_nov19_boundary_vs_utc(self):
+        # AEDT (UTC+11): 18 Nov 12:59 UTC is still 18 Nov in Sydney;
+        # 18 Nov 13:00 UTC is 19 Nov 00:00 in Sydney.
+        self.assertEqual(build.sydney_date_from_utc(datetime(2026, 11, 18, 12, 59)), date(2026, 11, 18))
+        self.assertEqual(build.sydney_date_from_utc(datetime(2026, 11, 18, 13, 0)), date(2026, 11, 19))
+
+    def test_winter_aest_boundary(self):
+        # AEST (UTC+10): 15 Jun 13:59 UTC is 15 Jun 23:59 Sydney;
+        # 15 Jun 14:00 UTC is 16 Jun 00:00 Sydney.
+        self.assertEqual(build.sydney_date_from_utc(datetime(2026, 6, 15, 13, 59)), date(2026, 6, 15))
+        self.assertEqual(build.sydney_date_from_utc(datetime(2026, 6, 15, 14, 0)), date(2026, 6, 16))
+
+    def test_card_visibility_follows_sydney_date(self):
+        cards = build.load_cards()
+        on_18 = [c["slug"] for c in build.public_cards(cards, date(2026, 11, 18))]
+        on_19 = [c["slug"] for c in build.public_cards(cards, date(2026, 11, 19))]
+        self.assertEqual(on_18, ["psychological-defense"])
+        self.assertIn("emotional-avoidance", on_19)
+        self.assertNotIn("future-must-not-publish", on_19)
 
 if __name__ == "__main__":
     unittest.main()

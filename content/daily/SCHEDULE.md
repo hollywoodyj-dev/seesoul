@@ -10,7 +10,16 @@
 - `status: published` 且 `published_at` 晚于构建当天（悉尼）→ 同样不生成公开页
 - 仅用 CSS/`hidden` 在浏览器里藏未来内容 **不算** 草稿保护，生成器不会这么做
 
-因此：把 `published_at` 写成明天，只有在明天之后的某一次 build + 部署之后，卡片才会出现。
+`published_at` 是 **Australia/Sydney 的日历日**，不是 UTC 日。边界是当天 00:00 悉尼时间：
+
+- 夏令时 AEDT（约 10 月第一个星期日至 4 月第一个星期日）：UTC+11。UTC 13:00 才进入次日。
+- 冬令时 AEST：UTC+10。UTC 14:00 才进入次日。
+
+生成器优先用 `zoneinfo`；没有 `tzdata` 时用上述 NSW 夏令时规则计算，**不会**再用运行机器的本地时区冒充悉尼。
+
+因此：把 `published_at` 写成明天，只有在明天（悉尼）之后的某一次 build + 部署之后，卡片才会出现。
+
+**生产注意：** 当前 Vercel **不会**运行 `daily/build.py`。线上看到的是仓库里已经生成的 HTML。日期过滤发生在提交这些 HTML 的那一次本地/CI 构建。
 
 ## 可选后续（须 Founder 另批，Phase 2 未启用）
 
