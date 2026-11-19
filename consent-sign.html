@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>心理咨询签署流程 · 尚未启用 · SEESOUL</title>
-    <meta name="description" content="SeeSoul 一对一心理咨询的电子签署流程尚未启用。这一页不能签名，也不会生成副本。" />
-    <link rel="stylesheet" href="./theme.css" />
+    <meta name="description" content="SeeSoul 一对一心理咨询的电子签署尚未启用。付款、预约与签署分开确认。这一页不能签名，也不会生成副本。" />
+    <link rel="stylesheet" href="./theme.css?v=sys1" />
   </head>
   <body data-page-id="consent-sign">
     <a class="skip-link" href="#main-content">跳转到主要内容</a>
@@ -38,35 +38,39 @@
       <section class="section section--ivory">
         <div class="container">
           <div class="consent-panel">
-            <div class="consent-note">状态：尚未启用。页面上没有签名框，也没有可以勾选完成的同意。阅读 <a class="text-link" href="consent-counselling.html">Draft v1.0</a> 不代表已经签署。</div>
+            <div class="consent-note">状态：尚未启用。页面上没有签名框，也没有“立即签署”按钮。阅读 <a class="text-link" href="consent-counselling.html">SSC-CONSENT-2.1-NSW-REVIEW</a> 不代表已经签署。DRAFT 文件不得作为正式签署文本。法律主体：Qianwei LU trading as INNERPRO，ABN 26 274 066 115。</div>
 
             <div class="consent-section">
               <h3>现在可以做的</h3>
-              <p>可以阅读一对一心理咨询的完整草案。Online Counselling 与 Face-to-Face Counselling 使用同一份文件，文件里分别写了线上的隐私与技术风险，以及线下的地点和现场安排。</p>
-              <p><a class="text-link" href="consent-counselling.html">阅读完整知情同意书</a></p>
+              <p>可以阅读一对一心理咨询知情同意书 v2.1 NSW 审核稿。Online Counselling 与 Face-to-Face Counselling 使用同一份文件。首期仅面向年满 18 岁的客户。你可以完整阅读、提问、拒签或暂停；本页不会收集签名。</p>
+              <p><a class="text-link" href="consent-counselling.html">阅读完整知情同意书（SSC-CONSENT-2.1-NSW-REVIEW）</a></p>
             </div>
 
             <div class="consent-section">
-              <h3>启用之后的流程</h3>
-              <p>正式系统应使用成熟的电子签署服务。启用后需要能够：</p>
+              <h3>拟议的人工发送流程（尚未启用）</h3>
+              <p>付款、预约和签署分开确认。任何一环完成，都不会自动完成另外两环。启用后的拟议步骤如下：</p>
               <ol>
-                <li>根据预约选择 Online Counselling 或 Face-to-Face Counselling。</li>
-                <li>展示完整协议，并记录协议版本。</li>
-                <li>让客户明确确认已阅读，并自愿签署。</li>
-                <li>让客户确认已阅读 <a class="text-link" href="cancellation-policy.html">取消、改期及退款政策</a>。</li>
-                <li>安全保存签署记录和审计信息。</li>
-                <li>向客户提供已签署的 PDF 副本。</li>
-                <li>将签署状态与预约编号关联，并与付款状态分开管理。</li>
-                <li>只允许获授权的人员访问客户资料。</li>
+                <li>客户了解服务并发送预约需求；SeeSoul 先确认是否属于可受理范围（首阶段成年人）。</li>
+                <li>SeeSoul 人工确认日期、时间和方式，产生不含个人资料的预约编号 <code>booking_reference</code>（例如 SSC-2026-XXXXXX），并把预约记为 CONFIRMED。付款仍须独立核实。</li>
+                <li>向客户发送<strong>已经生效</strong>的知情同意书、正式隐私声明、适用的 <a class="text-link" href="cancellation-policy.html">取消、改期及退款政策</a>、签署服务商隐私说明，以及一次性专属签署邀请。不会发送仍标记 DRAFT 的协议作为正式签署文本。</li>
+                <li>客户完整阅读文件，必要时先提问；明确同意使用电子签署后，通过安全链接完成身份核验及签署。</li>
+                <li>签署服务商生成带有文件版本、签署时间、签署人验证证明及审计轨迹的防篡改 PDF，并向客户提供安全副本。获授权人员只把签署状态更新为 SIGNED；付款状态仍由 Stripe 记录独立核对。</li>
               </ol>
-              <p>咨询内容、签名文件和健康信息，不会发送给 Stripe、PayPal 或 Compass。</p>
+              <p>首次咨询前须同时满足：预约 CONFIRMED、付款 VERIFIED、签署 SIGNED。任何一个不满足，都不会自动标记“准备就绪”。</p>
+              <p>咨询内容、签名文件和健康信息，不会发送给 Stripe、SeeSoul Compass 或生成式 AI。网站不会用 <code>?signed=true</code> 或浏览器本地存储来表示已经签署。</p>
+            </div>
+
+            <div class="consent-section">
+              <h3>拒签、过期、改期与退款</h3>
+              <p>客户可以拒绝或暂停签署。拒签只表示尚未完成签署，不自动退款，也不自动收取取消费。邀请过期须发出新邀请，不会默认为已签。文件重要内容变化时，须保留旧版本记录并视情况重新取得同意。仅改时间通常不必整份重签，但须以法律审核为准。</p>
             </div>
 
             <div class="consent-section">
               <h3>现在还接不上的原因</h3>
-              <p>预约仍由客户自己发出邮件。网站没有预约编号，也没有签署档案。一对一心理咨询已可在线付款，但付款状态与签署状态仍须分开管理；目前无法把签署状态挂到一笔预约上，因为电子签署尚未启用。</p>
-              <p>Draft v1.0 还待澳洲专业与法律审核。取消及改期的提前通知期限、咨询记录的保存安排、投诉渠道、线上平台、备用联络方式，以及未成年人服务政策，都还没有确定。</p>
+              <p>预约仍由客户自己发出邮件。网站没有公开预约编号，也没有签署档案。一对一心理咨询已可在线付款，但付款状态分开管理；目前无法把签署状态挂到一笔预约上，因为电子签署尚未启用。</p>
+              <p>SSC-CONSENT-2.1-NSW-REVIEW 仍待澳洲专业与法律审核。法律主体与 ABN 已按 Founder 确认写入。执业姓名与资格、生效取消政策、投诉邮箱、签署服务商与数据存放区域、健康记录保存方案，都还没有锁定。未成年人服务不走本阶段签署流程。</p>
               <p><a class="text-link" href="consent.html">返回咨询前须知</a></p>
+              <p><a class="text-link" href="nsw-code-of-conduct.html">NSW 守则与投诉告知</a></p>
             </div>
           </div>
         </div>
@@ -77,7 +81,7 @@
       <div class="site-footer__inner">
         <div><div class="brand" style="color:var(--color-gold-soft)">SEESOUL<small>熙愈心空间</small></div><p class="footer-tagline"><small>Seeing Before Being™</small></p></div>
         <div style="display:grid;gap:0.5rem"><a href="index.html">首页</a><a href="counselling.html">心理咨询</a><a href="life-theme.html">生命课题解读</a></div>
-        <div style="display:grid;gap:0.5rem"><a href="consent.html">咨询前须知</a><a href="consent-counselling.html">心理咨询知情同意书</a><a href="compass-privacy.html">Compass 隐私与使用说明</a></div>
+        <div style="display:grid;gap:0.5rem"><a href="consent.html">咨询前须知</a><a href="consent-counselling.html">心理咨询知情同意书</a><a href="nsw-code-of-conduct.html">NSW 守则与投诉</a><a href="compass-privacy.html">Compass 隐私与使用说明</a></div>
       </div>
     </footer>
     <script src="nav.js" defer></script>

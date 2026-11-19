@@ -9,7 +9,8 @@
   function set(open, returnFocus) {
     nav.classList.toggle("site-nav--open", open);
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    toggle.setAttribute("aria-label", open ? "关闭导航菜单" : "打开导航菜单");
+    var en = (document.documentElement.lang || "").toLowerCase().indexOf("en") === 0;
+    toggle.setAttribute("aria-label", open ? (en ? "Close menu" : "关闭导航菜单") : (en ? "Open menu" : "打开导航菜单"));
     if (returnFocus) toggle.focus();
   }
 

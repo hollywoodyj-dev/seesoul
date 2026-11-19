@@ -1,0 +1,20 @@
+{
+  "current": "SSC-CONSENT-2.1-NSW-REVIEW",
+  "signing_allowed": false,
+  "production_eligible": false,
+  "legal_entity": "Qianwei LU trading as INNERPRO",
+  "abn": "26 274 066 115",
+  "brand": "SeeSoul 熙愈心空间",
+  "versions": [
+    {
+      "id": "SSC-CONSENT-2.1-NSW-REVIEW",
+      "status": "DRAFT_FOR_FOUNDER_LEGAL_PROFESSIONAL_REVIEW",
+      "date": "2026-11-10",
+      "source_md": "C:/Users/hugoz/Downloads/seesoul-consent-v21-pack/01_SeeSoul_心理咨询知情同意书_v2.1_NSW_审核稿.md",
+      "public_page": "consent-counselling.html",
+      "may_send_as_signing_text": false,
+      "public_page_sha256": "2c4f6ac773adc1c808664b8a7813806c99c09674f175577d445df7cfaa2dbe76",
+      "note": "Public preview of v2.1 NSW review draft. Do not send as a formal signing packet."
+    }
+  ]
+}

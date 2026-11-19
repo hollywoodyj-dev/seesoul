@@ -99,11 +99,12 @@ pages = {
     "counselling.html": ["查看预约与付款方式", "booking.html", "付款成功不代表预约时间已经确认", "阅读知情同意与保密说明", "cancellation-policy.html", 'data-policy-summary="cancellation-v1.1"'],
     "payment-success.html": ["并不代表 SeeSoul 已经确认收到付款", "根据实际支付记录核对付款状态", "不代表预约时间已经确认", "知情同意书签署", "避免重复付款", "booking.html#booking-email", "前往发送预约邮件", "付款成功，但咨询时间尚未确认", "noindex"],
     "life-theme.html": ["提交预约请求", "这还不是一次已经确认的预约"],
-    "consent.html": ["这一页只是说明，不是已经完成的签署", "CONSENT-DRAFT-2026-10-13", "000", "13 11 14", "consent-counselling.html", "consent-sign.html", 'data-policy-summary="cancellation-v1.1"'],
-    "consent-counselling.html": ["Draft v1.0", "Online Counselling", "Face-to-Face Counselling", "AUD $150", "待确认", "000", "13 11 14", 'data-policy-summary="cancellation-v1.1"', "迟到不自动构成未出席", "不构成现阶段收取 AUD $75 的依据", "cancellation-policy.html"],
-    "consent-sign.html": ["尚未启用", "consent-counselling.html", "付款状态分开", "cancellation-policy.html"],
+    "consent.html": ["这一页只是说明，不是已经完成的签署", "CONSENT-DRAFT-2026-10-13", "SSC-CONSENT-2.1-NSW-REVIEW", "INNERPRO", "26 274 066 115", "000", "13 11 14", "consent-counselling.html", "consent-sign.html", 'data-policy-summary="cancellation-v1.1"'],
+    "consent-counselling.html": ["SSC-CONSENT-2.1-NSW-REVIEW", "INNERPRO", "26 274 066 115", "Online Counselling", "Face-to-Face Counselling", "AUD $150", "DRAFT — NOT YET EFFECTIVE", "000", "13 11 14", 'data-policy-summary="cancellation-v1.1"', "迟到不自动构成未出席", "不构成现阶段收取 AUD $75 的依据", "cancellation-policy.html", "1800 043 159", "年满 18"],
+    "consent-sign.html": ["尚未启用", "consent-counselling.html", "付款状态分开", "cancellation-policy.html", "立即签署", "SSC-CONSENT-2.1-NSW-REVIEW", "booking_reference", "INNERPRO"],
+    "nsw-code-of-conduct.html": ["INNERPRO", "26 274 066 115", "1800 043 159", "LEGAL HOLD", "不是", "make-a-complaint-online", "health.nsw.gov.au/phact"],
     "cancellation-policy.html": ["版本：v1.1｜文案定稿 · 待法律及专业审核", "状态：尚未正式生效", "24 小时前", "AUD $75", "全额退款", "Australian Consumer Law（澳大利亚消费者法）", "生命课题解读服务（AUD $100／50 分钟）不适用本政策", "同一次预约不会同时收取迟取消费用和未出席费用", "Australia/Sydney", "实际经过的 24 小时", "恰好在截止时间收到的通知，仍属于免费取消或改期范围", "不因网站后续更新而自动追溯适用新版本", "尚未作为正式收费条款生效"],
-    "booking.html": ["cancellation-policy.html", 'data-policy-summary="cancellation-v1.1"', "原则上拟收取 AUD $75", "生命课题解读不适用", "迟到不自动构成未出席", "尚未正式生效", "支付咨询费用 AUD $150", "https://buy.stripe.com/cNi7sK59I7VtbKncMo8og00", "发送预约邮件", "booking-email", "付款成功不代表预约时间已经确认", "只有收到 SeeSoul 的正式预约确认回复，预约才算成立", "知情同意书会独立处理"],
+    "booking.html": ["cancellation-policy.html", 'data-policy-summary="cancellation-v1.1"', "原则上拟收取 AUD $75", "生命课题解读不适用", "迟到不自动构成未出席", "尚未正式生效", "支付咨询费用 AUD $150", "https://buy.stripe.com/cNi7sK59I7VtbKncMo8og00", "发送预约邮件", "booking-email", "付款成功不代表预约时间已经确认", "只有收到 SeeSoul 的正式预约确认回复，预约才算成立", "知情同意书会独立处理", "INNERPRO", "26 274 066 115"],
     "lt-intake.html": ["不是命运预测，也不是心理测评", "LT-12", "lt-safety.html", "life-theme.html#booking", "网站不会替你发送"],
     "compass-privacy.html": ["不会发送给本网站，也不会发送给 OpenAI", "不会保存在这台浏览器里", "不使用 AI 生成结果", "所填内容不会发送给 OpenAI 用于生成觉察笔记", "本页只说明 Compass", "不能识别所有风险", "compass-safety.html", "旧记录会被清除", "不是心理测试或诊断", "000", "13 11 14", "COMPASS-PRIVACY-2026-10-20-DRAFT"],
     "compass-start.html": ["不是心理测试或诊断", "compass-privacy.html", "开始整理自己", "不会发送给本网站或任何 AI", "000", "13 11 14", "compass-v2.js"],
@@ -122,7 +123,7 @@ consent_absent = ["严格保密", "不会向任何第三方", "在有外部法�
 consent_text = (root / "consent.html").read_text(encoding="utf-8")
 check("consent-no-internal-or-absolute", not any(n in consent_text for n in consent_absent), ",".join(n for n in consent_absent if n in consent_text))
 banned = ["预约已确认", "已确认并签署", "我已阅读并同意签署", "400-161-9995", "任何情况下不退款", "概不退款"]
-for name in ("counselling.html", "life-theme.html", "consent.html", "consent-counselling.html", "consent-sign.html", "cancellation-policy.html", "booking.html", "lt-safety.html", "booking.js", "compass-safety.html", "compass-question.html", "compass-start.html"):
+for name in ("counselling.html", "life-theme.html", "consent.html", "consent-counselling.html", "consent-sign.html", "nsw-code-of-conduct.html", "cancellation-policy.html", "booking.html", "lt-safety.html", "booking.js", "compass-safety.html", "compass-question.html", "compass-start.html"):
     text = (root / name).read_text(encoding="utf-8")
     hit = [n for n in banned if n in text]
     check("banned-" + name, not hit, ",".join(hit))
@@ -148,6 +149,16 @@ check("booking-single-authorized-live-pay-link",
 check("counselling-no-second-payment-flow",
       "buy.stripe.com" not in (root / "counselling.html").read_text(encoding="utf-8")
       and "查看预约与付款方式" in (root / "counselling.html").read_text(encoding="utf-8"))
+en_booking = (root / "en" / "booking.html").read_text(encoding="utf-8")
+check("en-booking-same-authorized-live-pay-link",
+      en_booking.count(AUTHORIZED_PAY_LINK) == 1
+      and 'id="seesoulPayLink"' in en_booking
+      and "three separate things" in en_booking
+      and "INNERPRO" in en_booking
+      and "26 274 066 115" in en_booking
+      and "not yet in force" in en_booking.lower())
+check("en-counselling-no-second-payment-flow",
+      "buy.stripe.com" not in (root / "en" / "counselling.html").read_text(encoding="utf-8"))
 
 nav_bad = []
 for f in root.glob("*.html"):

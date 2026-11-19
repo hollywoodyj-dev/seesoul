@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>预约 SeeSoul 一对一咨询 · SEESOUL 熙愈心空间</title>
     <meta name="description" content="预约 SeeSoul 一对一心理咨询：先支付 AUD $150，再发送预约邮件，并等待 SeeSoul 确认。付款成功不代表预约时间已经确认。" />
-    <link rel="stylesheet" href="./theme.css" />
+    <link rel="stylesheet" href="./theme.css?v=sys1" />
+    <link rel="alternate" hreflang="en" href="en/booking.html" />
+    <link rel="alternate" hreflang="zh-CN" href="booking.html" />
     <style>
       .book-page { max-width: 40rem; }
       .book-page .section-header h2 { display: block; }
@@ -67,6 +69,10 @@
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand brand--logo" href="index.html"><img class="brand-logo" src="assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+        <nav class="lang-switch" aria-label="语言">
+          <span lang="zh-CN" aria-current="true">中文</span>
+          <a href="en/booking.html" hreflang="en" lang="en">English</a>
+        </nav>
         <button class="nav-toggle" id="navToggle" type="button" aria-controls="siteNav" aria-expanded="false" aria-label="打开导航菜单"><span class="nav-toggle__bars" aria-hidden="true"></span></button>
         <nav class="site-nav" id="siteNav">
           <a href="index.html">首页</a>
@@ -118,7 +124,7 @@
               <h3 id="step-pay-title">支付咨询费用</h3>
               <p>使用 Stripe 安全支付 AUD $150／60 分钟。这是一次性付款，对应一次一对一心理咨询。</p>
               <p><a class="btn btn--gold btn--full" id="seesoulPayLink" href="https://buy.stripe.com/cNi7sK59I7VtbKncMo8og00" rel="noopener noreferrer">支付咨询费用 AUD $150</a></p>
-              <p class="book-quiet">付款成功不代表预约时间已经确认。付款后，请继续发送预约邮件，并等待 SeeSoul 回复确认。</p>
+              <p class="book-quiet">收款法律主体为 Qianwei LU trading as INNERPRO（ABN 26 274 066 115）。SeeSoul 是服务品牌。付款成功不代表预约时间已经确认。付款后，请继续发送预约邮件，并等待 SeeSoul 回复确认。知情同意书签署仍单独处理。</p>
               <div class="book-warn">
                 支付并不保证有可用预约时间。若付款后无法安排双方都合适的时间，请通过预约邮件或回复 SeeSoul 的邮件联系我们，讨论退款或其他安排。付款前请先阅读<a class="text-link" href="cancellation-policy.html">取消、改期及退款政策</a>和<a class="text-link" href="consent.html">知情同意与保密说明</a>。如果不确定之前是否已经付过，请先联系我们核对，避免重复付款。
               </div>

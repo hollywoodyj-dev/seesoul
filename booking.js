@@ -5,8 +5,9 @@
   var calGrid = panel.querySelector("#calGrid");
   var slotGrid = panel.querySelector("#slotGrid");
   var title = panel.querySelector(".cal-title");
-  var prev = panel.querySelector(".cal-nav[aria-label='上个月']");
-  var next = panel.querySelector(".cal-nav[aria-label='下个月']");
+  var en = (document.documentElement.lang || "").toLowerCase().indexOf("en") === 0;
+  var prev = panel.querySelector(".cal-nav[data-cal='prev']") || panel.querySelector(".cal-nav[aria-label='上个月']");
+  var next = panel.querySelector(".cal-nav[data-cal='next']") || panel.querySelector(".cal-nav[aria-label='下个月']");
   var submit = panel.querySelector("#bookSubmit");
   var status = panel.querySelector("#bookStatus");
   var locNote = panel.querySelector("#locNote");
@@ -15,7 +16,36 @@
   var year = today.getFullYear();
   var month = today.getMonth();
   var selected = null;
-  var dowLabels = ["日", "一", "二", "三", "四", "五", "六"];
+  var dowLabels = en ? ["S", "M", "T", "W", "T", "F", "S"] : ["日", "一", "二", "三", "四", "五", "六"];
+  var copy = en ? {
+    month: function (y, m) { return ["January","February","March","April","May","June","July","August","September","October","November","December"][m] + " " + y; },
+    pickDay: function (d) { return "Select day " + d; },
+    needSlot: "Please choose a date and time first.",
+    needContact: "Please leave your name and email.",
+    submitting: "Preparing your booking request.",
+    received: function (id) { return "Your request has been submitted. Reference " + id + ". This is not a confirmed appointment. SeeSoul will reply to the email you left. The time is not held, and this is not a payment."; },
+    openMail: "A mail window will open with a prepared request. You still need to send that email before SeeSoul can see it. This is not a confirmed appointment.",
+    openMailLink: "Open the email and send this request",
+    notConfigured: "This request was not sent. Booking delivery is not connected yet.",
+    badTime: "Please choose a date and time that has not already passed.",
+    badEmail: "Please leave an email we can reply to.",
+    checkFields: "Please check the date, time and contact details, then try again.",
+    failed: "This request was not sent. Please try again shortly."
+  } : {
+    month: function (y, m) { return y + " 年 " + (m + 1) + " 月"; },
+    pickDay: function (d) { return "选择 " + d + " 日"; },
+    needSlot: "请先选择日期和时间。",
+    needContact: "请留下姓名和邮箱。",
+    submitting: "正在提交预约请求。",
+    received: function (id) { return "预约请求已经提交。请求编号 " + id + "。这还不是一次已经确认的预约。容熙会用你留下的邮箱回复。这个时间还没有被占住，也还没有付款。"; },
+    openMail: "邮件窗口会打开一封写好的预约请求。需要由你发出那封邮件，容熙才能看到。这还不是一次已经确认的预约。",
+    openMailLink: "打开邮件，发出这次请求",
+    notConfigured: "这次请求没有发出。预约收件还没有接上，所以现在还不能把请求送到容熙。",
+    badTime: "请先选择一个还没过去的日期和时间。",
+    badEmail: "请留下一个可以回复的邮箱。",
+    checkFields: "请检查日期、时间和联系方式后再提交。",
+    failed: "这次请求没有发出。请稍后再试。"
+  };
   var slots = ["09:00", "10:30", "13:00", "14:30", "16:00", "19:30"];
 
   function sameMonth(y, m) {
@@ -29,7 +59,7 @@
     return d.getFullYear() + "-" + m + "-" + day;
   }
   function buildCal() {
-    title.textContent = year + " 年 " + (month + 1) + " 月";
+    title.textContent = copy.month(year, month);
     prev.disabled = sameMonth(year, month);
     calGrid.innerHTML = "";
     dowLabels.forEach(function (label) {
@@ -55,7 +85,7 @@
       button.type = "button";
       button.className = "cal-date";
       button.textContent = String(d);
-      button.setAttribute("aria-label", "选择 " + d + " 日");
+      button.setAttribute("aria-label", copy.pickDay(d));
       if (date < today) {
         button.classList.add("is-off");
         button.disabled = true;
@@ -131,15 +161,15 @@
     var contact = panel.querySelector("input[name=bcontact]").value.trim();
     var note = panel.querySelector("textarea[name=bnote]").value.trim();
     if (!panel.dataset.date || !panel.dataset.time) {
-      say("请先选择日期和时间。", true);
+      say(copy.needSlot, true);
       return;
     }
     if (!name || !email) {
-      say("请留下姓名和邮箱。", true);
+      say(copy.needContact, true);
       return;
     }
     submit.disabled = true;
-    say("正在提交预约请求。", false);
+    say(copy.submitting, false);
     fetch("/api/booking", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -158,34 +188,34 @@
     }).then(function (result) {
       var data = result.data || {};
       if (data.status === "REQUEST_RECEIVED") {
-        say("预约请求已经提交。请求编号 " + data.request_id + "。这还不是一次已经确认的预约。容熙会用你留下的邮箱回复。这个时间还没有被占住，也还没有付款。", false);
+        say(copy.received(data.request_id), false);
         return;
       }
       if (data.status === "OPEN_MAIL" && typeof data.mailto === "string" && data.mailto.indexOf("mailto:") === 0) {
         status.classList.remove("is-error");
-        status.textContent = "邮件窗口会打开一封写好的预约请求。需要由你发出那封邮件，容熙才能看到。这还不是一次已经确认的预约。";
+        status.textContent = copy.openMail;
         var link = document.createElement("a");
         link.href = data.mailto;
-        link.textContent = "打开邮件，发出这次请求";
+        link.textContent = copy.openMailLink;
         status.appendChild(document.createElement("br"));
         status.appendChild(link);
         window.location.href = data.mailto;
         return;
       }
       if (data.status === "DELIVERY_NOT_CONFIGURED") {
-        say("这次请求没有发出。预约收件还没有接上，所以现在还不能把请求送到容熙。", true);
+        say(copy.notConfigured, true);
         return;
       }
       if (data.status === "INVALID") {
         var fields = data.fields || [];
-        if (fields.indexOf("date") >= 0 || fields.indexOf("time") >= 0) say("请先选择一个还没过去的日期和时间。", true);
-        else if (fields.indexOf("email") >= 0) say("请留下一个可以回复的邮箱。", true);
-        else say("请检查日期、时间和联系方式后再提交。", true);
+        if (fields.indexOf("date") >= 0 || fields.indexOf("time") >= 0) say(copy.badTime, true);
+        else if (fields.indexOf("email") >= 0) say(copy.badEmail, true);
+        else say(copy.checkFields, true);
         return;
       }
-      say("这次请求没有发出。请稍后再试。", true);
+      say(copy.failed, true);
     }).catch(function () {
-      say("这次请求没有发出。请稍后再试。", true);
+      say(copy.failed, true);
     }).then(function () {
       submit.disabled = false;
     });

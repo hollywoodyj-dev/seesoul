@@ -1,0 +1,49 @@
+{
+  "status": "SANDBOX_ONLY",
+  "production_eligible": false,
+  "note": "All rows are synthetic. No real names, emails, health notes, Stripe secrets or vendor tokens.",
+  "document_version_locked_for_signing": null,
+  "current_public_draft": "SSC-CONSENT-2.1-NSW-REVIEW",
+  "records": [
+    {
+      "booking_reference": "SSC-2026-SYN001",
+      "session_mode": "face-to-face",
+      "booking_status": "REQUESTED",
+      "payment_status": "VERIFIED",
+      "consent_status": "NOT_SENT",
+      "scenario": "paid-but-unconfirmed-booking"
+    },
+    {
+      "booking_reference": "SSC-2026-SYN002",
+      "session_mode": "online",
+      "booking_status": "CONFIRMED",
+      "payment_status": "NOT_VERIFIED",
+      "consent_status": "SENT",
+      "scenario": "confirmed-unpaid"
+    },
+    {
+      "booking_reference": "SSC-2026-SYN004",
+      "session_mode": "online",
+      "booking_status": "CONFIRMED",
+      "payment_status": "VERIFIED",
+      "consent_status": "NOT_SENT",
+      "scenario": "paid-and-booked-unsigned — not session-ready"
+    },
+    {
+      "booking_reference": "SSC-2026-SYN005",
+      "session_mode": "online",
+      "booking_status": "CONFIRMED",
+      "payment_status": "VERIFIED",
+      "consent_status": "DECLINED",
+      "scenario": "declined — no auto refund, no auto cancel"
+    },
+    {
+      "booking_reference": "SSC-2026-SYN010",
+      "session_mode": "face-to-face",
+      "booking_status": "CONFIRMED",
+      "payment_status": "VERIFIED",
+      "consent_status": "EXPIRED",
+      "scenario": "expired invite is not signed"
+    }
+  ]
+}
