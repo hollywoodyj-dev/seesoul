@@ -1,6 +1,7 @@
 content/
 insights/build.py
 insights/test_insights.py
+insights/preview/
 __pycache__/
 *.pyc
 .env*

@@ -16,7 +16,11 @@ tags:
 seo_title: 心理智库是做什么的（样稿）· SeeSoul
 seo_description: SeeSoul 心理智库把值得关注的心理学知识，写成普通人看得懂、用得上的说明。本文是页面样稿，不是正式研究周报。
 reviewer: ""
-references: []
+references:
+  - title: APA Dictionary of Psychology — cognitive dissonance
+    source_url: https://dictionary.apa.org/cognitive-dissonance
+    source_name: American Psychological Association
+    source_type: other
 evidence_summary: 本文不报告研究结果。
 limitations: 本文用于核对标题、摘要、分类、日期与免责声明的版式，不能当作心理学证据。
 safety_note: 阅读不能替代个人化咨询、诊断或紧急救助。澳大利亚紧急情况请拨打 000；也可联系 Lifeline 13 11 14。

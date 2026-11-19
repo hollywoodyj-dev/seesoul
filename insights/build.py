@@ -114,6 +114,8 @@ def _scalar(val: str):
         return True
     if val in ("false", "False"):
         return False
+    if val in ("null", "Null", "NULL", "~", "none", "None"):
+        return None
     if val in ("[]",):
         return []
     if val.startswith('"') and val.endswith('"'):
@@ -124,16 +126,32 @@ def _scalar(val: str):
 def load_articles() -> list[dict]:
     articles = []
     for path in sorted(CONTENT.glob("*.md")):
-        if path.name.upper() == "SCHEMA.MD":
+        if path.name.upper() in ("SCHEMA.MD", "CMS_UPGRADE.MD", "SCHEDULE.MD"):
             continue
-        meta, body = parse_frontmatter(path.read_text(encoding="utf-8"))
-        missing = [k for k in REQUIRED if k not in meta or meta[k] in ("", None)]
+        text = path.read_text(encoding="utf-8")
+        if not text.startswith("---"):
+            continue
+        meta, body = parse_frontmatter(text)
+        missing = []
+        for k in REQUIRED:
+            val = meta.get(k)
+            if k == "updated_at" and meta.get("status") == "draft" and val in ("", None):
+                meta["updated_at"] = meta.get("date") or ""
+                continue
+            if k not in meta or meta[k] in ("", None):
+                missing.append(k)
         if missing:
             raise ValueError(f"{path.name} missing {missing}")
         if meta["category"] not in CATEGORIES:
             raise ValueError(f"{path.name} bad category {meta['category']}")
         if meta["status"] not in ("draft", "published"):
             raise ValueError(f"{path.name} bad status")
+        author = str(meta.get("author") or "").strip()
+        if not author:
+            raise ValueError(f"{path.name} author required")
+        banned_author = ("chatgpt", "gpt-4", "anonymous expert", "匿名专家", "auto", "todo")
+        if author.lower() in banned_author:
+            raise ValueError(f"{path.name} fictional or placeholder author")
         slug = meta["slug"]
         if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
             raise ValueError(f"bad slug {slug}")
@@ -151,7 +169,18 @@ def load_articles() -> list[dict]:
     slugs = [a["slug"] for a in articles]
     if len(slugs) != len(set(slugs)):
         raise ValueError("duplicate slug")
+    ids = [a.get("id") for a in articles if a.get("id")]
+    if len(ids) != len(set(ids)):
+        raise ValueError("duplicate id")
     return articles
+
+
+def production_articles(articles: list[dict]) -> list[dict]:
+    """Published, non-sample only. Sample pages stay local/preview.
+    editorial_decision is internal only and never maps to public status."""
+    out = [a for a in articles if a["status"] == "published" and not a.get("sample")]
+    out.sort(key=lambda a: (a["date"], 1 if a.get("featured") else 0), reverse=True)
+    return out
 
 
 def md_inline(text: str) -> str:
@@ -198,31 +227,38 @@ def md_to_html(src: str) -> str:
     return "\n".join(out)
 
 
-def shell(title, description, canonical, extra_head, main, current="insights"):
-    p = "../"
+def shell(title, description, canonical, extra_head, main, current="insights", depth=1, preview=False):
+    p = "../" * depth
     here = "./"
     cur = 'aria-current="page"' if current == "insights" else ""
     nav = NAV.format(p=p, here=here, cur=cur)
+    robots = '<meta name="robots" content="noindex,nofollow,noarchive" />\n    ' if preview else ""
     return f"""<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{html.escape(title)}</title>
-    <meta name="description" content="{html.escape(description)}" />
+    {robots}<meta name="description" content="{html.escape(description)}" />
     <link rel="canonical" href="{html.escape(canonical)}" />
     <meta property="og:title" content="{html.escape(title)}" />
     <meta property="og:description" content="{html.escape(description)}" />
     <meta property="og:url" content="{html.escape(canonical)}" />
     <meta property="og:locale" content="zh_CN" />
-    <link rel="stylesheet" href="../theme.css?v=sys1" />
+    <link rel="stylesheet" href="{p}theme.css?v=sys1" />
+    <link rel="alternate" hreflang="en" href="https://seesoul.com.au/en/insights.html" />
+    <link rel="alternate" hreflang="zh-CN" href="{html.escape(canonical)}" />
     {extra_head}
   </head>
   <body data-page-id="insights">
     <a class="skip-link" href="#main-content">跳转到主要内容</a>
     <header class="site-header">
       <div class="site-header__inner">
-        <a class="brand brand--logo" href="../index.html"><img class="brand-logo" src="../assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+        <a class="brand brand--logo" href="{p}index.html"><img class="brand-logo" src="{p}assets/seesoul-logo-gold.png" alt="SEESOUL 熙愈心空间"></a>
+        <nav class="lang-switch" aria-label="语言">
+          <span lang="zh-CN" aria-current="true">中文</span>
+          <a href="{p}en/insights.html" hreflang="en" lang="en">English</a>
+        </nav>
         <button class="nav-toggle" id="navToggle" type="button" aria-controls="siteNav" aria-expanded="false" aria-label="打开导航菜单"><span class="nav-toggle__bars" aria-hidden="true"></span></button>
         <nav class="site-nav" id="siteNav">
 {nav}
@@ -235,11 +271,11 @@ def shell(title, description, canonical, extra_head, main, current="insights"):
     <footer class="site-footer">
       <div class="site-footer__inner">
         <div><div class="brand" style="color:var(--color-gold-soft)">SEESOUL<small>熙愈心空间</small></div><p class="footer-tagline"><small>Seeing Before Being™</small></p></div>
-        <div style="display:grid;gap:0.5rem"><a href="../index.html">首页</a><a href="../counselling.html">心理咨询</a><a href="../explore.html">自我探索</a><a href="./">心理智库</a></div>
-        <div style="display:grid;gap:0.5rem"><a href="../compass-start.html">SeeSoul Compass</a><a href="../booking.html">预约咨询</a><a href="../index.html#trust">隐私 · 专业边界 · 免责声明</a></div>
+        <div style="display:grid;gap:0.5rem"><a href="{p}index.html">首页</a><a href="{p}counselling.html">心理咨询</a><a href="{p}explore.html">自我探索</a><a href="./">心理智库</a></div>
+        <div style="display:grid;gap:0.5rem"><a href="{p}compass-start.html">SeeSoul Compass</a><a href="{p}booking.html">预约咨询</a><a href="{p}index.html#trust">隐私 · 专业边界 · 免责声明</a></div>
       </div>
     </footer>
-    <script src="../nav.js" defer></script>
+    <script src="{p}nav.js" defer></script>
   </body>
 </html>
 """
@@ -250,9 +286,13 @@ def json_ld(article: dict) -> str:
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": article["title"],
-        "datePublished": article["date"],
-        "dateModified": article["updated_at"],
-        "author": {"@type": "Organization", "name": article["author"]},
+        "datePublished": article.get("published_at") or article["date"],
+        "dateModified": article.get("updated_at") or article.get("published_at") or article["date"],
+        "author": (
+            {"@type": "Organization", "name": article["author"]}
+            if article["author"] == "SeeSoul 编辑部"
+            else {"@type": "Person", "name": article["author"]}
+        ),
         "inLanguage": "zh-CN",
         "url": f"{SITE}/insights/{article['slug']}.html",
         "description": article.get("seo_description") or article["summary"],
@@ -260,7 +300,7 @@ def json_ld(article: dict) -> str:
     return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + "</script>"
 
 
-def render_index(published: list[dict]) -> str:
+def render_index(published: list[dict], preview: bool = False) -> str:
     featured = [a for a in published if a.get("featured")]
     cards = []
     for a in published:
@@ -302,12 +342,13 @@ def render_index(published: list[dict]) -> str:
       </section>
       <section class="section section--ivory">
         <div class="container">
+          {'<p class="insights-sample-banner" role="note">本地预览 · 含样稿与草稿核对页 · 禁止收录</p>' if preview else ""}
           {feat_html}
           <header class="section-header">
             <h2>最新文章</h2>
-            <p class="sub">按发布日期排列。样稿会标明「样稿」，不会伪装成研究周报。</p>
+            <p class="sub">{"预览含样稿，非正式发布。" if preview else "只列出经过审核的正式文章。样稿不会出现在这里。"}</p>
           </header>
-          <div class="content-grid">{"".join(cards)}</div>
+          {('<div class="content-grid">' + "".join(cards) + "</div>") if cards else "<p>正式文章准备中。Founder 审核通过前，这里不会放样稿或占位研究。</p>"}
           <p class="insights-cats-label">按主题查看</p>
           <div class="chips">{cats}</div>
           {"".join(by_cat) if by_cat else "<p>这一类还没有正式文章。</p>"}
@@ -315,14 +356,23 @@ def render_index(published: list[dict]) -> str:
         </div>
       </section>
     """
-    return shell("心理智库 · SeeSoul 熙愈心空间", "SeeSoul 心理智库：把心理学写成普通人看得懂、用得上的中文说明。", f"{SITE}/insights/", "", main)
+    return shell(
+        "心理智库 · SeeSoul 熙愈心空间",
+        "SeeSoul 心理智库：把心理学写成普通人看得懂、用得上的中文说明。",
+        f"{SITE}/insights/",
+        "",
+        main,
+        depth=2 if preview else 1,
+        preview=preview,
+    )
 
 
-def render_article(a: dict) -> str:
+def render_article(a: dict, preview: bool = False) -> str:
     banner = ""
-    robots = ""
-    if a.get("sample"):
-        banner = '<p class="insights-sample-banner" role="note">样稿 · 用于核对页面。不是研究周报，没有真实论文或 DOI。</p>'
+    if preview:
+        banner = '<p class="insights-sample-banner" role="note">草稿预览｜尚未发布</p>'
+    elif a.get("sample"):
+        banner = '<p class="insights-sample-banner" role="note">样稿 · 用于核对页面</p>'
     refs = a.get("references") or []
     ref_html = ""
     if refs:
@@ -337,6 +387,8 @@ def render_article(a: dict) -> str:
                 extra.append(html.escape(str(r["year"])))
             if r.get("doi"):
                 extra.append("DOI: " + html.escape(str(r["doi"])))
+            if r.get("verification_scope"):
+                extra.append("核查范围: " + html.escape(str(r["verification_scope"])))
             meta = (" · ".join(extra) + " · ") if extra else ""
             lis.append(f'<li>{meta}<a href="{url}" rel="noopener noreferrer">{label}</a></li>')
         ref_html = "<h2>参考资料</h2><ol class=\"insights-refs\">" + "".join(lis) + "</ol>"
@@ -357,6 +409,8 @@ def render_article(a: dict) -> str:
     desc = a.get("seo_description") or a["summary"]
     title = a.get("seo_title") or (a["title"] + " · 心理智库")
     updated = "" if a["updated_at"] == a["date"] else f" · 更新 {html.escape(a['updated_at'])}"
+    reviewer = str(a.get("reviewer") or "").strip()
+    reviewed = f" · 审核 {html.escape(reviewer)}" if reviewer else ""
     sub = f"<p class=\"article-byline\">{html.escape(a.get('subtitle'))}</p>" if a.get("subtitle") else ""
     main = f"""
       <div class="container insights-article">
@@ -364,7 +418,7 @@ def render_article(a: dict) -> str:
           <span class="eyebrow">心理智库 · {html.escape(a['category'])}</span>
           <h1>{html.escape(a['title'])}</h1>
           {sub}
-          <p class="insights-by">{html.escape(a['author'])} · {html.escape(a['date'])}{updated}</p>
+          <p class="insights-by">{html.escape(a['author'])} · {html.escape(a['date'])}{updated}{reviewed}</p>
         </div>
         <article class="prose">
           {banner}
@@ -378,7 +432,15 @@ def render_article(a: dict) -> str:
         </article>
       </div>
     """
-    return shell(title, desc, f"{SITE}/insights/{a['slug']}.html", json_ld(a) + robots, main)
+    return shell(
+        title,
+        desc,
+        f"{SITE}/insights/{a['slug']}.html",
+        json_ld(a),
+        main,
+        depth=2 if preview else 1,
+        preview=preview or bool(a.get("sample")),
+    )
 
 
 def write_sitemap(published: list[dict]) -> None:
@@ -401,18 +463,33 @@ def clean_generated() -> None:
         sm.unlink()
 
 
-def build() -> list[dict]:
+def build(preview: bool = False) -> list[dict]:
     all_articles = load_articles()
-    published = [a for a in all_articles if a["status"] == "published"]
-    published.sort(key=lambda a: a["date"], reverse=True)
+    if preview:
+        visible = [a for a in all_articles if a["status"] in ("draft", "published")]
+        visible.sort(key=lambda a: a["date"], reverse=True)
+        dest = OUT / "preview"
+        dest.mkdir(parents=True, exist_ok=True)
+        for p in dest.glob("*.html"):
+            p.unlink()
+        (dest / "index.html").write_text(render_index(visible, preview=True), encoding="utf-8")
+        for a in visible:
+            (dest / f"{a['slug']}.html").write_text(render_article(a, preview=True), encoding="utf-8")
+        print("preview", len(visible), "not for production")
+        return visible
+    published = production_articles(all_articles)
     clean_generated()
     (OUT / "index.html").write_text(render_index(published), encoding="utf-8")
     for a in published:
         (OUT / f"{a['slug']}.html").write_text(render_article(a), encoding="utf-8")
     write_sitemap(published)
-    print("published", len(published), "drafts", len(all_articles) - len(published))
+    print("published", len(published), "excluded_sample_or_draft", len(all_articles) - len(published))
     return published
 
 
 if __name__ == "__main__":
-    build()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--preview", action="store_true", help="local sample/draft review; writes insights/preview/")
+    args = parser.parse_args()
+    build(preview=args.preview)
