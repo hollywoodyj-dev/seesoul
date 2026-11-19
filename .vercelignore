@@ -1,0 +1,8 @@
+content/
+insights/build.py
+insights/test_insights.py
+__pycache__/
+*.pyc
+.env*
+data/
+.coze

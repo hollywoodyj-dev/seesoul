@@ -160,6 +160,15 @@ check("en-booking-same-authorized-live-pay-link",
 check("en-counselling-no-second-payment-flow",
       "buy.stripe.com" not in (root / "en" / "counselling.html").read_text(encoding="utf-8"))
 
+insights_index = (root / "insights" / "index.html").read_text(encoding="utf-8")
+insights_sample = (root / "insights" / "yangao-lanmu-shuoming.html").read_text(encoding="utf-8")
+check("insights-hub-exists", "心理智库" in insights_index and "SeeSoul Psychology Insights" in insights_index)
+check("insights-sample-labelled", "样稿" in insights_sample and "不是研究周报" in insights_sample)
+check("insights-draft-not-public", not (root / "insights" / "draft-must-not-publish.html").exists() and "draft-must-not-publish" not in insights_index)
+check("insights-no-fake-doi", "doi.org" not in insights_sample.lower() and "10.1111" not in insights_sample)
+check("insights-nav-on-home", 'href="insights/"' in (root / "index.html").read_text(encoding="utf-8") and "心理智库" in (root / "index.html").read_text(encoding="utf-8"))
+check("insights-explore-urls-unchanged", (root / "article-loneliness.html").exists() and 'href="article-loneliness.html"' in (root / "explore.html").read_text(encoding="utf-8"))
+
 nav_bad = []
 for f in root.glob("*.html"):
     text = f.read_text(encoding="utf-8")
