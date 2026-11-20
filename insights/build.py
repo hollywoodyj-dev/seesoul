@@ -245,7 +245,7 @@ def shell(title, description, canonical, extra_head, main, current="insights", d
     <meta property="og:description" content="{html.escape(description)}" />
     <meta property="og:url" content="{html.escape(canonical)}" />
     <meta property="og:locale" content="zh_CN" />
-    <link rel="stylesheet" href="{p}theme.css?v=sys5" />
+    <link rel="stylesheet" href="{p}theme.css?v=sys6" />
     <link rel="alternate" hreflang="en" href="https://seesoul.com.au/en/insights.html" />
     <link rel="alternate" hreflang="zh-CN" href="{html.escape(canonical)}" />
     {extra_head}
