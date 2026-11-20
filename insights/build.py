@@ -245,7 +245,7 @@ def shell(title, description, canonical, extra_head, main, current="insights", d
     <meta property="og:description" content="{html.escape(description)}" />
     <meta property="og:url" content="{html.escape(canonical)}" />
     <meta property="og:locale" content="zh_CN" />
-    <link rel="stylesheet" href="{p}theme.css?v=sys6" />
+    <link rel="stylesheet" href="{p}theme.css?v=sys7" />
     <link rel="alternate" hreflang="en" href="https://seesoul.com.au/en/insights.html" />
     <link rel="alternate" hreflang="zh-CN" href="{html.escape(canonical)}" />
     {extra_head}
@@ -334,10 +334,9 @@ def render_index(published: list[dict], preview: bool = False) -> str:
     main = f"""
       <section class="page-hero">
         <div class="page-hero__inner">
-          <span class="eyebrow">心理智库 Blog</span>
+          <span class="eyebrow">心理智库 · SeeSoul Psychology Insights</span>
           <h1>把值得关注的心理学知识，写成普通人用得上的说明。</h1>
-          <p>SeeSoul Psychology Insights。我们先讲这件事和日常生活有什么关系，再说研究能支持到哪一步，以及哪些地方还不确定。</p>
-          <p class="insights-note">本栏目不是诊断，也不替代一对一咨询。紧急情况请拨打 000，或联系 Lifeline 13 11 14。</p>
+          <p>每篇文章都会先从日常经验讲起，再说明研究能支持到哪里、哪里还没有定论。你可以按自己的节奏读，带走一两个对你有用的视角就好。</p>
         </div>
       </section>
       <section class="section section--ivory">
@@ -352,6 +351,11 @@ def render_index(published: list[dict], preview: bool = False) -> str:
           <div class="chips">{cats}</div>
           {"".join(by_cat) if by_cat else "<p>这一类还没有正式文章。</p>"}
           <p class="insights-cross"><a class="text-link" href="../explore.html">自我探索仍是独立栏目，九篇文章网址不变 →</a></p>
+          <aside class="insights-care" aria-labelledby="insights-care-title">
+            <h2 id="insights-care-title">阅读时可以记得</h2>
+            <p>这些文章帮助你理解自己，但不能替代对你个人情况的评估。如果读的时候勾起了一些想谈的事，也可以<a class="text-link" href="../counselling.html">了解一对一咨询</a>。</p>
+            <p class="insights-care__safety">如果你此刻感到不安全，请拨打 <strong>000</strong>，或联系 <strong>Lifeline 13 11 14</strong>，全天都有人接听。</p>
+          </aside>
         </div>
       </section>
     """
