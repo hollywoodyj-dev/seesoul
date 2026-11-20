@@ -245,7 +245,7 @@ def shell(title, description, canonical, extra_head, main, current="insights", d
     <meta property="og:description" content="{html.escape(description)}" />
     <meta property="og:url" content="{html.escape(canonical)}" />
     <meta property="og:locale" content="zh_CN" />
-    <link rel="stylesheet" href="{p}theme.css?v=sys1" />
+    <link rel="stylesheet" href="{p}theme.css?v=sys5" />
     <link rel="alternate" hreflang="en" href="https://seesoul.com.au/en/insights.html" />
     <link rel="alternate" hreflang="zh-CN" href="{html.escape(canonical)}" />
     {extra_head}
@@ -346,7 +346,6 @@ def render_index(published: list[dict], preview: bool = False) -> str:
           {feat_html}
           <header class="section-header">
             <h2>最新文章</h2>
-            <p class="sub">{"预览含样稿，非正式发布。" if preview else "只列出经过审核的正式文章。样稿不会出现在这里。"}</p>
           </header>
           {('<div class="content-grid">' + "".join(cards) + "</div>") if cards else "<p>正式文章准备中。Founder 审核通过前，这里不会放样稿或占位研究。</p>"}
           <p class="insights-cats-label">按主题查看</p>

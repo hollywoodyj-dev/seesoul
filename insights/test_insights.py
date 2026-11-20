@@ -26,10 +26,7 @@ class InsightsTests(unittest.TestCase):
         self.assertFalse((build.OUT / "yangao-lanmu-shuoming.html").exists())
         self.assertNotIn("yangao-lanmu-shuoming", self.index)
         self.assertNotIn("yangao-lanmu-shuoming", self.sitemap)
-        self.assertEqual(
-            [a["slug"] for a in self.published],
-            ["when-mistakes-become-self-judgment", "weekly-2026-10-23"],
-        )
+        self.assertEqual(self.published, [])
 
     def test_preview_keeps_sample_without_status_flip(self):
         self.assertIn("样稿", self.preview_sample)
@@ -79,24 +76,22 @@ class InsightsTests(unittest.TestCase):
         "weekly-2026-11-13",
     )
 
-    def test_issue_01_published_without_reviewer_or_noindex(self):
+    def test_issue_01_editorial_hold_stays_draft(self):
         by_slug = {c["slug"]: c for c in build.load_articles()}
         for slug in self.ISSUE_01:
-            self.assertEqual(by_slug[slug]["status"], "published", slug)
-            self.assertEqual(by_slug[slug].get("published_at"), "2026-11-20")
-            self.assertEqual(by_slug[slug].get("editorial_decision"), "approved")
+            self.assertEqual(by_slug[slug]["status"], "draft", slug)
+            self.assertFalse(by_slug[slug].get("published_at"))
             self.assertFalse(by_slug[slug].get("reviewer"))
-            html = (build.OUT / f"{slug}.html").read_text(encoding="utf-8")
-            self.assertNotIn("noindex", html)
-            self.assertNotIn("草稿预览", html)
-            self.assertNotIn("editorial_decision", html)
-            self.assertNotIn("审核", html)
-            self.assertIn("SeeSoul 编辑部", html)
-            self.assertIn(slug, self.index)
-            self.assertIn(slug, self.sitemap)
+            self.assertEqual(by_slug[slug].get("editorial_decision"), "approved")
+            self.assertFalse((build.OUT / f"{slug}.html").exists())
+            self.assertNotIn(slug, self.index)
+            self.assertNotIn(slug, self.sitemap)
             preview = (build.OUT / "preview" / f"{slug}.html").read_text(encoding="utf-8")
             self.assertIn("noindex", preview)
             self.assertIn("草稿预览｜尚未发布", preview)
+            self.assertIn("SeeSoul 编辑部", preview)
+            self.assertNotIn("editorial_decision", preview)
+            self.assertNotIn("审核", preview)
 
     def test_issue_02_04_stay_draft(self):
         by_slug = {c["slug"]: c for c in build.load_articles()}

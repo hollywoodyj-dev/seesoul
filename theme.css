@@ -192,7 +192,6 @@ img, svg { display: block; max-width: 100%; }
 .brand small { display: block; font-family: var(--font-body); font-weight: 400; font-size: 0.6rem; letter-spacing: 0.28em; color: var(--color-muted-navy); margin-top: 0.1rem; }
 .brand--logo { display: flex; align-items: center; line-height: 0; }
 .brand--logo .brand-logo { height: 3.6rem; width: auto; display: block; }
-/* 导航头部 LOGO：纵向组合标（图形+文字），高度适配单行导航 */
 .site-header .brand--logo .brand-logo { height: 3.4rem; }
 
 .site-nav { display: flex; align-items: center; gap: 1.4rem; margin-left: auto; }
@@ -232,6 +231,52 @@ img, svg { display: block; max-width: 100%; }
 }
 .site-nav a:hover { opacity: 1; }
 .site-nav a[aria-current="page"] { border-bottom-color: var(--color-gold); opacity: 1; }
+
+html[lang="zh-CN"] .site-header__inner {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.45rem;
+  height: 4.1rem;
+  max-width: none;
+  width: 100%;
+  padding-inline: 1rem 1.15rem;
+}
+html[lang="zh-CN"] .site-header .brand--logo {
+  order: 1;
+  flex: 0 0 auto;
+}
+html[lang="zh-CN"] .site-header .brand--logo .brand-logo { height: 2.7rem; }
+html[lang="zh-CN"] .site-nav {
+  order: 2;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  margin: 0 0.35rem 0 0.1rem;
+  gap: clamp(0.28rem, 0.65vw, 0.62rem);
+  min-width: 0;
+  overflow: hidden;
+}
+html[lang="zh-CN"] .lang-switch {
+  order: 3;
+  flex: 0 0 auto;
+  margin-left: 0.2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0;
+}
+html[lang="zh-CN"] .nav-toggle { order: 4; }
+html[lang="zh-CN"] .site-nav a {
+  flex: 0 0 auto;
+  font-size: clamp(0.68rem, 0.55vw + 0.48rem, 0.8rem);
+  letter-spacing: 0;
+  white-space: nowrap;
+  padding: 0.2rem 0;
+}
+html[lang="zh-CN"] .site-nav a.btn--gold {
+  margin-left: 0.15rem;
+  padding: 0.32rem 0.72rem;
+  font-size: clamp(0.68rem, 0.55vw + 0.46rem, 0.78rem);
+  letter-spacing: 0;
+}
 
 /* — 按钮 —— */
 .btn {
@@ -879,7 +924,8 @@ html[lang="en"] .page-hero h1 { line-height: 1.22; letter-spacing: -0.01em; }
   .site-nav--open { visibility: visible; opacity: 1; transform: none; transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s; }
   .site-nav a { display: flex; align-items: center; min-height: 2.9rem; padding: 0.5rem 0; font-size: 1rem; border-bottom: 1px solid var(--color-border-navy); opacity: 1; }
   .site-nav a[aria-current="page"] { color: var(--color-gold-soft); border-bottom-color: var(--color-border-navy); }
-  .site-nav a.btn--gold, .site-nav a.btn--gold[aria-current="page"] { justify-content: center; margin-top: 1rem; padding: 0.75rem 1rem; border-bottom: 0; color: var(--color-navy-deep); }
+  .site-nav a.btn--gold, .site-nav a.btn--gold[aria-current="page"] { justify-content: center; margin-top: 1rem; margin-left: 0; padding: 0.75rem 1rem; border-bottom: 0; color: var(--color-navy-deep); }
+  html[lang="zh-CN"] .site-nav { overflow-y: auto; flex: none; }
 }
 @media (max-width: 640px) {
   .site-header__inner { height: 3.9rem; gap: 1rem; }

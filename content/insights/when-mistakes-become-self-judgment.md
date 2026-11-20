@@ -5,15 +5,15 @@ id: seesoul-blog-2026-10-23
 issue_number: "01"
 issue_date: 2026-10-23
 date: 2026-10-23
-updated_at: 2026-11-20
-published_at: 2026-11-20
+updated_at: ""
+published_at: null
 editorial_decision: approved
 category: 情绪与自我觉察
 summary: 一条漏回的消息，为什么会变成对整个人的否定？从具体经验理解自责与咨询支持。
 author: SeeSoul 编辑部
-status: published
+status: draft
 sample: false
-featured: true
+featured: false
 article_type: research_explainer
 tags:
   - 自责
